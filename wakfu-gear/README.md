@@ -1,5 +1,5 @@
 # Wakfu Gear - FrontEnd
-[![Netlify Status](https://api.netlify.com/api/v1/badges/e216e026-dafc-4826-b5e4-fb8264adddbe/deploy-status)](https://app.netlify.com/sites/wakfu-gear/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/37268d5a-cf20-4fc2-9e30-946de33bc42e/deploy-status)](https://app.netlify.com/sites/almostbuilder/deploys)
 
 Project developed in VueJS to compare, organize and assemble assemblies with Wakfu MMO items.
 
