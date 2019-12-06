@@ -82,7 +82,7 @@ function getAllItems (versao) {
 
 function verificarVersaoAPI () {
   return new Promise (async resolve => {
-    let response = await request('https://s.ankama.com/games/wakfu/gamedata/config.json')
+    let response = await request('https://wakfu.cdn.ankama.com/gamedata/config.json')
     let versao = JSON.parse(response).version
     resolve(versao)
   })
@@ -95,7 +95,7 @@ function criarJSONSeNaoExistir (version, type) {
       await fs.access(`${version}/${type}.json`)
       response = (await fs.readFile(`${version}/${type}.json`)).Body.toString()
     } catch (e) {
-      response = await request(`https://s.ankama.com/games/wakfu/gamedata/${version}/${type}.json`)
+      response = await request(`https://wakfu.cdn.ankama.com/gamedata/${version}/${type}.json`)
       await fs.writeFileSync(`${version}/${type}.json`, response)
       response = (await fs.readFile(`${version}/${type}.json`)).Body.toString()
     }
