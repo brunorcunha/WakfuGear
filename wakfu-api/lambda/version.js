@@ -3,7 +3,7 @@ const AWS = require('aws-sdk')
 const request = require('request-promise')
 
 async function verificarVersaoAPI () {
-  return JSON.parse(await request('https://s.ankama.com/games/wakfu/gamedata/config.json'))
+  return JSON.parse(await request('https://wakfu.cdn.ankama.com/gamedata/config.json'))
 }
 
 module.exports.handler = async (event, context, callback) => {
