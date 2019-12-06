@@ -21,7 +21,7 @@ Vue.use(Donut)
 Vue.config.productionTip = false
 
 Vue.prototype.moment = moment
-Vue.prototype.$lang = 'pt'
+Vue.prototype.$lang = 'en'
 
 /* eslint-disable no-new */
 new Vue({
