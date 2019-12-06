@@ -31,7 +31,7 @@ You'll need a few things before you go any further.
 With everything ready and installed, clone the project to a specific folder.
 
 ```
-git clone https://github.com/brunorcunha/WakfuGear-Frontend.git
+git clone https://github.com/A-Charvin/WakfuGear.git
 ```
 
 Access the project folder to execute the next commands.
