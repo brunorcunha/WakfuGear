@@ -7,7 +7,7 @@
       <v-layout class="atr">
         <v-flex px-0>
           <div class="titulo">
-            <span>Principais</span>
+            <span>Main</span>
           </div>
         </v-flex>
       </v-layout>
@@ -29,7 +29,7 @@
       <v-layout class="atr">
         <v-flex px-0>
           <div class="titulo">
-            <span>Maestrias</span>
+            <span>Mastery</span>
           </div>
         </v-flex>
       </v-layout>
@@ -61,7 +61,7 @@
       <v-layout class="atr">
         <v-flex px-0>
           <div class="titulo">
-            <span>Combate</span>
+            <span>Combat</span>
           </div>
         </v-flex>
       </v-layout>
@@ -92,7 +92,7 @@
       <v-layout class="atr">
         <v-flex px-0>
           <div class="titulo">
-            <span>Secundários</span>
+            <span>Secondary</span>
           </div>
         </v-flex>
       </v-layout>

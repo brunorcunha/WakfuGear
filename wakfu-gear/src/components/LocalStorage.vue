@@ -68,9 +68,9 @@ export default {
         }
       }
       this.sections = []
-      fn('Dados dos Itens', 'itens')
-      fn('Nome dos Itens', 'itensList')
-      fn('Filtros', 'filtros')
+      fn('Item Data', 'itens')
+      fn('Item Name', 'itensList')
+      fn('Filters', 'filtros')
       fn('Gears', 'gears')
     }
   }

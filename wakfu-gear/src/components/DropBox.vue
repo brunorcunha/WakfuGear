@@ -26,7 +26,7 @@
           </v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
-          <v-list-tile-title>Selecionar Tudo</v-list-tile-title>
+          <v-list-tile-title>Select All</v-list-tile-title>
         </v-list-tile-content>
         <v-list-tile-action v-if="!!selecionarTodosIcone">
           <img :src="`../../static/${selecionarTodosIcone}`">

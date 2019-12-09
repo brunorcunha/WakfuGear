@@ -129,7 +129,7 @@
                                   v-on="submenu"
                                 >
                                   <v-list-tile-content>
-                                    Adicionar ao Gear
+                                    Add to the Gear
                                   </v-list-tile-content>
                                   <v-list-tile-action>
                                     <v-icon small>
@@ -141,7 +141,7 @@
                               <v-list dense>
                                 <v-list-tile @click="adicionarGear(item)">
                                   <v-list-tile-content>
-                                    ATUAL
+                                    Add
                                   </v-list-tile-content>
                                 </v-list-tile>
                               </v-list>
@@ -149,7 +149,7 @@
                             <v-divider />
                             <v-list-tile @click="abrirURL(item.type, item.id)">
                               <v-list-tile-content>
-                                Abrir no site oficial
+                                Open on the official website
                               </v-list-tile-content>
                               <v-list-tile-action>
                                 <v-icon small>

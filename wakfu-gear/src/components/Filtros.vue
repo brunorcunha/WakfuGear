@@ -10,7 +10,7 @@
         src="static/bg.jpg"
         height="165"
       >
-        <span class="versao">Versão: {{ versao }}</span>
+        <span class="versao">Version: {{ versao }}</span>
         <div
           v-if="temAtualizacao"
           class="atualizar"
@@ -31,7 +31,7 @@
                 </v-icon>
               </v-btn>
             </template>
-            <span>Atualizar Itens</span>
+            <span>Update Items</span>
           </v-tooltip>
         </div>
         <img
@@ -59,8 +59,8 @@
       >
         <v-autocomplete
           v-model="filtros.nome"
-          :label="$t('label.nome')"
-          :placeholder="$t('label.nome')"
+          :label="$t('Costume')"
+          :placeholder="$t('Costume Name')"
           :items="itemsList"
           clearable
           dense
@@ -71,8 +71,8 @@
         <drop-box
           v-model="filtros.tipos"
           :items="itemsTipo"
-          :label="$t('label.tipo')"
-          :placeholder="$t('label.tipo')"
+          :label="$t('Gear Type')"
+          :placeholder="$t('Gear Type')"
           selecionar-todos-icone="tipo/118.png"
         />
       </v-flex>
@@ -81,8 +81,8 @@
         <drop-box
           v-model="filtros.raridades"
           :items="itemsRaridade"
-          :label="$t('label.raridade')"
-          :placeholder="$t('label.raridade')"
+          :label="$t('Rarity')"
+          :placeholder="$t('Rarity')"
           selecionar-todos-icone="raridade/r0.png"
         />
       </v-flex>
@@ -100,7 +100,7 @@
         px-3
         mb-5
       >
-        <label style="font-size: 13px; color: rgba(0,0,0,.54);">{{ $t('label.nivel') }}</label>
+        <label style="font-size: 13px; color: rgba(0,0,0,.54);">{{ $t('Level Slider') }}</label>
         <v-range-slider
           v-model="filtros.niveis"
           ticks
@@ -120,7 +120,7 @@
           large
           @click="emitirFiltros"
         >
-          <span class="pl-3">Filtrar</span>
+          <span class="pl-3">Filter</span>
           <v-icon>arrow_right</v-icon>
         </v-btn>
       </v-flex>
@@ -130,7 +130,7 @@
 
     <v-flex>
       <v-footer class="px-3 foot">
-        <small>Bruno Cunha &copy; 2019. Clone o projeto no <a
+        <small>Bruno Cunha &copy; 2019.| English version By Stotena | Clone o projeto no<a
           href="https://github.com/brunorcunha/wakfu-gear"
           target="_blank"
         >GitHub</a>.</small>

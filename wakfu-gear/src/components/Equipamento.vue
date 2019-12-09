@@ -26,8 +26,8 @@
                 hide-details
                 :readonly="!edit"
                 :disabled="!edit"
-                label="Título do Conjunto"
-                :rules="[v => !!v || 'Obrigatório']"
+                label="Enter a Build Name"
+                :rules="[v => !!v || 'Mandatory']"
               >
                 <v-menu
                   slot="prepend"
@@ -57,7 +57,7 @@
                   </template>
                   <v-list dense>
                     <v-list-tile @click="abrirURL(item.type, item.id)">
-                      <v-list-tile-title>Abrir no site oficial</v-list-tile-title>
+                      <v-list-tile-title>Open on the official website</v-list-tile-title>
                     </v-list-tile>
                   </v-list>
                 </v-menu>
@@ -75,7 +75,7 @@
                   >
                     <v-icon>{{ edit ? 'check' : 'edit' }}</v-icon>
                   </v-btn>
-                  <span>{{ edit ? 'Gravar Título' : 'Editar Título' }}</span>
+                  <span>{{ edit ? 'Save Title' : 'Edit Title' }}</span>
                 </v-tooltip>
               </v-text-field>
             </v-flex>
@@ -139,7 +139,7 @@
                     <v-divider />
                     <v-list-tile @click="remover(k)">
                       <v-list-tile-content>
-                        Remover
+                        Remove
                       </v-list-tile-content>
                       <v-list-tile-action>
                         <v-icon small>
@@ -253,7 +253,7 @@ export default {
       })
     },
     confirmarExcluir (index) {
-      EventBus.$emit('confirm', 'Confirmar', 'Tem certeza que deseja excluir este conjunto?', () => {
+      EventBus.$emit('confirm', 'Confirm', 'Are you sure you want to delete this set?', () => {
         this.sets.splice(index, 1)
       }, () => {})
     }

@@ -32,7 +32,7 @@
               <v-icon>filter_list</v-icon>
             </v-btn>
           </template>
-          <span>Filtros</span>
+          <span>Filter</span>
         </v-tooltip>
 
         <v-flex text-xs-center>
@@ -43,7 +43,7 @@
               block
               value="left"
             >
-              Equipamentos
+              Equipments
             </v-btn>
             <v-btn
               color="red"
@@ -68,7 +68,7 @@
               <v-icon>business_center</v-icon>
             </v-btn>
           </template>
-          <span>Conjuntos</span>
+          <span>Sets</span>
         </v-tooltip>
       </v-toolbar>
 
@@ -116,7 +116,7 @@ export default {
   watch: {
     versao: async function (val, oldVal) {
       if (!oldVal) return
-      const confirm = await this.$refs.confirm.open('Atualizar Itens', 'Uma nova versão dos itens foi encontrada. Deseja atualizar?')
+      const confirm = await this.$refs.confirm.open('Maintain Items', 'A new version of the items has been found. Do you want to update?')
       if (confirm) this.atualizarItens()
     }
   },
