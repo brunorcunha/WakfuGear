@@ -16,11 +16,11 @@
             class="larguraInfo"
           >
             <div class="caption">
-              Mostrando {{ itemsLimitados.length }} de
+              {{ $t('label.mostrando', [itemsLimitados.length]) }}
             </div>
-            {{ itemsFiltrados.length }} itens >
+            {{ $t('label.qntitens', [itemsFiltrados.length]) }} >
             <div class="caption">
-              Total de {{ items.length }} itens
+              {{ $t('label.totalitens', [items.length]) }}
             </div>
           </v-flex>
 
@@ -105,7 +105,7 @@
                                   </v-avatar>
                                 </v-btn>
                               </template>
-                              <span>Opções</span>
+                              <span>{{ $t('label.opcoes') }}</span>
                             </v-tooltip>
                           </template>
                           <v-list
@@ -119,7 +119,7 @@
                             <v-menu
                               open-on-hover
                               right
-                              transition="slide-y-transition"
+                              transition="slide-x-transition"
                               offset-x
                               :close-on-content-click="false"
                             >
@@ -129,7 +129,7 @@
                                   v-on="submenu"
                                 >
                                   <v-list-tile-content>
-                                    Adicionar ao Gear
+                                    {{ $t('label.adicionaraogear') }}
                                   </v-list-tile-content>
                                   <v-list-tile-action>
                                     <v-icon small>
@@ -141,7 +141,7 @@
                               <v-list dense>
                                 <v-list-tile @click="adicionarGear(item)">
                                   <v-list-tile-content>
-                                    ATUAL
+                                    {{ $t('label.atual') }}
                                   </v-list-tile-content>
                                 </v-list-tile>
                               </v-list>
@@ -149,7 +149,7 @@
                             <v-divider />
                             <v-list-tile @click="abrirURL(item.type, item.id)">
                               <v-list-tile-content>
-                                Abrir no site oficial
+                                {{ $t('label.abrirsiteoficial') }}
                               </v-list-tile-content>
                               <v-list-tile-action>
                                 <v-icon small>
@@ -348,7 +348,11 @@ export default {
       })
     },
     abrirURL (type, id) {
-      window.open(`https://www.wakfu.com/pt/mmorpg/enciclopedia/armas/${id}-${type}`)
+      if (this.$i18n.locale === 'pt') {
+        window.open(`https://www.wakfu.com/pt/mmorpg/enciclopedia/armas/${id}-${type}`)
+      } else {
+        window.open(`https://www.wakfu.com/en/mmorpg/encyclopedia/armors/${id}-${type}`)
+      }
     },
     adicionarGear (item) {
       this.$store.dispatch('gear/adicionarItem', item)

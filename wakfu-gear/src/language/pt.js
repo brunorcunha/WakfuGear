@@ -1,10 +1,27 @@
-export const ptBR = {
+export const pt = {
   label: {
     nome: 'Nome',
     bonus: 'Bônus',
     nivel: 'Nível',
     raridade: 'Raridade',
-    tipo: 'Tipo de Equipamento'
+    equipamentos: 'Equipamentos',
+    gears: 'Conjuntos',
+    filtros: 'Filtros',
+    filtrar: 'Filtrar',
+    mostrando: 'Mostrando {0} de',
+    qntitens: '{0} itens',
+    totalitens: 'Total de {0} itens',
+    tipo: 'Tipo de Equipamento',
+    selecionartudo: 'Selecionar Tudo',
+    atualizaritens: 'Atualizar Itens',
+    atual: 'Atual',
+    opcoes: 'Opções',
+    remover: 'Remover',
+    adicionaraogear: 'Adicionar ao Conjunto',
+    abrirsiteoficial: 'Abrir no site oficial',
+    trocaridioma: 'Trocar Idioma',
+    versao: 'Versão: {0}',
+    fork: 'Clone o projeto no {0}.'
   },
   tipo: {
     amuleto: 'Amuleto',
@@ -33,6 +50,8 @@ export const ptBR = {
     'Épico'
   ],
   dialog: {
+    titulo: 'Atualizar Itens',
+    msg: 'Uma nova versão dos itens foi encontrada. Deseja atualizar?',
     confirmar: 'Sim',
     cancelar: 'Cancelar'
   },
@@ -40,6 +59,12 @@ export const ptBR = {
     one_relic: 'Somente 1 relíquia por conjunto.',
     one_epic: 'Somente 1 épico por conjunto.',
     one_unique: 'Somente 1 anel único por conjunto.'
+  },
+  localstorage: {
+    dados: 'Dados',
+    nomes: 'Nomes',
+    filtros: 'Filtros',
+    gears: 'Conjuntos'
   },
   loading: [
     'Carregando',

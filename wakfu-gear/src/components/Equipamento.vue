@@ -52,12 +52,12 @@
                           <v-icon>menu</v-icon>
                         </v-btn>
                       </template>
-                      <span>Opções</span>
+                      <span>{{ $t('label.opcoes') }}</span>
                     </v-tooltip>
                   </template>
                   <v-list dense>
                     <v-list-tile @click="abrirURL(item.type, item.id)">
-                      <v-list-tile-title>Abrir no site oficial</v-list-tile-title>
+                      <v-list-tile-title>{{ $t('label.abrirsiteoficial') }}</v-list-tile-title>
                     </v-list-tile>
                   </v-list>
                 </v-menu>
@@ -139,7 +139,7 @@
                     <v-divider />
                     <v-list-tile @click="remover(k)">
                       <v-list-tile-content>
-                        Remover
+                        {{ $t('label.remover') }}
                       </v-list-tile-content>
                       <v-list-tile-action>
                         <v-icon small>
@@ -172,6 +172,8 @@
       <v-expand-transition>
         <v-alert
           v-show="!somenteUmEpico"
+          dismissible
+          dark
           color="pink lighten-1"
           icon="warning"
           class="py-0"
@@ -183,6 +185,8 @@
       <v-expand-transition>
         <v-alert
           v-show="!somenteUmaReliquia"
+          dismissible
+          dark
           color="purple lighten-1"
           icon="warning"
           class="py-0"
@@ -194,6 +198,8 @@
       <v-expand-transition>
         <v-alert
           v-show="!somenteUmUnico"
+          dismissible
+          dark
           color="light-blue lighten-1"
           icon="warning"
           class="py-0"

@@ -9,12 +9,13 @@
         id="logo"
         src="static/bg.jpg"
         height="165"
+        class="corFundo"
       >
-        <span class="versao">Versão: {{ versao }}</span>
-        <div
-          v-if="temAtualizacao"
-          class="atualizar"
-        >
+        <span class="versao">{{ $t('label.versao', [versao]) }}</span>
+        <div class="lang">
+          <Idioma />
+        </div>
+        <div class="atualizar">
           <v-tooltip bottom>
             <template #activator="{ on }">
               <v-btn
@@ -31,7 +32,7 @@
                 </v-icon>
               </v-btn>
             </template>
-            <span>Atualizar Itens</span>
+            <span>{{ $t('label.atualizaritens') }}</span>
           </v-tooltip>
         </div>
         <img
@@ -120,7 +121,7 @@
           large
           @click="emitirFiltros"
         >
-          <span class="pl-3">Filtrar</span>
+          <span class="pl-3">{{ $t('label.filtrar') }}</span>
           <v-icon>arrow_right</v-icon>
         </v-btn>
       </v-flex>
@@ -130,10 +131,17 @@
 
     <v-flex>
       <v-footer class="px-3 foot">
-        <small>Bruno Cunha &copy; 2019. Clone o projeto no <a
-          href="https://github.com/brunorcunha/wakfu-gear"
-          target="_blank"
-        >GitHub</a>.</small>
+        <small>Bruno Cunha &copy; 2019.
+          <i18n
+            path="label.fork"
+            tag="label"
+          >
+            <a
+              href="https://github.com/brunorcunha/wakfu-gear"
+              target="_blank"
+            >GitHub</a>
+          </i18n>
+        </small>
       </v-footer>
     </v-flex>
   </v-layout>
@@ -142,8 +150,8 @@
 <script>
 import { mapGetters } from 'vuex'
 import DropBox from './DropBox'
+import Idioma from './Idioma'
 import EventBus from '../event-bus'
-import FunctionsMixins from '../mixins/functions'
 
 import { equipType } from '../model/equipType'
 import { equipEffects } from '../model/equipEffects'
@@ -153,8 +161,7 @@ import LocalStorage from './LocalStorage'
 
 export default {
   name: 'Filtros',
-  components: { LocalStorage, DropBox },
-  mixins: [FunctionsMixins],
+  components: { LocalStorage, DropBox, Idioma },
   data: () => ({
     filtros: {
       nome: '',
@@ -236,12 +243,15 @@ export default {
     left: 0;
     top: 0;
   }
-  .atualizar {
+  .atualizar, .lang {
     position: absolute;
     padding: 0 5px;
     right: 0;
-    top: 0;
+    bottom: 0;
     z-index: 9;
+  }
+  .lang {
+    top: 0;
   }
   .v-slider__thumb-label__container { bottom: -70px; top: auto; }
   .v-slider__thumb-label { border-radius: 0 50% 50% 50%; }

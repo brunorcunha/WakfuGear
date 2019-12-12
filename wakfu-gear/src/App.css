@@ -40,8 +40,9 @@ table { border-collapse: collapse; }
 #header {
   background: #008989;
 }
+.corFundo { background: #0C3139; }
 #info {
-  background: url(../static/bg.jpg) center;
+  background: #00A19C url(../static/bg.jpg) center;
   background-size: 200% 150%;
   font-size: 30px;
   color: #fff;

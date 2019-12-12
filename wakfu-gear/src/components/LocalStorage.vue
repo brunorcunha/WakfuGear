@@ -68,10 +68,10 @@ export default {
         }
       }
       this.sections = []
-      fn('Dados dos Itens', 'itens')
-      fn('Nome dos Itens', 'itensList')
-      fn('Filtros', 'filtros')
-      fn('Gears', 'gears')
+      fn(this.$i18n.t('localstorage.dados'), 'itens')
+      fn(this.$i18n.t('localstorage.nomes'), 'itensList')
+      fn(this.$i18n.t('localstorage.filtros'), 'filtros')
+      fn(this.$i18n.t('localstorage.gears'), 'gears')
     }
   }
 }

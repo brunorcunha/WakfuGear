@@ -14,14 +14,22 @@ import store from './store'
 
 import App from './App'
 
+import FunctionsMixin from './mixins/functions'
+
 Vue.use(Vuetify, { theme: { primary: '#01A7A5' } })
 Vue.use(VueResource)
 Vue.use(Donut)
 
+Vue.mixin(FunctionsMixin)
+
 Vue.config.productionTip = false
 
 Vue.prototype.moment = moment
-Vue.prototype.$lang = 'pt'
+
+const lsFiltros = localStorage.getItem('filtros')
+const lang = lsFiltros ? JSON.parse(lsFiltros).lang : 'pt'
+Vue.prototype.$lang = lang
+i18n.locale = lang
 
 /* eslint-disable no-new */
 new Vue({

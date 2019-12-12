@@ -32,7 +32,7 @@
               <v-icon>filter_list</v-icon>
             </v-btn>
           </template>
-          <span>Filtros</span>
+          <span>{{ $t('label.filtros') }}</span>
         </v-tooltip>
 
         <v-flex text-xs-center>
@@ -43,7 +43,7 @@
               block
               value="left"
             >
-              Equipamentos
+              {{ $t('label.equipamentos') }}
             </v-btn>
             <v-btn
               color="red"
@@ -52,7 +52,7 @@
               value="center"
               disabled
             >
-              Gears
+              {{ $t('label.gears') }}
             </v-btn>
           </v-btn-toggle>
         </v-flex>
@@ -68,7 +68,7 @@
               <v-icon>business_center</v-icon>
             </v-btn>
           </template>
-          <span>Conjuntos</span>
+          <span>{{ $t('label.gears') }}</span>
         </v-tooltip>
       </v-toolbar>
 
@@ -96,13 +96,11 @@ import Filtros from './Filtros'
 import ConfirmDialog from './ConfirmDialog'
 import ExternalState from './ExternalState'
 import Loading from './Loading'
-import FunctionsMixins from '../mixins/functions'
 import EventBus from '../event-bus'
 
 export default {
   name: 'WGView',
   components: { Loading, Filtros, DataTable, Equipamento, ConfirmDialog, ExternalState },
-  mixins: [FunctionsMixins],
   data: () => ({
     drawer: true,
     drawerRight: true,
@@ -116,7 +114,7 @@ export default {
   watch: {
     versao: async function (val, oldVal) {
       if (!oldVal) return
-      const confirm = await this.$refs.confirm.open('Atualizar Itens', 'Uma nova versão dos itens foi encontrada. Deseja atualizar?')
+      const confirm = await this.$refs.confirm.open(this.$i18n.t('dialog.titulo'), this.$i18n.t('dialog.msg'))
       if (confirm) this.atualizarItens()
     }
   },
