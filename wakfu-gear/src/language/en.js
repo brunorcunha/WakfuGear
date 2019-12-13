@@ -41,12 +41,12 @@ export const en = {
   },
   raridade: [
     '',
-    'Incommon',
+    'Uncommon',
     'Rare',
     'Mythical',
     'Legendary',
     'Relic',
-    'Lembrança',
+    'Souvenir',
     'Epic'
   ],
   dialog: {
