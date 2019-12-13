@@ -3,6 +3,7 @@ export const pt = {
     nome: 'Nome',
     bonus: 'Bônus',
     nivel: 'Nível',
+    obrigatorio: 'Obrigatório',
     raridade: 'Raridade',
     equipamentos: 'Equipamentos',
     gears: 'Conjuntos',
@@ -19,7 +20,14 @@ export const pt = {
     remover: 'Remover',
     adicionaraogear: 'Adicionar ao Conjunto',
     abrirsiteoficial: 'Abrir no site oficial',
+    gravartitulo: 'Gravar Título',
+    editartitulo: 'Editar Título',
     trocaridioma: 'Trocar Idioma',
+    tituloconjunto: 'Título do Conjunto',
+    principais: 'Principais',
+    maestrias: 'Maestrias',
+    combate: 'Combate',
+    secundarios: 'Secundários',
     versao: 'Versão: {0}',
     fork: 'Clone o projeto no {0}.'
   },
@@ -50,8 +58,14 @@ export const pt = {
     'Épico'
   ],
   dialog: {
-    titulo: 'Atualizar Itens',
-    msg: 'Uma nova versão dos itens foi encontrada. Deseja atualizar?',
+    atualizar: {
+      titulo: 'Atualizar Itens',
+      msg: 'Uma nova versão dos itens foi encontrada. Deseja atualizar?'
+    },
+    excluir: {
+      titulo: 'Confirmar',
+      msg: 'Tem certeza que deseja excluir este conjunto?'
+    },
     confirmar: 'Sim',
     cancelar: 'Cancelar'
   },

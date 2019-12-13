@@ -96,14 +96,14 @@ export default {
     }
   },
   watch: {
-    value: function (val) {
+    value (val) {
       if (!val) {
         this.selected = []
         return
       }
       this.selected = val
     },
-    selected: function (val) {
+    selected (val) {
       this.$emit('input', this.selected)
     }
   },

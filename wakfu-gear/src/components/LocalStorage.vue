@@ -34,18 +34,18 @@ export default {
     sections: []
   }),
   computed: {
-    LS: function () {
+    LS () {
       return window.localStorage
     },
-    totalMB: function () {
+    totalMB () {
       return (this.total / 1000000).toFixed(2)
     },
-    limitMB: function () {
+    limitMB () {
       return (this.limit / 1000000).toFixed(2)
     }
   },
   watch: {
-    LS: function () {
+    LS () {
       this.atualizar()
     }
   },

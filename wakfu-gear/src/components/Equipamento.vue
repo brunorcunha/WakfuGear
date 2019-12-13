@@ -26,8 +26,8 @@
                 hide-details
                 :readonly="!edit"
                 :disabled="!edit"
-                label="Título do Conjunto"
-                :rules="[v => !!v || 'Obrigatório']"
+                :label="$t('label.tituloconjunto')"
+                :rules="[v => !!v || $t('label.obrigatorio')]"
               >
                 <v-menu
                   slot="prepend"
@@ -75,7 +75,7 @@
                   >
                     <v-icon>{{ edit ? 'check' : 'edit' }}</v-icon>
                   </v-btn>
-                  <span>{{ edit ? 'Gravar Título' : 'Editar Título' }}</span>
+                  <span>{{ edit ? $t('label.gravartitulo') : $t('label.editartitulo') }}</span>
                 </v-tooltip>
               </v-text-field>
             </v-flex>
@@ -235,13 +235,13 @@ export default {
   }),
   computed: {
     ...mapGetters('gear', ['gear']),
-    somenteUmaReliquia: function () {
+    somenteUmaReliquia () {
       return Object.keys(this.gear).filter(e => this.gear[e] && this.gear[e].rarity === 5).length <= 1
     },
-    somenteUmEpico: function () {
+    somenteUmEpico () {
       return Object.keys(this.gear).filter(e => this.gear[e] && this.gear[e].rarity === 7).length <= 1
     },
-    somenteUmUnico: function () {
+    somenteUmUnico () {
       if (!this.gear.LEFT_HAND || !this.gear.RIGHT_HAND) return true
       return this.gear.LEFT_HAND.id !== this.gear.RIGHT_HAND.id
     }
@@ -259,7 +259,7 @@ export default {
       })
     },
     confirmarExcluir (index) {
-      EventBus.$emit('confirm', 'Confirmar', 'Tem certeza que deseja excluir este conjunto?', () => {
+      EventBus.$emit('confirm', this.$i18n.t('dialog.excluir.titulo'), this.$i18n.t('dialog.excluir.msg'), () => {
         this.sets.splice(index, 1)
       }, () => {})
     }

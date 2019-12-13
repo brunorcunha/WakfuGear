@@ -31,136 +31,11 @@
             <table id="itemsTable">
               <tr>
                 <draggable v-model="itemsLimitados">
-                  <template v-for="(item, index) in itemsLimitados">
-                    <td
-                      :key="`iL${index}`"
-                      class="itemHeader"
-                    >
-                      <v-img
-                        class="img"
-                        aspect-ratio="1"
-                        lazy-src="/static/erro.png"
-                        width="115"
-                        height="115"
-                        :src="`http://s.ankama.com/www/static.ankama.com/wakfu/portal/game/item/115/${item.iid[0]}.png`"
-                      />
-
-                      <v-tooltip bottom>
-                        <template #activator="{ on }">
-                          <span
-                            :class="`nome r${item.rarity} text-truncate`"
-                            v-on="on"
-                          >{{ item.title[$lang] || '' }}</span>
-                        </template>
-                        <span>{{ item.title[$lang] || '' }}</span>
-                      </v-tooltip>
-                      <v-tooltip bottom>
-                        <template #activator="{ on }">
-                          <div
-                            :class="`raridade r${item.rarity}`"
-                            v-on="on"
-                          />
-                        </template>
-                        <span>{{ $t(`raridade[${item.rarity}]`) }}</span>
-                      </v-tooltip>
-                      <v-tooltip bottom>
-                        <template #activator="{ on }">
-                          <div
-                            :class="`tipo t${item.type}`"
-                            v-on="on"
-                          />
-                        </template>
-                        <span>{{ equipType.find(e => e.id === item.type)[$lang] }}</span>
-                      </v-tooltip>
-                      <v-tooltip bottom>
-                        <template #activator="{ on }">
-                          <div
-                            class="nivel"
-                            v-on="on"
-                          >
-                            {{ item.lvl }}
-                          </div>
-                        </template>
-                        <span>Nível {{ item.lvl }}</span>
-                      </v-tooltip>
-
-                      <div class="menu">
-                        <v-menu
-                          bottom
-                          right
-                          transition="slide-y-transition"
-                          offset-y
-                        >
-                          <template #activator="{ on: menu }">
-                            <v-tooltip bottom>
-                              <template #activator="{ on: tooltip }">
-                                <v-btn
-                                  small
-                                  icon
-                                  flat
-                                  v-on="{ ...menu, ...tooltip }"
-                                >
-                                  <v-avatar size="15">
-                                    <img src="/static/atributos/tags_35.png">
-                                  </v-avatar>
-                                </v-btn>
-                              </template>
-                              <span>{{ $t('label.opcoes') }}</span>
-                            </v-tooltip>
-                          </template>
-                          <v-list
-                            dense
-                            subheader
-                          >
-                            <v-subheader class="deep-orange accent-4 white--text">
-                              {{ item.title[$lang] }}
-                            </v-subheader>
-                            <v-divider />
-                            <v-menu
-                              open-on-hover
-                              right
-                              transition="slide-x-transition"
-                              offset-x
-                              :close-on-content-click="false"
-                            >
-                              <template v-slot:activator="{ on: submenu }">
-                                <v-list-tile
-                                  @click.stop
-                                  v-on="submenu"
-                                >
-                                  <v-list-tile-content>
-                                    {{ $t('label.adicionaraogear') }}
-                                  </v-list-tile-content>
-                                  <v-list-tile-action>
-                                    <v-icon small>
-                                      arrow_forward_ios
-                                    </v-icon>
-                                  </v-list-tile-action>
-                                </v-list-tile>
-                              </template>
-                              <v-list dense>
-                                <v-list-tile @click="adicionarGear(item)">
-                                  <v-list-tile-content>
-                                    {{ $t('label.atual') }}
-                                  </v-list-tile-content>
-                                </v-list-tile>
-                              </v-list>
-                            </v-menu>
-                            <v-divider />
-                            <v-list-tile @click="abrirURL(item.type, item.id)">
-                              <v-list-tile-content>
-                                {{ $t('label.abrirsiteoficial') }}
-                              </v-list-tile-content>
-                              <v-list-tile-action>
-                                <v-icon small>
-                                  open_in_new
-                                </v-icon>
-                              </v-list-tile-action>
-                            </v-list-tile>
-                          </v-list>
-                        </v-menu>
-                      </div>
-                    </td>
+                  <template v-for="item in itemsLimitados">
+                    <ItemView
+                      :key="`iL${item.id}`"
+                      :value="item"
+                    />
                   </template>
                 </draggable>
               </tr>
@@ -223,6 +98,7 @@ import draggable from 'vuedraggable'
 import filtros from '../functions/filtros'
 import EventBus from '../event-bus'
 import DataValue from './DataValue'
+import ItemView from './ItemView'
 
 import { equipType } from '../model/equipType'
 import { equipEffects } from '../model/equipEffects'
@@ -230,7 +106,11 @@ import { states } from '../model/states'
 
 export default {
   name: 'DataTable',
-  components: { draggable, DataValue },
+  components: {
+    draggable,
+    DataValue,
+    ItemView
+  },
   props: {
     value: { type: Array, default: () => [] }
   },
@@ -346,16 +226,6 @@ export default {
         this.progress = false
         resolve(atributos)
       })
-    },
-    abrirURL (type, id) {
-      if (this.$i18n.locale === 'pt') {
-        window.open(`https://www.wakfu.com/pt/mmorpg/enciclopedia/armas/${id}-${type}`)
-      } else {
-        window.open(`https://www.wakfu.com/en/mmorpg/encyclopedia/armors/${id}-${type}`)
-      }
-    },
-    adicionarGear (item) {
-      this.$store.dispatch('gear/adicionarItem', item)
     }
   }
 }

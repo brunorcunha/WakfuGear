@@ -3,6 +3,7 @@ export const en = {
     nome: 'Name',
     bonus: 'Effects',
     nivel: 'Level',
+    obrigatorio: 'Required',
     raridade: 'Rarity',
     equipamentos: 'Equipments',
     gears: 'Gears',
@@ -19,7 +20,14 @@ export const en = {
     remover: 'Remove',
     adicionaraogear: 'Add to Gear',
     abrirsiteoficial: 'Open in the official website',
+    gravartitulo: 'Save Title',
+    editartitulo: 'Edit Title',
     trocaridioma: 'Change Language',
+    tituloconjunto: 'Gear Title',
+    principais: 'General',
+    maestrias: 'Mastery',
+    combate: 'Battle',
+    secundarios: 'Secondary',
     versao: 'Version: {0}',
     fork: 'Fork the project on {0}.'
   },
@@ -50,6 +58,14 @@ export const en = {
     'Epic'
   ],
   dialog: {
+    atualizar: {
+      titulo: 'Update Items',
+      msg: 'A new version of the items has been found. Do you want to update?'
+    },
+    excluir: {
+      titulo: 'Confirm',
+      msg: 'Are you sure you want to delete this gear?'
+    },
     confirmar: 'Yes',
     cancelar: 'Cancel'
   },

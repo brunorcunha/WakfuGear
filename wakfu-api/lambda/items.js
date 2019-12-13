@@ -54,13 +54,15 @@ function formatar (item, lang) {
   let iid = [ item.definition.item.graphicParameters.gfxId ]
   let gfx = item.definition.item.graphicParameters.femaleGfxId
   if (iid[0] !== gfx) iid.push(gfx)
+  let lvl = item.definition.item.level
+  let type = item.definition.item.baseParameters.itemTypeId
+  if ([582, 420].includes(type)) lvl = 50
   return {
     id: item.definition.item.id,
     iid,
     title: item.title,
-    // desc: item.description ? item.description[lang] : '',
-    lvl: item.definition.item.level,
-    type: item.definition.item.baseParameters.itemTypeId,
+    lvl,
+    type,
     set: item.definition.item.baseParameters.itemSetId,
     rarity: item.definition.item.baseParameters.rarity,
     shard: [

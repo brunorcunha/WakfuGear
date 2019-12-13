@@ -8,23 +8,23 @@ window.setTimeout = (fn, t) => fn()
 window.localStorage = (function () {
   var store = {}
   return {
-    getItem: function (key) {
+    getItem (key) {
       return store[key] || null
     },
-    setItem: function (key, value) {
+    setItem (key, value) {
       store[key] = value.toString()
     },
-    removeItem: function (key) {
+    removeItem (key) {
       delete store[key]
     },
     get length () {
       return Object.keys(store).length
     },
-    key: function (i) {
+    key (i) {
       var keys = Object.keys(store)
       return keys[i] || null
     },
-    clear: function () {
+    clear () {
       store = {}
     }
   }

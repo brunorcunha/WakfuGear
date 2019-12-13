@@ -179,10 +179,10 @@ export default {
   computed: {
     ...mapGetters('items', ['itemsList', 'versao']),
     ...mapGetters('filtros', { filtrosLS: 'filtros' }),
-    temAtualizacao: function () {
+    temAtualizacao () {
       return localStorage['versao'] !== this.versao
     },
-    ehDev: function () {
+    ehDev () {
       return !process.env.build
     }
   },

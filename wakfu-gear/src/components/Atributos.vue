@@ -7,7 +7,7 @@
       <v-layout class="atr">
         <v-flex px-0>
           <div class="titulo">
-            <span>Principais</span>
+            <span>{{ $t('label.principais') }}</span>
           </div>
         </v-flex>
       </v-layout>
@@ -29,7 +29,7 @@
       <v-layout class="atr">
         <v-flex px-0>
           <div class="titulo">
-            <span>Maestrias</span>
+            <span>{{ $t('label.maestrias') }}</span>
           </div>
         </v-flex>
       </v-layout>
@@ -61,7 +61,7 @@
       <v-layout class="atr">
         <v-flex px-0>
           <div class="titulo">
-            <span>Combate</span>
+            <span>{{ $t('label.combate') }}</span>
           </div>
         </v-flex>
       </v-layout>
@@ -92,7 +92,7 @@
       <v-layout class="atr">
         <v-flex px-0>
           <div class="titulo">
-            <span>Secundários</span>
+            <span>{{ $t('label.secundarios') }}</span>
           </div>
         </v-flex>
       </v-layout>

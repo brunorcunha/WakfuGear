@@ -100,7 +100,14 @@ import EventBus from '../event-bus'
 
 export default {
   name: 'WGView',
-  components: { Loading, Filtros, DataTable, Equipamento, ConfirmDialog, ExternalState },
+  components: {
+    Loading,
+    Filtros,
+    DataTable,
+    Equipamento,
+    ConfirmDialog,
+    ExternalState
+  },
   data: () => ({
     drawer: true,
     drawerRight: true,
@@ -112,9 +119,9 @@ export default {
     ...mapGetters('items', ['existItems', 'versao'])
   },
   watch: {
-    versao: async function (val, oldVal) {
+    async versao (val, oldVal) {
       if (!oldVal) return
-      const confirm = await this.$refs.confirm.open(this.$i18n.t('dialog.titulo'), this.$i18n.t('dialog.msg'))
+      const confirm = await EventBus.$emit('confirm', this.$i18n.t('dialog.atualizar.titulo'), this.$i18n.t('dialog.atualizar.msg'))
       if (confirm) this.atualizarItens()
     }
   },
