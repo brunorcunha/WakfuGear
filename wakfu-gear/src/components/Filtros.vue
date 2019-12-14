@@ -137,7 +137,7 @@
             tag="label"
           >
             <a
-              href="https://github.com/brunorcunha/wakfu-gear"
+              href="https://github.com/brunorcunha/WakfuGear/tree/master/wakfu-gear"
               target="_blank"
             >GitHub</a>
           </i18n>

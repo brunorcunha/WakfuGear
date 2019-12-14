@@ -63,11 +63,10 @@ const thisFiltros = {
 
   filtroLimit: (items, filtros) => {
     if (!filtros || !filtros.limit) return items.slice(0, 10)
-    let limit = parseInt(filtros.limit)
+    const limit = parseInt(filtros.limit)
     const offset = filtros.offset ? parseInt(filtros.offset) : 0
     if (isNaN(limit) || isNaN(offset)) return items.slice(0, 10)
 
-    if (limit > 25) limit = 25
     return items.slice(offset, limit)
   }
 }

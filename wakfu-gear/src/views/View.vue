@@ -91,12 +91,12 @@
 <script>
 import Vue from 'vue'
 import { mapGetters } from 'vuex'
-import Equipamento from './Equipamento'
+import Equipamento from '../components/Equipamento'
 import DataTable from './DataTable'
-import Filtros from './Filtros'
-import ConfirmDialog from './ConfirmDialog'
-import ExternalState from './ExternalState'
-import Loading from './Loading'
+import Filtros from '../components/Filtros'
+import ConfirmDialog from '../components/ConfirmDialog'
+import ExternalState from '../components/ExternalState'
+import Loading from '../components/Loading'
 
 export default {
   name: 'WGView',

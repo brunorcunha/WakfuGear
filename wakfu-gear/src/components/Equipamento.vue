@@ -93,6 +93,9 @@
               pt-0
               class="text-xs-center"
             >
+              <template v-if="vazio">
+                <span class="msg">{{ $t('msg.adicionarEquip') }}</span>
+              </template>
               <template v-for="(i, k) in gear">
                 <v-menu
                   v-if="!!i"
@@ -233,7 +236,7 @@ export default {
     progress: false
   }),
   computed: {
-    ...mapGetters('gear', ['gear']),
+    ...mapGetters('gear', ['gear', 'vazio']),
     somenteUmaReliquia () {
       return Object.keys(this.gear).filter(e => this.gear[e] && this.gear[e].rarity === 5).length <= 1
     },
@@ -254,7 +257,7 @@ export default {
     },
     adicionarConjunto () {
       this.sets.push({
-        nome: 'Conjunto #' + this.ultimoNumero++
+        nome: 'Gear #' + this.ultimoNumero++
       })
     },
     async confirmarExcluir (index) {
@@ -304,4 +307,8 @@ export default {
   .minirarity.r5:before { background-image: url(../../static/raridade/m5.png); }
   .minirarity.r7:before { background-image: url(../../static/raridade/m6.png); }
   .minirarity.r6:before { background-image: url(../../static/raridade/m7.png); }
+  .msg {
+    font-size: 22px;
+    color: rgba(255,255,255,.4);
+  }
 </style>

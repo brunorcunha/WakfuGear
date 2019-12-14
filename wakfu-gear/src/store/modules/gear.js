@@ -16,15 +16,20 @@ const state = {
     COSTUME: null,
     FIRST_WEAPON: null,
     SECOND_WEAPON: null
-  }
+  },
+  qntItens: 0
 }
 
 const getters = {
-  gear: state => state.gear
+  gear: state => state.gear,
+  qntItens: state => state.qntItens,
+  vazio: state => state.qntItens === 0
 }
 
 const mutations = {
-  setGear: (state, gear) => { state.gear = gear }
+  setGear: (state, gear) => { state.gear = gear },
+  addQntItens: (state) => { state.qntItens++ },
+  subQntItens: (state) => { state.qntItens-- }
 }
 
 const actions = {
@@ -46,12 +51,14 @@ const actions = {
       gear[posicao] = item
     }
     commit('setGear', gear)
+    commit('addQntItens')
     dispatch('atributos/calcularAtributos', gear, { root: true })
   },
   async removerItem ({ commit, state, dispatch }, posicao) {
     const gear = { ...state.gear }
     gear[posicao] = null
     commit('setGear', gear)
+    commit('subQntItens')
     dispatch('atributos/calcularAtributos', gear, { root: true })
   }
 }

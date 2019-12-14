@@ -7,6 +7,7 @@ export const pt = {
     nome: 'Nome',
     bonus: 'Bônus',
     nivel: 'Nível',
+    mostrar: 'Mostrar',
     obrigatorio: 'Obrigatório',
     raridade: 'Raridade',
     equipamentos: 'Equipamentos',
@@ -34,6 +35,9 @@ export const pt = {
     secundarios: 'Secundários',
     versao: 'Versão: {0}',
     fork: 'Clone o projeto no {0}.'
+  },
+  msg: {
+    adicionarEquip: 'Adicione equipamentos a esse conjunto'
   },
   tipo: {
     amuleto: 'Amuleto',

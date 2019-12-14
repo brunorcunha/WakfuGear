@@ -97,8 +97,8 @@ import draggable from 'vuedraggable'
 
 import filtros from '../functions/filtros'
 import EventBus from '../event-bus'
-import DataValue from './DataValue'
-import ItemView from './ItemView'
+import DataValue from '../components/DataValue'
+import ItemView from '../components/ItemView'
 
 import { equipType } from '../model/equipType'
 import { equipEffects } from '../model/equipEffects'

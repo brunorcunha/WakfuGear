@@ -7,6 +7,7 @@ export const en = {
     nome: 'Name',
     bonus: 'Effects',
     nivel: 'Level',
+    mostrar: 'Show',
     obrigatorio: 'Required',
     raridade: 'Rarity',
     equipamentos: 'Equipments',
@@ -34,6 +35,9 @@ export const en = {
     secundarios: 'Secondary',
     versao: 'Version: {0}',
     fork: 'Fork the project on {0}.'
+  },
+  msg: {
+    adicionarEquip: 'Add equipment to this gear'
   },
   tipo: {
     amuleto: 'Amulet',

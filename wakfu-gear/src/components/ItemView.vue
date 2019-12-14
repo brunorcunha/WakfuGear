@@ -38,7 +38,7 @@
           v-on="on"
         />
       </template>
-      <span>{{ equipType.find(e => e.id === item.type)[$lang] }}</span>
+      <span>{{ (equipType.find(e => e.id === item.type) || {})[$lang] }}</span>
     </v-tooltip>
     <v-tooltip bottom>
       <template #activator="{ on }">
