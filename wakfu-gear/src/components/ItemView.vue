@@ -2,6 +2,7 @@
   <td
     v-if="item"
     class="itemHeader"
+    @dblclick="adicionarGear"
   >
     <v-img
       class="img"
@@ -152,8 +153,8 @@ export default {
         window.open(`https://www.wakfu.com/en/mmorpg/encyclopedia/armors/${id}-${type}`)
       }
     },
-    adicionarGear (item) {
-      this.$store.dispatch('gear/adicionarItem', item)
+    adicionarGear () {
+      this.$store.dispatch('gear/adicionarItem', this.item)
     }
   }
 }

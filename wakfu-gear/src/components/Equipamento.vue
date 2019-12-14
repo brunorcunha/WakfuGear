@@ -217,7 +217,6 @@
 <script>
 import { mapGetters } from 'vuex'
 import Atributos from './Atributos'
-import EventBus from '../event-bus'
 
 export default {
   name: 'Equipamento',
@@ -258,10 +257,14 @@ export default {
         nome: 'Conjunto #' + this.ultimoNumero++
       })
     },
-    confirmarExcluir (index) {
-      EventBus.$emit('confirm', this.$i18n.t('dialog.excluir.titulo'), this.$i18n.t('dialog.excluir.msg'), () => {
+    async confirmarExcluir (index) {
+      try {
+        await this.$ConfirmDialog.abrir({
+          titulo: this.$i18n.t('dialog.excluir.titulo'),
+          mensagem: this.$i18n.t('dialog.excluir.msg')
+        })
         this.sets.splice(index, 1)
-      }, () => {})
+      } catch (e) {}
     }
   }
 }

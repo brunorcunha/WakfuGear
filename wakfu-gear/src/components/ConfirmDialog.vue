@@ -3,39 +3,45 @@
     v-model="dialog"
     persistent
     :max-width="opcoes.width"
-    @keydown.esc="cancel()"
+    @keydown.esc="cancelar"
   >
     <v-toolbar
       class="cabecalho"
       dark
       dense
-      :color="opcoes.color"
+      :color="opcoes.cor"
     >
       <v-toolbar-title
         :class="[(opcoes.color === 'white') ? 'black--text' : 'white--text']"
       >
-        {{ title }}
+        {{ titulo }}
       </v-toolbar-title>
     </v-toolbar>
     <v-card tile>
-      <v-card-text v-show="!!message">
-        {{ message }}
+      <v-card-text v-show="!!mensagem">
+        {{ mensagem }}
       </v-card-text>
+
+      <v-divider />
+
       <v-card-actions>
         <v-spacer />
         <v-btn
           color="error"
           text
-          @click="cancel()"
+          @click="cancelar"
         >
-          {{ cancelar }}
+          {{ label.cancelar }}
         </v-btn>
         <v-btn
           color="primary darken-1"
           text
-          @click="agree()"
+          @click="label.confirmar"
         >
           {{ confirmar }}
+          <v-icon right>
+            thumb_up
+          </v-icon>
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -43,44 +49,49 @@
 </template>
 
 <script>
-import { i18n } from '../language/lang'
-
 export default {
   name: 'ConfirmDialog',
   props: {
-    options: { type: Object, default: () => ({}) },
-    confirmar: { type: String, default: i18n.t('dialog.confirmar') },
-    cancelar: { type: String, default: i18n.t('dialog.cancelar') }
+    labelCancelar: { type: String, default: null },
+    labelConfirmar: { type: String, default: null }
   },
   data: () => ({
     dialog: false,
     resolve: null,
-    message: null,
-    title: null,
+    reject: null,
+    titulo: null,
+    mensagem: null,
+    label: {
+      cancelar: '',
+      confirmar: ''
+    },
     opcoes: {
-      color: 'deep-orange accent-4',
-      width: 390
+      cor: 'accent',
+      width: 350
     }
   }),
-  created () {
-    this.opcoes = { ...this.opcoes, ...this.options }
+  mounted () {
+    this.label.cancelar = this.labelCancelar ? this.labelCancelar : this.$i18n.t('dialog.cancelar')
+    this.label.confirmar = this.labelConfirmar ? this.labelConfirmar : this.$i18n.t('dialog.confirmar')
   },
   methods: {
-    open (title, message) {
+    abrir (obj) {
       this.dialog = true
-      this.title = title
-      this.message = message
+      this.titulo = obj.titulo
+      this.mensagem = obj.mensagem
+      this.opcoes = { ...this.opcoes, ...obj.opcoes }
 
-      return new Promise(resolve => {
+      return new Promise((resolve, reject) => {
         this.resolve = resolve
+        this.reject = reject
       })
     },
-    agree () {
-      this.resolve(true)
+    confirmar () {
+      this.resolve()
       this.dialog = false
     },
-    cancel () {
-      this.resolve(false)
+    cancelar () {
+      this.reject()
       this.dialog = false
     }
   }

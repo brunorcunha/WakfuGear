@@ -83,12 +83,13 @@
       <DataTable />
     </template>
 
-    <ConfirmDialog ref="confirm" />
-    <ExternalState />
+    <ConfirmDialog ref="confirmDialog" />
+    <ExternalState ref="linkerState" />
   </v-layout>
 </template>
 
 <script>
+import Vue from 'vue'
 import { mapGetters } from 'vuex'
 import Equipamento from './Equipamento'
 import DataTable from './DataTable'
@@ -96,7 +97,6 @@ import Filtros from './Filtros'
 import ConfirmDialog from './ConfirmDialog'
 import ExternalState from './ExternalState'
 import Loading from './Loading'
-import EventBus from '../event-bus'
 
 export default {
   name: 'WGView',
@@ -121,8 +121,13 @@ export default {
   watch: {
     async versao (val, oldVal) {
       if (!oldVal) return
-      const confirm = await EventBus.$emit('confirm', this.$i18n.t('dialog.atualizar.titulo'), this.$i18n.t('dialog.atualizar.msg'))
-      if (confirm) this.atualizarItens()
+      try {
+        await this.$ConfirmDialog.abrir({
+          titulo: this.$i18n.t('dialog.atualizar.titulo'),
+          mensagem: this.$i18n.t('dialog.atualizar.msg')
+        })
+        this.atualizarItens()
+      } catch (e) {}
     }
   },
   created () {
@@ -130,17 +135,8 @@ export default {
     this.$store.dispatch('filtros/init', this.$lang)
   },
   mounted () {
-    EventBus.$on('confirm', this.abrirConfirm)
-  },
-  beforeDestroy () {
-    EventBus.$off('confirm')
-  },
-  methods: {
-    async abrirConfirm (titulo, pergunta, callbackSucesso, callbackCancelar) {
-      const confirm = await this.$refs.confirm.open(titulo, pergunta)
-      if (confirm) callbackSucesso()
-      else callbackCancelar()
-    }
+    Vue.prototype.$ConfirmDialog = this.$refs.confirmDialog
+    Vue.prototype.$LinkerState = this.$refs.linkerState
   }
 }
 </script>

@@ -1,5 +1,9 @@
 export const en = {
   label: {
+    fogo: 'Fire',
+    agua: 'Water',
+    terra: 'Earth',
+    ar: 'Air',
     nome: 'Name',
     bonus: 'Effects',
     nivel: 'Level',

@@ -205,10 +205,10 @@ export default {
     traduzirFx (val) {
       val.forEach(e => {
         e[this.$lang] = e[this.$lang]
-          .replace(/\[el1\]/g, 'Fogo')
-          .replace(/\[el2\]/g, 'Água')
-          .replace(/\[el3\]/g, 'Terra')
-          .replace(/\[el4\]/g, 'Ar')
+          .replace(/\[el1\]/g, this.$i18n.t('label.fogo'))
+          .replace(/\[el2\]/g, this.$i18n.t('label.agua'))
+          .replace(/\[el3\]/g, this.$i18n.t('label.terra'))
+          .replace(/\[el4\]/g, this.$i18n.t('label.ar'))
           .replace(/{\[>2\]\?s:}/g, 's')
           .replace(/{\[>1\]\?s:}/g, 's')
           .replace(/\[#1\]/g, 'x')

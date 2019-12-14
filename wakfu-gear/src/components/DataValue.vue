@@ -17,8 +17,6 @@
 </template>
 
 <script>
-import EventBus from '../event-bus'
-
 export default {
   name: 'DataValue',
   props: {
@@ -26,7 +24,7 @@ export default {
   },
   methods: {
     abrirDialog () {
-      EventBus.$emit('ExternalState', this.value)
+      this.$LinkerState.abrir(this.value)
     }
   }
 }

@@ -4,7 +4,7 @@
     max-width="600px"
     hide-overlay
     persistent
-    @keydown.esc="cancel()"
+    @keydown.esc="cancelar"
   >
     <v-toolbar
       class="cabecalho"
@@ -46,7 +46,6 @@
 
 <script>
 import linker from '../api/linker'
-import EventBus from '../event-bus'
 
 export default {
   name: 'ExternalState',
@@ -59,11 +58,8 @@ export default {
     dialog: false,
     loading: true
   }),
-  mounted () {
-    EventBus.$on('ExternalState', this.open)
-  },
   methods: {
-    async open (state) {
+    async abrir (state) {
       if (!this.dialog) this.dialog = true
       this.title = state.text
       this.loading = true
@@ -72,7 +68,7 @@ export default {
       this.html = this.html.replace('game/state/42/', 'game/state/64/')
       this.loading = false
     },
-    cancel () {
+    cancelar () {
       this.dialog = false
     }
   }

@@ -18,9 +18,17 @@
       >
         <template v-for="item in secoes.principal">
           <v-flex :key="`principal${item.id}`">
-            <div class="py-1">
-              <div :class="`icone ${item.icone}`" /> {{ atributos[item.id] || '0' }}
-            </div>
+            <v-tooltip bottom>
+              <template #activator="{ on }">
+                <div
+                  class="py-1"
+                  v-on="on"
+                >
+                  <div :class="`icone ${item.icone}`" /> {{ atributos[item.id] || '0' }}
+                </div>
+              </template>
+              <span>{{ equipEffects.find(e => e.id === item.id)[$lang] }}</span>
+            </v-tooltip>
           </v-flex>
         </template>
       </draggable>
@@ -50,8 +58,22 @@
               <v-flex shrink>
                 <div :class="`icone ${item.icone}`" />
               </v-flex>
-              <v-flex><div class="icone damage" /> 99.999</v-flex>
-              <v-flex><div class="icone resist" /> 99.999</v-flex>
+              <v-tooltip bottom>
+                <template #activator="{ on }">
+                  <v-flex v-on="on">
+                    <div class="icone damage" /> 99.999
+                  </v-flex>
+                </template>
+                <span>{{ equipEffects.find(e => e.id === item.id)[$lang] }}</span>
+              </v-tooltip>
+              <v-tooltip bottom>
+                <template #activator="{ on }">
+                  <v-flex v-on="on">
+                    <div class="icone resist" /> 99.999
+                  </v-flex>
+                </template>
+                <span>{{ equipEffects.find(e => e.id === item.id2)[$lang] }}</span>
+              </v-tooltip>
             </v-layout>
           </v-flex>
         </template>
@@ -134,44 +156,44 @@ export default {
     equipEffects: equipEffects,
     secoes: {
       principal: [
-        { id: 20, icone: 'hp', label: '' },
-        { id: 31, icone: 'pa', label: '' },
-        { id: 41, icone: 'mp', label: '' },
-        { id: 191, icone: 'wp', label: '' },
-        { id: 0, icone: 'armor', label: '' }
+        { id: 20, icone: 'hp' },
+        { id: 31, icone: 'pa' },
+        { id: 41, icone: 'mp' },
+        { id: 191, icone: 'wp' },
+        { id: 0, icone: 'armor' }
       ],
       maestrias: [
-        { id: 1, icone: 'water', label: '' },
-        { id: 2, icone: 'earth', label: '' },
-        { id: 3, icone: 'air', label: '' },
-        { id: 4, icone: 'fire', label: '' }
+        { id: 122, id2: 82, icone: 'fire' },
+        { id: 124, id2: 83, icone: 'water' },
+        { id: 123, id2: 84, icone: 'earth' },
+        { id: 125, id2: 85, icone: 'air' }
       ],
       combate: [
-        { id: 120, icone: 'sword', label: '' },
-        { id: 24, icone: 'heal', label: '' },
-        { id: 875, icone: 'parade', label: '' },
-        { id: 150, icone: 'crit', label: '' },
-        { id: 171, icone: 'init', label: '' },
-        { id: 160, icone: 'range', label: '' },
-        { id: 175, icone: 'dodge', label: '' },
-        { id: 173, icone: 'lock', label: '' },
-        { id: 166, icone: 'wisdom', label: '' },
-        { id: 162, icone: 'prosp', label: '' },
-        { id: 184, icone: 'control', label: '' },
-        { id: 234, icone: 'kit', label: '' },
-        { id: 177, icone: 'will', label: '' }
+        { id: 120, icone: 'sword' },
+        { id: 24, icone: 'heal' },
+        { id: 875, icone: 'parade' },
+        { id: 150, icone: 'crit' },
+        { id: 171, icone: 'init' },
+        { id: 160, icone: 'range' },
+        { id: 175, icone: 'dodge' },
+        { id: 173, icone: 'lock' },
+        { id: 166, icone: 'wisdom' },
+        { id: 162, icone: 'prosp' },
+        { id: 184, icone: 'control' },
+        { id: 234, icone: 'kit' },
+        { id: 177, icone: 'will' }
       ],
       secundario: [
-        { id: 149, icone: 'mastcrit', label: '' },
-        { id: 988, icone: 'critresist', label: '' },
-        { id: 180, icone: 'mastrear', label: '' },
-        { id: 71, icone: 'rearresist', label: '' },
-        { id: 1052, icone: 'melee', label: '' },
-        { id: 1053, icone: 'dist', label: '' },
-        { id: 1051, icone: 'single', label: '' },
-        { id: 1050, icone: 'area', label: '' },
-        { id: 26, icone: 'heal', label: '' },
-        { id: 1055, icone: 'berserk', label: '' }
+        { id: 149, icone: 'mastcrit' },
+        { id: 988, icone: 'critresist' },
+        { id: 180, icone: 'mastrear' },
+        { id: 71, icone: 'rearresist' },
+        { id: 1052, icone: 'melee' },
+        { id: 1053, icone: 'dist' },
+        { id: 1051, icone: 'single' },
+        { id: 1050, icone: 'area' },
+        { id: 26, icone: 'heal' },
+        { id: 1055, icone: 'berserk' }
       ]
     }
   }),

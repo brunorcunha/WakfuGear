@@ -1,5 +1,9 @@
 export const pt = {
   label: {
+    fogo: 'Fogo',
+    agua: 'Água',
+    terra: 'Terra',
+    ar: 'Ar',
     nome: 'Nome',
     bonus: 'Bônus',
     nivel: 'Nível',
