@@ -23,7 +23,7 @@ const mutations = {
 }
 
 const actions = {
-  async init ({ commit }, lang) {
+  async init ({ commit }, { lang }) {
     const fnLocal = async () => {
       const dados = await api.getItems()
       const versao = await api.getVersion()

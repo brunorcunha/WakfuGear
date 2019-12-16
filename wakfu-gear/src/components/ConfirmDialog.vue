@@ -36,9 +36,9 @@
         <v-btn
           color="primary darken-1"
           text
-          @click="label.confirmar"
+          @click="confirmar"
         >
-          {{ confirmar }}
+          {{ label.confirmar }}
           <v-icon right>
             thumb_up
           </v-icon>

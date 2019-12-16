@@ -20,21 +20,26 @@
           >
             <v-flex>
               <v-text-field
+                ref="titulo"
                 class="pt-2 mt-0"
                 dark
                 single-line
                 hide-details
+                :value="nome"
                 :readonly="!edit"
                 :disabled="!edit"
                 :label="$t('label.tituloconjunto')"
-                :rules="[v => !!v || $t('label.obrigatorio')]"
+                @change="mudarNome"
+                @focus="$event.target.select()"
+                @keyup.native.enter="editarTitulo"
+                @blur="editarTitulo"
               >
                 <v-menu
                   slot="prepend"
                   bottom
                   right
-                  transition="slide-x-transition"
-                  offset-x
+                  transition="slide-y-transition"
+                  offset-y
                 >
                   <template #activator="{ on: menu }">
                     <v-tooltip
@@ -56,8 +61,55 @@
                     </v-tooltip>
                   </template>
                   <v-list dense>
-                    <v-list-tile @click="abrirURL(item.type, item.id)">
-                      <v-list-tile-title>{{ $t('label.abrirsiteoficial') }}</v-list-tile-title>
+                    <v-list-tile @click="novoConjunto">
+                      <v-list-tile-content><v-list-tile-title>{{ $t('label.novogear') }}</v-list-tile-title></v-list-tile-content>
+                      <v-list-tile-action>
+                        <v-icon color="green">
+                          add
+                        </v-icon>
+                      </v-list-tile-action>
+                    </v-list-tile>
+                    <v-list-tile @click="clonarConjunto">
+                      <v-list-tile-content><v-list-tile-title>{{ $t('label.clonar') }}</v-list-tile-title></v-list-tile-content>
+                      <v-list-tile-action>
+                        <v-icon color="orange">
+                          library_add
+                        </v-icon>
+                      </v-list-tile-action>
+                    </v-list-tile>
+                    <v-menu
+                      open-on-hover
+                      right
+                      transition="slide-x-transition"
+                      offset-x
+                      :close-on-content-click="false"
+                    >
+                      <template #activator="{ on: submenu }">
+                        <v-list-tile
+                          @click.stop
+                          v-on="submenu"
+                        >
+                          <v-list-tile-content>
+                            {{ $t('label.trocargear') }}
+                          </v-list-tile-content>
+                          <v-list-tile-action>
+                            <v-icon small>
+                              arrow_forward_ios
+                            </v-icon>
+                          </v-list-tile-action>
+                        </v-list-tile>
+                      </template>
+                      <ListGears
+                        @evento="trocarGear"
+                      />
+                    </v-menu>
+                    <v-list-tile @click="confirmarExcluir">
+                      <v-list-tile-content><v-list-tile-title>{{ $t('label.remover') }}</v-list-tile-title></v-list-tile-content>
+                      <v-list-tile-action>
+                        <v-icon color="red">
+                          delete
+                        </v-icon>
+                      </v-list-tile-action>
                     </v-list-tile>
                   </v-list>
                 </v-menu>
@@ -71,7 +123,7 @@
                     icon
                     class="ma-0"
                     dark
-                    @click="edit = !edit"
+                    @click="editarTitulo"
                   >
                     <v-icon>{{ edit ? 'check' : 'edit' }}</v-icon>
                   </v-btn>
@@ -96,7 +148,7 @@
               <template v-if="vazio">
                 <span class="msg">{{ $t('msg.adicionarEquip') }}</span>
               </template>
-              <template v-for="(i, k) in gear">
+              <template v-for="(i, k) in gearAtual">
                 <v-menu
                   v-if="!!i"
                   :key="`gear${i.iid[0]}${k}`"
@@ -220,53 +272,65 @@
 <script>
 import { mapGetters } from 'vuex'
 import Atributos from './Atributos'
+import ListGears from './ListGears'
 
 export default {
   name: 'Equipamento',
-  components: { Atributos },
+  components: { Atributos, ListGears },
   data: () => ({
     url: 'http://s.ankama.com/www/static.ankama.com/wakfu/portal/game/item/42/',
-    active: false,
     edit: false,
-    items: [],
-    sets: [],
-    ultimoNumero: 1,
     model: null,
     search: null,
     progress: false
   }),
   computed: {
-    ...mapGetters('gear', ['gear', 'vazio']),
+    ...mapGetters('gears', ['gears', 'gearAtual', 'vazio', 'nome', 'qnt']),
     somenteUmaReliquia () {
-      return Object.keys(this.gear).filter(e => this.gear[e] && this.gear[e].rarity === 5).length <= 1
+      if (!this.gearAtual) return true
+      return Object.keys(this.gearAtual).filter(e => this.gearAtual[e] && this.gearAtual[e].rarity === 5).length <= 1
     },
     somenteUmEpico () {
-      return Object.keys(this.gear).filter(e => this.gear[e] && this.gear[e].rarity === 7).length <= 1
+      if (!this.gearAtual) return true
+      return Object.keys(this.gearAtual).filter(e => this.gearAtual[e] && this.gearAtual[e].rarity === 7).length <= 1
     },
     somenteUmUnico () {
-      if (!this.gear.LEFT_HAND || !this.gear.RIGHT_HAND) return true
-      return this.gear.LEFT_HAND.id !== this.gear.RIGHT_HAND.id
+      if (!this.gearAtual) return true
+      if (!this.gearAtual.LEFT_HAND || !this.gearAtual.RIGHT_HAND) return true
+      return this.gearAtual.LEFT_HAND.id !== this.gearAtual.RIGHT_HAND.id
     }
   },
   methods: {
-    next () {
-      this.active = !this.active
+    editarTitulo () {
+      this.edit = !this.edit
+      if (this.edit) setTimeout(() => this.$refs.titulo.focus(), 200)
     },
-    remover (chave) {
-      this.$store.dispatch('gear/removerItem', chave)
+    mudarNome (nome) {
+      this.$store.dispatch('gears/setNome', { nome })
     },
-    adicionarConjunto () {
-      this.sets.push({
-        nome: 'Gear #' + this.ultimoNumero++
-      })
+    remover (posicao) {
+      this.$store.dispatch('gears/removerItem', { posicao })
     },
-    async confirmarExcluir (index) {
+    novoConjunto () {
+      const index = this.qnt
+      this.$store.dispatch('gears/adicionarGear', {})
+      this.$store.dispatch('gears/selecionarAtual', { index })
+    },
+    clonarConjunto () {
+      const index = this.qnt
+      this.$store.dispatch('gears/clonarGear', {})
+      this.$store.dispatch('gears/selecionarAtual', { index })
+    },
+    trocarGear (gear, index) {
+      this.$store.dispatch('gears/selecionarAtual', { index })
+    },
+    async confirmarExcluir () {
       try {
         await this.$ConfirmDialog.abrir({
           titulo: this.$i18n.t('dialog.excluir.titulo'),
           mensagem: this.$i18n.t('dialog.excluir.msg')
         })
-        this.sets.splice(index, 1)
+        this.$store.dispatch('gears/removerGear', {})
       } catch (e) {}
     }
   }

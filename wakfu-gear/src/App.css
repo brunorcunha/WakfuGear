@@ -100,7 +100,7 @@ table { border-collapse: collapse; }
   position: relative;
   width: 117px; max-width: 117px; min-width: 117px;
   height: 117px;
-  background: url(../static/bg.jpg) center;
+  background: #0C3139 url(../static/bg.jpg) center;
   cursor: move;
   border-right: 1px solid rgba(0,0,0,.1)
 }

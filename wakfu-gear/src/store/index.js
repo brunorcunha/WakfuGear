@@ -2,7 +2,6 @@ import Vuex from 'vuex'
 import Vue from 'vue'
 import items from './modules/items'
 import filtros from './modules/filtros'
-import gear from './modules/gear'
 import gears from './modules/gears'
 import atributos from './modules/atributos'
 
@@ -14,7 +13,6 @@ export default new Vuex.Store({
     items,
     atributos,
     gears,
-    gear,
     filtros
   }
 })

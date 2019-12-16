@@ -50,7 +50,6 @@
               depressed
               block
               value="center"
-              disabled
             >
               {{ $t('label.gears') }}
             </v-btn>
@@ -109,8 +108,8 @@ export default {
     ExternalState
   },
   data: () => ({
-    drawer: true,
-    drawerRight: true,
+    drawer: false,
+    drawerRight: false,
     right: null,
     left: null,
     dados: null
@@ -131,12 +130,18 @@ export default {
     }
   },
   created () {
-    this.$store.dispatch('items/init', this.$lang)
-    this.$store.dispatch('filtros/init', this.$lang)
+    this.$store.dispatch('items/init', { lang: this.$lang })
+    this.$store.dispatch('filtros/init')
+    this.$store.dispatch('gears/init')
   },
   mounted () {
     Vue.prototype.$ConfirmDialog = this.$refs.confirmDialog
     Vue.prototype.$LinkerState = this.$refs.linkerState
+
+    if (this.$vuetify.breakpoint.lgAndUp) {
+      this.drawer = true
+      this.drawerRight = true
+    }
   }
 }
 </script>

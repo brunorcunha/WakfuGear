@@ -2,7 +2,7 @@
   <td
     v-if="item"
     class="itemHeader"
-    @dblclick="adicionarGear"
+    @dblclick="adicionarAoGear"
   >
     <v-img
       class="img"
@@ -89,7 +89,7 @@
             right
             transition="slide-x-transition"
             offset-x
-            :close-on-content-click="false"
+            :close-on-content-click="true"
           >
             <template #activator="{ on: submenu }">
               <v-list-tile
@@ -106,13 +106,9 @@
                 </v-list-tile-action>
               </v-list-tile>
             </template>
-            <v-list dense>
-              <v-list-tile @click="adicionarGear(item)">
-                <v-list-tile-content>
-                  {{ $t('label.atual') }}
-                </v-list-tile-content>
-              </v-list-tile>
-            </v-list>
+            <ListGears
+              @evento="adicionarAoGear"
+            />
           </v-menu>
           <v-divider />
           <v-list-tile @click="abrirURL(item.type, item.id)">
@@ -132,9 +128,12 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import { equipType } from '../model/equipType'
+import ListGears from './ListGears'
 
 export default {
+  components: { ListGears },
   props: {
     value: { type: Object, default: null }
   },
@@ -142,6 +141,9 @@ export default {
     item: null,
     equipType
   }),
+  computed: {
+    ...mapGetters('gears', ['gears', 'indexAtual'])
+  },
   mounted () {
     this.item = this.value
   },
@@ -153,8 +155,8 @@ export default {
         window.open(`https://www.wakfu.com/en/mmorpg/encyclopedia/armors/${id}-${type}`)
       }
     },
-    adicionarGear () {
-      this.$store.dispatch('gear/adicionarItem', this.item)
+    adicionarAoGear (gear, index) {
+      this.$store.dispatch('gears/adicionarItem', { item: this.item, index })
     }
   }
 }

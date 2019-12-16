@@ -13,7 +13,7 @@ const mutations = {
 }
 
 const actions = {
-  calcularAtributos ({ commit }, gear) {
+  calcularAtributos ({ commit }, { gear }) {
     const atr = atributos.getAtributos(gear)
     commit('setAtributos', atr)
   }
