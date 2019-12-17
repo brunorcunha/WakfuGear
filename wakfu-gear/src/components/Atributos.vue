@@ -145,6 +145,7 @@
 </template>
 
 <script>
+import atributos from '../functions/atributos'
 import { equipEffects } from '../model/equipEffects'
 import { mapGetters } from 'vuex'
 import draggable from 'vuedraggable'
@@ -198,7 +199,10 @@ export default {
     }
   }),
   computed: {
-    ...mapGetters('atributos', ['atributos'])
+    ...mapGetters('gears', ['gearAtual']),
+    atributos () {
+      return atributos.getAtributos(this.gearAtual)
+    }
   }
 }
 </script>

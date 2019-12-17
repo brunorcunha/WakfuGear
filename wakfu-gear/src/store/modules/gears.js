@@ -62,8 +62,6 @@ const actions = {
   },
   selecionarAtual ({ commit, state, dispatch }, { index }) {
     commit('setAtual', { index })
-    const gear = state.gears[state.gearAtual].gear
-    dispatch('atributos/calcularAtributos', { gear }, { root: true })
   },
   setNome ({ commit }, { nome, index }) {
     index = (index != null ? index : state.gearAtual)
@@ -116,7 +114,6 @@ const actions = {
     commit('editarGear', { gear, index })
     commit('addQntItens', { index })
     commit('salvarLS')
-    if (index === state.gearAtual) dispatch('atributos/calcularAtributos', { gear }, { root: true })
   },
   async removerItem ({ commit, state, dispatch }, { posicao, index }) {
     index = (index != null ? index : state.gearAtual)
@@ -125,7 +122,6 @@ const actions = {
     commit('editarGear', { gear, index })
     commit('subQntItens', { index })
     commit('salvarLS')
-    if (index === state.gearAtual) dispatch('atributos/calcularAtributos', { gear }, { root: true })
   }
 }
 

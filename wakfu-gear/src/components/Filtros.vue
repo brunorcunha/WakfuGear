@@ -218,7 +218,7 @@ export default {
       })
       return val
     },
-    emitirFiltros () {
+    async emitirFiltros () {
       this.progress = true
       EventBus.$emit('filtrar', this.filtros)
       this.$store.dispatch('filtros/salvar', this.filtros)
