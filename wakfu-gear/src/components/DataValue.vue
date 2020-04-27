@@ -1,6 +1,6 @@
 <template>
-  <span v-if="!value">-</span>
-  <span v-else-if="!value.id">{{ value.text }}</span>
+  <span v-if="!valor">-</span>
+  <span v-else-if="!valor.id">{{ valor.text }}</span>
   <v-tooltip
     v-else
     bottom
@@ -10,9 +10,9 @@
         class="link"
         v-on="on"
         @click="abrirDialog"
-      >{{ value.text }} ({{ value.lvl }})</small>
+      >{{ valor.text }} ({{ valor.lvl }})</small>
     </template>
-    <span>{{ value.text }} ({{ value.lvl }})</span>
+    <span>{{ valor.text }} ({{ valor.lvl }})</span>
   </v-tooltip>
 </template>
 
@@ -25,6 +25,9 @@ export default {
   props: {
     value: { type: Object, default: null }
   },
+  data: vm => ({
+    valor: null
+  }),
   watch: {
     value (val) {
       this.tratarValue(val)
@@ -43,17 +46,18 @@ export default {
       if (valor && valor.params[0] != null) {
         if (atributo === 304) {
           const efeito = states.find(e => e.id === valor.params[0])
-          return {
+          this.valor = {
             text: efeito[this.$lang],
             id: valor.params[0],
             lvl: valor.params[2]
           }
         } else {
-          if (equipEffects.find(e => e.iid.includes(atributo))) return { text: -valor.params[0] }
-          return { text: valor.params[0] }
+          if (equipEffects.find(e => e.iid.includes(atributo))) this.valor = { text: -valor.params[0] }
+          this.valor = { text: valor.params[0] }
         }
+      } else {
+        this.valor = null
       }
-      return null
     }
   }
 }
