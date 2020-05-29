@@ -127,11 +127,11 @@ export default {
     itemsFiltrados: [],
     itemsLimitados: [],
     itemsAtributos: [],
-    equipEffects: equipEffects,
-    equipType: equipType,
     hover: null,
     mostrar: 20,
-    progress: true
+    progress: true,
+    equipEffects,
+    equipType
   }),
   computed: {
     ...mapGetters('items', ['items', 'itemsList']),
@@ -180,7 +180,7 @@ export default {
       this.itemsFiltrados = await this.filtrarDados(this.items, filtros)
       this.itemsOrdenados = await this.ordenarDados(this.itemsFiltrados)
       this.itemsLimitados = await this.limitarDados(this.itemsOrdenados)
-      this.itemsAtributos = await this.extrairAtributosDados(this.itemsLimitados)
+      this.itemsAtributos = await this.extrairAtributosDados(this.itemsOrdenados)
 
       this.progress = false
       EventBus.$emit('terminouFiltragem')
@@ -208,7 +208,7 @@ export default {
     },
     traduzir (array, id) {
       const valor = array.find(e => e.id === id || e.iid.includes(id))
-      return valor ? valor[this.$lang].replace('{[>2]?s:}', 's').replace('[#1]', '') : '-'
+      return valor ? valor[this.$lang] || id : id
     },
     scrolling (evt) {
       this.$refs.atributos.scrollTop = evt.target.scrollTop

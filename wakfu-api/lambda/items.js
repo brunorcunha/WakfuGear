@@ -86,11 +86,17 @@ const formatarEquipEffects = equipEffects => {
     { iid: 194, id: 191 },
     { iid: 876, id: 875 },
     { iid: 1060, id: 1053 },
-    { iid: 1061, id: 1055 }
+    { iid: 1061, id: 1055 },
+    { iid: 93, id: 82 },
+    { iid: 97, id: 82 },
+    { iid: 94, id: 83 },
+    { iid: 98, id: 83 },
+    { iid: 92, id: 84 },
+    { iid: 96, id: 84 }
   ]
   const ArrayIID = IIDtoID.map(e => e.iid)
 
-  return equipEffects.map(fx => {
+  let equipFx = equipEffects.map(fx => {
     const tID = fx.effect.definition.actionId
     let params = fx.effect.definition.params
     let id = tID
@@ -99,12 +105,14 @@ const formatarEquipEffects = equipEffects => {
       id = IIDtoID.find(e => e.iid === tID).id
       if (params && params[0]) params[0] *= -1
     } else {
-      if (id === 1068) id = parseInt(`91068${params[2]}`)
-      if (id === 1069) id = parseInt(`91069${params[2]}`)
+      if (id === 1068) id = parseInt(`91068${params[2]}`) // Dominio
+      if (id === 1069) id = parseInt(`91069${params[2]}`) // Resistencia
+      if (id === 42) id = 184 // Controle
     }
 
     return { id, params }
   })
+  return equipFx.filter(e => [1020, 1062, 400, ].includes(e.id))
 }
 
 const formatarItem = item => {

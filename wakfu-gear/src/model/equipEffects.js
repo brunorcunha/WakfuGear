@@ -86,35 +86,35 @@ export const equipEffects = [
   },
   {
     id: 82,
-    iid: [93],
-    fr: 'Résistance [el1]',
-    en: '[el1] Resistance',
-    es: 'Resistencia al [el1]',
-    pt: 'Resistência a [el1]'
+    iid: [93, 97],
+    fr: 'Résistance Feu',
+    en: 'Fire Resistance',
+    es: 'Resistencia al Fuego',
+    pt: 'Resistência a Fogo'
   },
   {
     id: 83,
-    iid: [94],
-    fr: 'Résistance [el2]',
-    en: '[el2] Resistance',
-    es: 'Resistencia al [el2]',
-    pt: 'Resistência a [el2]'
+    iid: [94, 98],
+    fr: 'Résistance Eau',
+    en: 'Water Resistance',
+    es: 'Resistencia al Agua',
+    pt: 'Resistência a Água'
   },
   {
     id: 84,
-    iid: [92],
-    fr: 'Résistance [el3]',
-    en: '[el3] Resistance',
-    es: 'Resistencia a la [el3]',
-    pt: 'Resistência a [el3]'
+    iid: [92, 96],
+    fr: 'Résistance Terre',
+    en: 'Earth Resistance',
+    es: 'Resistencia a la Tierra',
+    pt: 'Resistência a Terra'
   },
   {
     id: 85,
     iid: [],
-    fr: 'Résistance [el4]',
-    en: '[el4] Resistance',
-    es: 'Resistencia al [el4]',
-    pt: 'Resistência a [el4]'
+    fr: 'Résistance Air',
+    en: 'Air Resistance',
+    es: 'Resistencia al Aire',
+    pt: 'Resistência a Ar'
   },
   {
     id: 120,
@@ -127,34 +127,34 @@ export const equipEffects = [
   {
     id: 122,
     iid: [132],
-    fr: 'Maîtrise [el1]',
-    en: '[el1] Mastery',
-    es: 'Dominio de [el1]',
-    pt: 'Domínio de [el1]'
+    fr: 'Maîtrise Feu',
+    en: 'Fire Mastery',
+    es: 'Dominio de Fuego',
+    pt: 'Domínio de Fogo'
   },
   {
     id: 123,
     iid: [],
-    fr: 'Maîtrise [el3]',
-    en: '[el3] Mastery',
-    es: 'Dominio de [el3]',
-    pt: 'Domínio de [el3]'
+    fr: 'Maîtrise Terre',
+    en: 'Earth Mastery',
+    es: 'Dominio de Tierra',
+    pt: 'Domínio de Terra'
   },
   {
     id: 124,
     iid: [],
-    fr: 'Maîtrise [el2]',
-    en: '[el2] Mastery',
-    es: 'Dominio de [el2]',
-    pt: 'Domínio de [el2]'
+    fr: 'Maîtrise Eau',
+    en: 'Water Mastery',
+    es: 'Dominio de Agua',
+    pt: 'Domínio de Água'
   },
   {
     id: 125,
     iid: [],
-    fr: 'Maîtrise [el4]',
-    en: '[el4] Mastery',
-    es: 'Dominio de [el4]',
-    pt: 'Domínio de [el4]'
+    fr: 'Maîtrise Air',
+    en: 'Air Mastery',
+    es: 'Dominio de Aire',
+    pt: 'Domínio de Ar'
   },
   {
     id: 149,
