@@ -303,7 +303,7 @@ export default {
 
   .icone.mastcrit { background-image: url(../../static/atributos/tags_40.png); }
   .icone.mastrear { background-image: url(../../static/atributos/tags_26.png); }
-  .icone.critresist { background-image: url(../../static/atributos/tags_25.png); }
+  .icone.critresist { background-image: url(../../static/atributos/tags_39.png); }
   .icone.rearresist { background-image: url(../../static/atributos/tags_38.png); }
   .icone.melee { background-image: url(../../static/atributos/tags_23.png); }
   .icone.dist { background-image: url(../../static/atributos/tags_20.png); }
