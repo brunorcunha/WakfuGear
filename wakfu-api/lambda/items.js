@@ -89,16 +89,19 @@ const formatarEquipEffects = equipEffects => {
     { iid: 1061, id: 1055 }
   ]
   const ArrayIID = IIDtoID.map(e => e.iid)
-  const tID = fx.effect.definition.actionId
-  let params = fx.effect.definition.params
-  let id = tID
 
-  if (ArrayIID.includes(tID)) {
-    id = IIDtoID.find(e => e.iid === tID).id
-    if (params && params[0]) params[0] *= -1
-  }
+  return equipEffects.map(fx => {
+    const tID = fx.effect.definition.actionId
+    let params = fx.effect.definition.params
+    let id = tID
 
-  return equipEffects.map(fx => ({ id, params }))
+    if (ArrayIID.includes(tID)) {
+      id = IIDtoID.find(e => e.iid === tID).id
+      if (params && params[0]) params[0] *= -1
+    }
+
+    return {id, params }
+  })
 }
 
 const formatarItem = item => {
