@@ -2,14 +2,14 @@
 const AWS = require('aws-sdk')
 const request = require('request-promise')
 
-async function getLinker (resource, params) {
-  return await request('http://www.wakfu.com/fr/linker/' + resource + '?' + Object.entries(params).map(([key, val]) => `${key}=${val}`).join('&'))
+const getLinker = async (resource, params) => {
+  const args = Object.entries(params).map(([key, val]) => `${key}=${val}`).join('&')
+  return (await request(`http://www.wakfu.com/fr/linker/${resource}?${args}`))
 }
 
 module.exports.handler = async (event, context, callback) => {
-  console.log(event)
   if (event.httpMethod === 'OPTIONS') {
-    callback(null, {
+    return callback(null, {
       statusCode: 204,
       headers: {
         'Access-Control-Allow-Origin': '*',
@@ -20,21 +20,19 @@ module.exports.handler = async (event, context, callback) => {
         'Access-Control-Allow-Credentials': 'true'
       }
     })
-    return
   } else if (event.httpMethod === 'POST') {
     try {
       const data = JSON.parse(event.body)
       const body = await getLinker(data.resource, data.params)
-      console.log(body)
-      callback(null, {
+      return callback(null, {
         statusCode: 200,
-        headers: {'Access-Control-Allow-Origin': '*'},
+        headers: {'Access-Control-Allow-Origin': 'https://wakfu-gear.netlify.app'},
         body
       })
     } catch (e) {
-      callback(null, {
-        statusCode: 200,
-        headers: {'Access-Control-Allow-Origin': '*'},
+      return callback(null, {
+        statusCode: 404,
+        headers: {'Access-Control-Allow-Origin': 'https://wakfu-gear.netlify.app'},
         body: JSON.stringify({error: e})
       })
     }

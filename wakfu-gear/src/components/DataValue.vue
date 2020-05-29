@@ -52,8 +52,8 @@ export default {
             lvl: valor.params[2]
           }
         } else {
-          if (equipEffects.find(e => e.iid.includes(atributo))) this.valor = { text: -valor.params[0] }
           this.valor = { text: valor.params[0] }
+          if (equipEffects.find(e => e.iid.includes(atributo))) this.valor = { text: -valor.params[0] }
         }
       } else {
         this.valor = null

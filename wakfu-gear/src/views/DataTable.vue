@@ -60,8 +60,13 @@
             <table>
               <draggable v-model="itemsAtributos">
                 <template v-for="(atributo, index) in itemsAtributos">
-                  <tr :key="`atr${index}`">
-                    <td>{{ traduzir(equipEffects, atributo) }}</td>
+                  <tr
+                    :key="`atr${index}`"
+                    @click="ordenar(atributo)"
+                  >
+                    <td :class="ordenarPor === atributo ? (!!ordemAsc ? 'ordemAscSelecionada' : 'ordemSelecionada') : null">
+                      {{ traduzir(equipEffects, atributo) }}
+                    </td>
                   </tr>
                 </template>
               </draggable>
@@ -75,7 +80,7 @@
           >
             <table id="dados">
               <template v-for="(atributo, indAtr) in itemsAtributos">
-                <tr :key="`tr${indAtr}`">
+                <tr :key="`tr${indAtr}`" :class="ordenarPor === atributo ? 'atributoSelecionado' : null">
                   <template v-for="(item, indIte) in itemsLimitados">
                     <td :key="`i${indAtr}_${indIte}`">
                       <DataValue :value="{ item, atributo }" />
@@ -114,6 +119,8 @@ export default {
     value: { type: Array, default: () => [] }
   },
   data: () => ({
+    ordenarPor: null,
+    ordemAsc: null,
     itemsFiltrados: [],
     itemsLimitados: [],
     itemsAtributos: [],
@@ -137,11 +144,39 @@ export default {
     EventBus.$off('filtrar')
   },
   methods: {
+    async ordenar (id) {
+      this.ordemAsc = !this.ordemAsc
+      if (this.ordenarPor !== id) this.ordemAsc = !true
+      this.ordenarPor = id
+      this.progress = true
+
+      this.itemsOrdenados = await this.ordenarDados(this.itemsFiltrados)
+      this.itemsLimitados = await this.limitarDados(this.itemsOrdenados)
+      this.itemsAtributos = await this.extrairAtributosDados(this.itemsOrdenados)
+
+      this.progress = false
+    },
+    async ordenarDados (items) {
+      if (this.ordenarPor) {
+        items.sort((a, b) => {
+          if (a.equipEffects && b.equipEffects) {
+            const aTmp = a.equipEffects.find(e => e.id === this.ordenarPor) || { params: [0] }
+            const bTmp = b.equipEffects.find(e => e.id === this.ordenarPor) || { params: [0] }
+            if (aTmp.params[0] > bTmp.params[0]) return -1
+            if (aTmp.params[0] < bTmp.params[0]) return 1
+          }
+          return 0
+        })
+      }
+      if (this.ordemAsc) items.reverse()
+      return items
+    },
     async eventoFiltragem (filtros) {
       this.progress = true
 
       this.itemsFiltrados = await this.filtrarDados(this.items, filtros)
-      this.itemsLimitados = await this.limitarDados(this.itemsFiltrados)
+      this.itemsOrdenados = await this.ordenarDados(this.itemsFiltrados)
+      this.itemsLimitados = await this.limitarDados(this.itemsOrdenados)
       this.itemsAtributos = await this.extrairAtributosDados(this.itemsLimitados)
 
       this.progress = false
@@ -153,6 +188,7 @@ export default {
       items = filtros.filtroRaridade(items, filtro)
       items = filtros.filtroTipo(items, filtro)
       items = filtros.filtroBonus(items, filtro)
+
       return items
     },
     limitarDados (items) {
@@ -165,7 +201,7 @@ export default {
             item => item.equipEffects.map(fx => fx.id)
           ).flat()
         )
-      ]
+      ].sort()
     },
     traduzir (array, id) {
       const valor = array.find(e => e.id === id || e.iid.includes(id))
@@ -182,5 +218,17 @@ export default {
 <style>
   #dados tr:hover {
     background: #fff4f2;
+  }
+  .ordemSelecionada {
+    background: #fafafa;
+  }
+  .ordemSelecionada:after {
+    content: '▼';
+  }
+  .ordemAscSelecionada:after {
+    content: '▲';
+  }
+  .atributoSelecionado {
+    background: #fafafa;
   }
 </style>

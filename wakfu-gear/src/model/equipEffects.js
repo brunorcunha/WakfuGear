@@ -271,10 +271,10 @@ export const equipEffects = [
   {
     id: 832,
     iid: [],
-    fr: '[#2] Niv. aux Sorts ',
-    en: '[#2] Lvl. to Spells',
-    es: '[#2] Niv. a Hechizos ',
-    pt: '[#2] Nv. aos Feitiços '
+    fr: 'Niv. aux Sorts',
+    en: 'Lvl. to Spells',
+    es: 'Niv. a Hechizos',
+    pt: 'Nv. aos Feitiços'
   },
   {
     id: 875,
@@ -343,18 +343,18 @@ export const equipEffects = [
   {
     id: 1068,
     iid: [],
-    fr: 'Maîtrise sur [#2] éléments aléatoires}',
-    en: 'Mastery of [#2] random elements}',
-    es: 'Dominio de [#2] elementos aleatorios}',
-    pt: 'Domínio sobre [#2] elementos aleatórios}'
+    fr: 'Maîtrise sur [#2] éléments aléatoires',
+    en: 'Mastery of [#2] random elements',
+    es: 'Dominio de [#2] elementos aleatorios',
+    pt: 'Domínio sobre [#2] elementos aleatórios'
   },
   {
     id: 1069,
     iid: [],
-    fr: 'Résistance sur [#2] éléments aléatoires}',
-    en: 'Resistance to [#2] random elements}',
-    es: 'Resistencia a [#2] elementos aleatorios}',
-    pt: 'Resistência a [#2] elementos aleatórios}'
+    fr: 'Résistance sur [#2] éléments aléatoires',
+    en: 'Resistance to [#2] random elements',
+    es: 'Resistencia a [#2] elementos aleatorios',
+    pt: 'Resistência a [#2] elementos aleatórios'
   },
   {
     id: 2001,
