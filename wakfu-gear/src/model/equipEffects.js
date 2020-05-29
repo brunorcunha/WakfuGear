@@ -340,22 +340,22 @@ export const equipEffects = [
     es: 'Dominio Berserker',
     pt: 'Domínio de Berserk'
   },
-  {
-    id: 1068,
-    iid: [],
-    fr: 'Maîtrise sur [#2] éléments aléatoires',
-    en: 'Mastery of [#2] random elements',
-    es: 'Dominio de [#2] elementos aleatorios',
-    pt: 'Domínio sobre [#2] elementos aleatórios'
-  },
-  {
-    id: 1069,
-    iid: [],
-    fr: 'Résistance sur [#2] éléments aléatoires',
-    en: 'Resistance to [#2] random elements',
-    es: 'Resistencia a [#2] elementos aleatorios',
-    pt: 'Resistência a [#2] elementos aleatórios'
-  },
+  // {
+  //   id: 1068,
+  //   iid: [],
+  //   fr: 'Maîtrise sur [#2] éléments aléatoires',
+  //   en: 'Mastery of [#2] random elements',
+  //   es: 'Dominio de [#2] elementos aleatorios',
+  //   pt: 'Domínio sobre [#2] elementos aleatórios'
+  // },
+  // {
+  //   id: 1069,
+  //   iid: [],
+  //   fr: 'Résistance sur [#2] éléments aléatoires',
+  //   en: 'Resistance to [#2] random elements',
+  //   es: 'Resistencia a [#2] elementos aleatorios',
+  //   pt: 'Resistência a [#2] elementos aleatórios'
+  // },
   {
     id: 2001,
     iid: [],
