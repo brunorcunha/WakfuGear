@@ -99,8 +99,8 @@ const formatarEquipEffects = equipEffects => {
       id = IIDtoID.find(e => e.iid === tID).id
       if (params && params[0]) params[0] *= -1
     } else {
-      if (id === 1068) id = `91068${params[1]}`
-      if (id === 1069) id = `91069${params[1]}`
+      if (id === 1068) id = `91068${params[2]}`
+      if (id === 1069) id = `91069${params[2]}`
     }
 
     return { id, params }
