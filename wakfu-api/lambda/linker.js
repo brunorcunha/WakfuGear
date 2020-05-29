@@ -8,11 +8,18 @@ const getLinker = async (resource, params) => {
 }
 
 module.exports.handler = async (event, context, callback) => {
+  const ALLOWED_ORIGINS = [
+    'http://localhost:8080/',
+    'https://wakfu-gear.netlify.app'
+  ]
+  const { origin } = event.headers
+  const headerCORS = (ALLOWED_ORIGINS.includes(origin)) ? origin : '*'
+
   if (event.httpMethod === 'OPTIONS') {
     return callback(null, {
       statusCode: 204,
       headers: {
-        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Origin': headerCORS,
         'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
         'Content-Type': 'application/json',
         'Access-Control-Allow-Methods': '*',
@@ -26,13 +33,13 @@ module.exports.handler = async (event, context, callback) => {
       const body = await getLinker(data.resource, data.params)
       return callback(null, {
         statusCode: 200,
-        headers: {'Access-Control-Allow-Origin': 'https://wakfu-gear.netlify.app'},
+        headers: {'Access-Control-Allow-Origin': headerCORS},
         body
       })
     } catch (e) {
       return callback(null, {
         statusCode: 404,
-        headers: {'Access-Control-Allow-Origin': 'https://wakfu-gear.netlify.app'},
+        headers: {'Access-Control-Allow-Origin': headerCORS},
         body: JSON.stringify({error: e})
       })
     }

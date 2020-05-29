@@ -80,7 +80,10 @@
           >
             <table id="dados">
               <template v-for="(atributo, indAtr) in itemsAtributos">
-                <tr :key="`tr${indAtr}`" :class="ordenarPor === atributo ? 'atributoSelecionado' : null">
+                <tr
+                  :key="`tr${indAtr}`"
+                  :class="ordenarPor === atributo ? 'atributoSelecionado' : null"
+                >
                   <template v-for="(item, indIte) in itemsLimitados">
                     <td :key="`i${indAtr}_${indIte}`">
                       <DataValue :value="{ item, atributo }" />
