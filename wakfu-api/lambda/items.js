@@ -112,7 +112,7 @@ const formatarEquipEffects = equipEffects => {
 
     return { id, params }
   })
-  return equipFx.filter(e => [1020, 1062, 400, ].includes(e.id))
+  return equipFx.filter(e => ![1020, 1062, 400, ].includes(e.id))
 }
 
 const formatarItem = item => {
