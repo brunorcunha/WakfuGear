@@ -95,7 +95,7 @@ const formatarEquipEffects = equipEffects => {
 
   if (ArrayIID.includes(tID)) {
     id = IIDtoID.find(e => e.iid === tID).id
-    params[0] *= -1
+    if (params && params[0]) params[0] *= -1
   }
 
   return equipEffects.map(fx => ({ id, params }))

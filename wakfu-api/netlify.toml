@@ -3,4 +3,4 @@
 [[headers]]
   for = "/*"
     [headers.values]
-      Access-Control-Allow-Origin = "*"
+      Access-Control-Allow-Origin = "https://wakfu-gear.netlify.app"
