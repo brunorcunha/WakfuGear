@@ -363,5 +363,53 @@ export const equipEffects = [
     en: '% Harvesting Quantity',
     es: '% Cantidad de Recolección',
     pt: '% Quantidade de Colheita'
+  },
+  {
+    id: 910681,
+    iid: [],
+    fr: 'Maîtrise sur 1 élément aléatoire',
+    en: 'Mastery of 1 random element',
+    es: 'Dominio de 1 elemento aleatorio',
+    pt: 'Domínio sobre 1 elemento aleatório'
+  },
+  {
+    id: 910682,
+    iid: [],
+    fr: 'Maîtrise sur 2 éléments aléatoires',
+    en: 'Mastery of 2 random elements',
+    es: 'Dominio de 2 elementos aleatorios',
+    pt: 'Domínio sobre 2 elementos aleatórios'
+  },
+  {
+    id: 910683,
+    iid: [],
+    fr: 'Maîtrise sur 3 éléments aléatoires',
+    en: 'Mastery of 3 random elements',
+    es: 'Dominio de 3 elementos aleatorios',
+    pt: 'Domínio sobre 3 elementos aleatórios'
+  },
+  {
+    id: 910691,
+    iid: [],
+    fr: 'Résistance sur 1 élément aléatoire',
+    en: 'Resistance to 1 random element',
+    es: 'Resistencia a 1 elemento aleatorio',
+    pt: 'Resistência a 1 elemento aleatório'
+  },
+  {
+    id: 910692,
+    iid: [],
+    fr: 'Résistance sur 2 éléments aléatoires',
+    en: 'Resistance to 2 random elements',
+    es: 'Resistencia a 2 elementos aleatorios',
+    pt: 'Resistência a 2 elementos aleatórios'
+  },
+  {
+    id: 910693,
+    iid: [],
+    fr: 'Résistance sur 3 éléments aléatoires',
+    en: 'Resistance to 3 random elements',
+    es: 'Resistencia a 3 elementos aleatorios',
+    pt: 'Resistência a 3 elementos aleatórios'
   }
 ]
