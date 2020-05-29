@@ -17,12 +17,40 @@ const fs = {
     return s3.putObject({...S3_PARAMS, Key, ContentType: 'application/json', Body: bufferObject }).promise()
   }
 }
+const endpointWAPI = 'https://wakfu.cdn.ankama.com/gamedata'
 
-const formatarTabela = async () => {
-  let versao = await verificarVersaoAPI()
-  let items = await getAllItems(versao)
-  items = items.map(item => formatar(item))
-  return items
+const WAPIrequestVersao = async () => {
+  const response = await request(`${endpointWAPI}/config.json`)
+  return JSON.parse(response).version
+}
+const WAPIrequestItems = async (versao, tipo) => {
+  const response = await request(`${endpointWAPI}/${versao}/${tipo}.json`)
+  return response
+}
+const FSreadFile = async (versao, tipo) => {
+  return (await fs.readFile(`${versao}/${tipo}.json`)).Body.toString()
+}
+const FSwriteFile = async (versao, tipo, data) => {
+  return await fs.writeFileSync(`${versao}/${tipo}.json`, data)
+}
+
+const getItemsSaved = async (versao, tipo) => {
+  let response = ''
+  try {
+    await fs.access(`${versao}/${tipo}.json`)
+    response = await FSreadFile(versao, tipo)
+  } catch (e) {
+    response = await WAPIrequestItems(versao, tipo)
+    await FSwriteFile(versao, tipo, response)
+  }
+  return JSON.parse(response)
+}
+
+const getItems = async () => {
+  const versao = await WAPIrequestVersao()
+  const items = await getItemsSaved(versao, 'items')
+  const itemsFormatados = items.map(item => formatarItem(item))
+  return itemsFormatados
 }
 
 const verificarGFX = item => {
@@ -32,7 +60,7 @@ const verificarGFX = item => {
   return `${iid}` === `${type}${id}`
 }
 
-const formatar = (item, lang) => {
+const formatarItem = item => {
   let iid = [ item.definition.item.graphicParameters.gfxId ]
   let gfx = item.definition.item.graphicParameters.femaleGfxId
   if (iid[0] !== gfx) iid.push(gfx)
@@ -58,32 +86,9 @@ const formatar = (item, lang) => {
   }
 }
 
-const getAllItems = async (versao) => {
-  return JSON.parse(await criarJSONSeNaoExistir(versao, 'items'))
-}
-
-const verificarVersaoAPI = async () => {
-  let response = await request('https://wakfu.cdn.ankama.com/gamedata/config.json')
-  let versao = JSON.parse(response).version
-  return versao
-}
-
-const criarJSONSeNaoExistir = async (version, type) => {
-  let response = ''
-  try {
-    await fs.access(`${version}/${type}.json`)
-    response = (await fs.readFile(`${version}/${type}.json`)).Body.toString()
-  } catch (e) {
-    response = await request(`https://wakfu.cdn.ankama.com/gamedata/${version}/${type}.json`)
-    await fs.writeFileSync(`${version}/${type}.json`, response)
-    response = (await fs.readFile(`${version}/${type}.json`)).Body.toString()
-  }
-  return response
-}
-
 module.exports.handler = async (event, context, callback) => {
   try {
-    const body = JSON.stringify(await formatarTabela())
+    const body = JSON.stringify(await getItems())
     return callback(null, {
       statusCode: 200,
       headers: { 'Access-Control-Allow-Origin': 'https://wakfu-gear.netlify.app' },
