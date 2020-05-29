@@ -9,11 +9,11 @@
     "start": "npm run serve"
   },
   "dependencies": {
-    "aws-sdk": "^2.493.0",
-    "request": "^2.88.0",
-    "request-promise": "^4.2.4"
+    "aws-sdk": "^2.686.0",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.5"
   },
   "devDependencies": {
-    "netlify-lambda": "^1.0.1"
+    "netlify-lambda": "^1.6.3"
   }
 }
