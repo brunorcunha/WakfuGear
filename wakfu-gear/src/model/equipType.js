@@ -368,29 +368,29 @@ export const equipType = [
     es: 'Emblema',
     pt: 'Emblema',
     img: 'tipo/646.png'
-  },
-  {
-    id: 647,
-    iid: 525,
-    pos: [
-      'COSTUME'
-    ],
-    dis: [],
-    fr: 'Costumes',
-    en: 'Costumes',
-    es: 'Trajes',
-    pt: 'Trajes',
-    img: 'tipo/647.png'
-  },
-  {
-    id: 683,
-    iid: 812,
-    pos: [],
-    dis: [],
-    fr: 'Parchemin de Sublimation',
-    en: 'Sublimation Scroll',
-    es: 'Pergamino de sublimación',
-    pt: 'Pergaminho de Sublimação',
-    img: 'tipo/683.png'
   }
+  // {
+  //   id: 647,
+  //   iid: 525,
+  //   pos: [
+  //     'COSTUME'
+  //   ],
+  //   dis: [],
+  //   fr: 'Costumes',
+  //   en: 'Costumes',
+  //   es: 'Trajes',
+  //   pt: 'Trajes',
+  //   img: 'tipo/647.png'
+  // },
+  // {
+  //   id: 683,
+  //   iid: 812,
+  //   pos: [],
+  //   dis: [],
+  //   fr: 'Parchemin de Sublimation',
+  //   en: 'Sublimation Scroll',
+  //   es: 'Pergamino de sublimación',
+  //   pt: 'Pergaminho de Sublimação',
+  //   img: 'tipo/683.png'
+  // }
 ]

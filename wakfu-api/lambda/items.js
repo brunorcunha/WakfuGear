@@ -49,7 +49,8 @@ const getItemsSaved = async (versao, tipo) => {
 const getItems = async () => {
   const versao = await WAPIrequestVersao()
   const items = await getItemsSaved(versao, 'items')
-  const itemsFormatados = items.map(item => formatarItem(item))
+  const itemsRemovidos = items.filter(item => ![647, 525, 683, 812].includes(item.definition.item.baseParameters.itemTypeId))
+  const itemsFormatados = itemsRemovidos.map(item => formatarItem(item))
   return itemsFormatados
 }
 
@@ -112,7 +113,7 @@ const formatarEquipEffects = equipEffects => {
 
     return { id, params }
   })
-  return equipFx.filter(e => ![1020, 1062, 400, ].includes(e.id))
+  return equipFx.filter(e => ![1020, 1062, 400].includes(e.id))
 }
 
 const formatarItem = item => {

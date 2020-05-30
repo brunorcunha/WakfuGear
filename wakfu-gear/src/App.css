@@ -73,7 +73,6 @@ table { border-collapse: collapse; }
   width: 239px;
   max-width: 239px;
   text-align: right;
-  text-transform: capitalize;
   font-size: 12px;
   font-weight: bold;
   cursor: move;
