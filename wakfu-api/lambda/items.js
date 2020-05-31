@@ -120,9 +120,9 @@ const formatarEquipEffects = equipEffects => {
   return equipFx.filter(e => ![1020, 1062, 400].includes(e.id))
 }
 
-const formatarPetEffects = equipEffects => {
+const formatarItemsComLevel = (equipEffects, lvl) => {
   equipEffects.forEach(fx => {
-    fx.params.unshift(fx.params[0] + (fx.params[1] * 50))
+    fx.params.unshift(fx.params[0] + (fx.params[1] * lvl))
   })
   return equipEffects
 }
@@ -143,7 +143,8 @@ const formatarItem = item => {
   if ([582, 420].includes(type)) lvl = 50
 
   let equipEffects = formatarEquipEffects(item.definition.equipEffects)
-  if (type === 582 || type === 420) equipEffects = formatarPetEffects(equipEffects)
+  if (type === 582 || type === 420) equipEffects = formatarItemsComLevel(equipEffects, 50) // Pets
+  if (lvl === 0 && rarity === 3) equipEffects = formatarItemsComLevel(equipEffects, 100) // Makabra Items
 
   return {
     id,
