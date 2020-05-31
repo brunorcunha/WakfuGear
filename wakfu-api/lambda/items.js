@@ -122,7 +122,7 @@ const formatarEquipEffects = equipEffects => {
 
 const formatarItemsComLevel = (equipEffects, lvl) => {
   equipEffects.forEach(fx => {
-    fx.params.unshift(fx.params[0] + (fx.params[1] * lvl))
+    fx.params.unshift(fx.params[0] + parseInt(fx.params[1] * lvl))
   })
   return equipEffects
 }
