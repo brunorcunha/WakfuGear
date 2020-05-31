@@ -263,9 +263,9 @@ export const equipEffects = [
   {
     id: 304,
     iid: [],
-    fr: '',
-    en: '',
-    es: '',
+    fr: 'Effet',
+    en: 'Effect',
+    es: 'Efecto',
     pt: 'Efeito'
   },
   {

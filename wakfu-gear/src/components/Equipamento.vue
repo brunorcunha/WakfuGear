@@ -159,17 +159,21 @@
                   offset-x
                 >
                   <template #activator="{ on: menu }">
-                    <v-tooltip
+                    <v-menu
+                      open-on-hover
                       bottom
+                      left
+                      offset-x
+                      class="inlineblock"
                     >
-                      <template #activator="{ on: tooltip }">
+                      <template #activator="{ on: hover }">
                         <v-btn
                           dark
                           flat
                           fab
                           small
                           class="mx-1 mb-0"
-                          v-on="{ ...menu, ...tooltip }"
+                          v-on="{ ...menu, ...hover }"
                         >
                           <v-img
                             :class="`minirarity r${i.rarity}`"
@@ -181,8 +185,30 @@
                           />
                         </v-btn>
                       </template>
-                      <span>{{ i.title[$lang] }}</span>
-                    </v-tooltip>
+                      <v-card>
+                        <v-list
+                          dense
+                          subheader
+                        >
+                          <v-subheader class="deep-orange accent-4 white--text">
+                            {{ i.title[$lang] }}
+                          </v-subheader>
+                          <template v-for="(item, index) in i.equipEffects">
+                            <div :key="`ifx${index}`">
+                              <v-divider />
+                              <v-list-tile :class="`icone i${item.id} menulist paddingleft`">
+                                <v-list-tile-content class="fontsmall">
+                                  <v-list-tile-title>{{ equipEffects.find(e => e.id === item.id)[$lang] }}</v-list-tile-title>
+                                </v-list-tile-content>
+                                <v-list-tile-avatar class="fontsmall">
+                                  {{ item.params[0] }}
+                                </v-list-tile-avatar>
+                              </v-list-tile>
+                            </div>
+                          </template>
+                        </v-list>
+                      </v-card>
+                    </v-menu>
                   </template>
                   <v-list
                     dense
@@ -281,6 +307,7 @@
 </template>
 
 <script>
+import { equipEffects } from '../model/equipEffects'
 import { mapGetters } from 'vuex'
 import Atributos from './Atributos'
 import ListGears from './ListGears'
@@ -289,6 +316,7 @@ export default {
   name: 'Equipamento',
   components: { Atributos, ListGears },
   data: () => ({
+    equipEffects,
     url: 'http://s.ankama.com/www/static.ankama.com/wakfu/portal/game/item/42/',
     edit: false,
     model: null,
@@ -393,4 +421,6 @@ export default {
     font-size: 22px;
     color: rgba(255,255,255,.4);
   }
+  .inlineblock { display: inline-block; }
+  .paddingleft { padding-left: 15px; }
 </style>

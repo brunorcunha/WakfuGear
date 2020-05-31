@@ -49,9 +49,10 @@ const getItemsSaved = async (versao, tipo) => {
 const getItems = async () => {
   const versao = await WAPIrequestVersao()
   const items = await getItemsSaved(versao, 'items')
-  const itemsRemovidos = items.filter(item => ![647, 525, 683, 812].includes(item.definition.item.baseParameters.itemTypeId))
-  const itemsFormatados = itemsRemovidos.map(item => formatarItem(item))
-  return itemsFormatados
+  let itemsRetornados = removerItemsTipo(items)
+  itemsRetornados = itemsRetornados.map(formatarItem)
+  itemsRetornados = removerItemsNivelZeroSemFx(itemsRetornados)
+  return itemsRetornados
 }
 
 const verificarGFX = item => {
@@ -60,6 +61,9 @@ const verificarGFX = item => {
   let type = item.definition.item.baseParameters.itemTypeId
   return `${iid}` === `${type}${id}`
 }
+
+const removerItemsTipo = items => items.filter(item => ![647, 525, 683, 812].includes(item.definition.item.baseParameters.itemTypeId))
+const removerItemsNivelZeroSemFx = items => items.filter(item => item.lvl > 0 || item.equipEffects.length > 0)
 
 const formatarEquipEffects = equipEffects => {
   const IIDtoID = [

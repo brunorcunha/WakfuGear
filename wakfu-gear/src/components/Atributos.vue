@@ -16,20 +16,53 @@
         tag="div"
         class="layout row atr big"
       >
-        <template v-for="item in secoes.principal">
-          <v-flex :key="`principal${item.id}`">
-            <v-tooltip bottom>
-              <template #activator="{ on }">
-                <div
-                  class="py-1"
-                  v-on="on"
-                >
-                  <div :class="`icone ${item.icone}`" /> {{ atributos[item.id] || '0' }}
+        <template v-for="atributo in secoes.principal">
+          <v-menu
+            :key="`principal${atributo.id}`"
+            open-on-hover
+            bottom
+            left
+            offset-x
+          >
+            <template #activator="{ on }">
+              <v-flex v-on="(!itemsComAtributo[atributo.id] || !itemsComAtributo[atributo.id].length) ? null : on">
+                <div class="py-1">
+                  <div :class="`icone ${atributo.icone}`" /> {{ atributos[atributo.id] || '0' }}
                 </div>
-              </template>
-              <span>{{ equipEffects.find(e => e.id === item.id)[$lang] }}</span>
-            </v-tooltip>
-          </v-flex>
+              </v-flex>
+            </template>
+            <v-card>
+              <v-list
+                dense
+                subheader
+              >
+                <v-subheader class="deep-orange accent-4 white--text">
+                  {{ equipEffects.find(e => e.id === atributo.id)[$lang] }}
+                  <v-spacer />
+                  <span>{{ atributos[atributo.id] || '0' }}</span>
+                </v-subheader>
+                <template v-for="(item, index) in itemsComAtributo[atributo.id]">
+                  <div :key="`ia${index}`">
+                    <v-divider />
+                    <v-list-tile class="menulist">
+                      <v-list-tile-action>
+                        <img
+                          :src="`${url}${item.item.iid[0]}.png`"
+                          height="30"
+                        >
+                      </v-list-tile-action>
+                      <v-list-tile-content class="fontsmall">
+                        <v-list-tile-title>{{ item.item.title[$lang] }}</v-list-tile-title>
+                      </v-list-tile-content>
+                      <v-list-tile-avatar class="fontsmall">
+                        {{ item.valor }}
+                      </v-list-tile-avatar>
+                    </v-list-tile>
+                  </div>
+                </template>
+              </v-list>
+            </v-card>
+          </v-menu>
         </template>
       </draggable>
     </v-flex>
@@ -46,9 +79,9 @@
         tag="div"
         class="layout row wrap atr big"
       >
-        <template v-for="(item, index) in secoes.maestrias">
+        <template v-for="(atributo, index) in secoes.maestrias">
           <v-flex
-            :key="`maestria${item.id}`"
+            :key="`maestria${atributo.id}`"
             xs6
           >
             <v-layout
@@ -56,24 +89,94 @@
               class="py-1"
             >
               <v-flex shrink>
-                <div :class="`icone ${item.icone}`" />
+                <div :class="`icone ${atributo.icone}`" />
               </v-flex>
-              <v-tooltip bottom>
+              <v-menu
+                open-on-hover
+                bottom
+                left
+                offset-x
+              >
                 <template #activator="{ on }">
-                  <v-flex v-on="on">
-                    <div class="icone damage" /> {{ somaDanoAtributos(item, index) }}
+                  <v-flex v-on="(!itemsAtributoDanoOrdem[index] || !itemsAtributoDanoOrdem[index].length) ? null : on">
+                    <div class="icone damage" /> {{ somaDanoAtributos(atributo, index) }}
                   </v-flex>
                 </template>
-                <span>{{ equipEffects.find(e => e.id === item.id)[$lang] }}</span>
-              </v-tooltip>
-              <v-tooltip bottom>
+                <v-card>
+                  <v-list
+                    dense
+                    subheader
+                  >
+                    <v-subheader class="deep-orange accent-4 white--text">
+                      {{ equipEffects.find(e => e.id === atributo.id)[$lang] }}
+                      <v-spacer />
+                      <span>{{ somaDanoAtributos(atributo, index) }}</span>
+                    </v-subheader>
+                    <template v-for="(item, ind) in itemsAtributoDanoOrdem[index]">
+                      <div :key="`ia${ind}`">
+                        <v-divider />
+                        <v-list-tile class="menulist">
+                          <v-list-tile-action>
+                            <img
+                              :src="`${url}${item.item.iid[0]}.png`"
+                              height="30"
+                            >
+                          </v-list-tile-action>
+                          <v-list-tile-content class="fontsmall">
+                            <v-list-tile-title>{{ item.item.title[$lang] }}</v-list-tile-title>
+                          </v-list-tile-content>
+                          <v-list-tile-avatar class="fontsmall">
+                            {{ item.valor }}
+                          </v-list-tile-avatar>
+                        </v-list-tile>
+                      </div>
+                    </template>
+                  </v-list>
+                </v-card>
+              </v-menu>
+              <v-menu
+                open-on-hover
+                bottom
+                left
+                offset-x
+              >
                 <template #activator="{ on }">
-                  <v-flex v-on="on">
-                    <div class="icone resist" /> {{ somaResistenciaAtributos(item, index) }}
+                  <v-flex v-on="(!itemsAtributoResistenciaOrdem[index] || !itemsAtributoResistenciaOrdem[index].length) ? null : on">
+                    <div class="icone resist" /> {{ somaResistenciaAtributos(atributo, index) }}
                   </v-flex>
                 </template>
-                <span>{{ equipEffects.find(e => e.id === item.id2)[$lang] }}</span>
-              </v-tooltip>
+                <v-card>
+                  <v-list
+                    dense
+                    subheader
+                  >
+                    <v-subheader class="deep-orange accent-4 white--text">
+                      {{ equipEffects.find(e => e.id === atributo.id2)[$lang] }}
+                      <v-spacer />
+                      <span>{{ somaResistenciaAtributos(atributo, index) }}</span>
+                    </v-subheader>
+                    <template v-for="(item, ind) in itemsAtributoResistenciaOrdem[index]">
+                      <div :key="`ia${ind}`">
+                        <v-divider />
+                        <v-list-tile class="menulist">
+                          <v-list-tile-action>
+                            <img
+                              :src="`${url}${item.item.iid[0]}.png`"
+                              height="30"
+                            >
+                          </v-list-tile-action>
+                          <v-list-tile-content class="fontsmall">
+                            <v-list-tile-title>{{ item.item.title[$lang] }}</v-list-tile-title>
+                          </v-list-tile-content>
+                          <v-list-tile-avatar class="fontsmall">
+                            {{ item.valor }}
+                          </v-list-tile-avatar>
+                        </v-list-tile>
+                      </div>
+                    </template>
+                  </v-list>
+                </v-card>
+              </v-menu>
             </v-layout>
           </v-flex>
         </template>
@@ -92,21 +195,62 @@
         tag="div"
         class="layout row wrap atr"
       >
-        <template v-for="item in secoes.combate">
-          <v-flex
-            :key="`combate${item.id}`"
-            xs6
+        <template v-for="atributo in secoes.combate">
+          <v-menu
+            :key="`combate${atributo.id}`"
+            open-on-hover
+            bottom
+            left
+            offset-x
           >
-            <v-layout row>
-              <div :class="`icone ${item.icone}`" />
-              <v-flex class="fontsmall">
-                {{ equipEffects.find(e => e.id === item.id)[$lang] }}
+            <template #activator="{ on }">
+              <v-flex
+                xs6
+                v-on="(!itemsComAtributo[atributo.id] || !itemsComAtributo[atributo.id].length) ? null : on"
+              >
+                <v-layout row>
+                  <div :class="`icone ${atributo.icone}`" />
+                  <v-flex class="fontsmall">
+                    {{ equipEffects.find(e => e.id === atributo.id)[$lang] }}
+                  </v-flex>
+                  <v-flex shrink>
+                    {{ atributos[atributo.id] || '0' }}
+                  </v-flex>
+                </v-layout>
               </v-flex>
-              <v-flex shrink>
-                {{ atributos[item.id] || '0' }}
-              </v-flex>
-            </v-layout>
-          </v-flex>
+            </template>
+            <v-card>
+              <v-list
+                dense
+                subheader
+              >
+                <v-subheader class="deep-orange accent-4 white--text">
+                  {{ equipEffects.find(e => e.id === atributo.id)[$lang] }}
+                  <v-spacer />
+                  <span>{{ atributos[atributo.id] || '0' }}</span>
+                </v-subheader>
+                <template v-for="(item, index) in itemsComAtributo[atributo.id]">
+                  <div :key="`ia${index}`">
+                    <v-divider />
+                    <v-list-tile class="menulist">
+                      <v-list-tile-action>
+                        <img
+                          :src="`${url}${item.item.iid[0]}.png`"
+                          height="30"
+                        >
+                      </v-list-tile-action>
+                      <v-list-tile-content class="fontsmall">
+                        <v-list-tile-title>{{ item.item.title[$lang] }}</v-list-tile-title>
+                      </v-list-tile-content>
+                      <v-list-tile-avatar class="fontsmall">
+                        {{ item.valor }}
+                      </v-list-tile-avatar>
+                    </v-list-tile>
+                  </div>
+                </template>
+              </v-list>
+            </v-card>
+          </v-menu>
         </template>
       </draggable>
     </v-flex>
@@ -123,21 +267,62 @@
         tag="div"
         class="layout row wrap atr"
       >
-        <template v-for="item in secoes.secundario">
-          <v-flex
-            :key="`secundario${item.id}`"
-            xs6
+        <template v-for="atributo in secoes.secundario">
+          <v-menu
+            :key="`secundario${atributo.id}`"
+            open-on-hover
+            bottom
+            left
+            offset-x
           >
-            <v-layout row>
-              <div :class="`icone ${item.icone}`" />
-              <v-flex class="fontsmall">
-                {{ equipEffects.find(e => e.id === item.id)[$lang] }}
+            <template #activator="{ on }">
+              <v-flex
+                xs6
+                v-on="(!itemsComAtributo[atributo.id] || !itemsComAtributo[atributo.id].length) ? null : on"
+              >
+                <v-layout row>
+                  <div :class="`icone ${atributo.icone}`" />
+                  <v-flex class="fontsmall">
+                    {{ equipEffects.find(e => e.id === atributo.id)[$lang] }}
+                  </v-flex>
+                  <v-flex shrink>
+                    {{ atributos[atributo.id] || '0' }}
+                  </v-flex>
+                </v-layout>
               </v-flex>
-              <v-flex shrink>
-                {{ atributos[item.id] || '0' }}
-              </v-flex>
-            </v-layout>
-          </v-flex>
+            </template>
+            <v-card>
+              <v-list
+                dense
+                subheader
+              >
+                <v-subheader class="deep-orange accent-4 white--text">
+                  {{ equipEffects.find(e => e.id === atributo.id)[$lang] }}
+                  <v-spacer />
+                  <span>{{ atributos[atributo.id] || '0' }}</span>
+                </v-subheader>
+                <template v-for="(item, index) in itemsComAtributo[atributo.id]">
+                  <div :key="`ia${index}`">
+                    <v-divider />
+                    <v-list-tile class="menulist">
+                      <v-list-tile-action>
+                        <img
+                          :src="`${url}${item.item.iid[0]}.png`"
+                          height="30"
+                        >
+                      </v-list-tile-action>
+                      <v-list-tile-content class="fontsmall">
+                        <v-list-tile-title>{{ item.item.title[$lang] }}</v-list-tile-title>
+                      </v-list-tile-content>
+                      <v-list-tile-avatar class="fontsmall">
+                        {{ item.valor }}
+                      </v-list-tile-avatar>
+                    </v-list-tile>
+                  </div>
+                </template>
+              </v-list>
+            </v-card>
+          </v-menu>
         </template>
       </draggable>
     </v-flex>
@@ -154,7 +339,8 @@ export default {
   name: 'Atributos',
   components: { draggable },
   data: () => ({
-    equipEffects: equipEffects,
+    equipEffects,
+    url: 'http://s.ankama.com/www/static.ankama.com/wakfu/portal/game/item/42/',
     secoes: {
       principal: [
         { id: 20, icone: 'hp' },
@@ -203,6 +389,69 @@ export default {
     ...mapGetters('gears', ['gearAtual']),
     atributos () {
       return atributos.getAtributos(this.gearAtual)
+    },
+    itemsComAtributo () {
+      return atributos.getItems(this.gearAtual)
+    },
+    itemsAtributoDanoOrdem () {
+      const masteries = [[], [], [], []]
+      const [maestria1, maestria2, maestria3, maestria4] = this.secoes.maestrias
+
+      this.itemsComAtributo[maestria1.id] && this.itemsComAtributo[maestria1.id].forEach(e => masteries[0].push(e))
+      this.itemsComAtributo[maestria2.id] && this.itemsComAtributo[maestria2.id].forEach(e => masteries[1].push(e))
+      this.itemsComAtributo[maestria3.id] && this.itemsComAtributo[maestria3.id].forEach(e => masteries[2].push(e))
+      this.itemsComAtributo[maestria4.id] && this.itemsComAtributo[maestria4.id].forEach(e => masteries[3].push(e))
+
+      this.itemsComAtributo[120] && this.itemsComAtributo[120].forEach(e => {
+        masteries[0].push(e)
+        masteries[1].push(e)
+        masteries[2].push(e)
+        masteries[3].push(e)
+      })
+      this.itemsComAtributo[910681] && this.itemsComAtributo[910681].forEach(e => {
+        masteries[0].push(e)
+      })
+      this.itemsComAtributo[910682] && this.itemsComAtributo[910682].forEach(e => {
+        masteries[0].push(e)
+        masteries[1].push(e)
+      })
+      this.itemsComAtributo[910683] && this.itemsComAtributo[910683].forEach(e => {
+        masteries[0].push(e)
+        masteries[1].push(e)
+        masteries[2].push(e)
+      })
+
+      return masteries
+    },
+    itemsAtributoResistenciaOrdem () {
+      const resists = [[], [], [], []]
+      const [resist1, resist2, resist3, resist4] = this.secoes.maestrias
+
+      this.itemsComAtributo[resist1.id2] && this.itemsComAtributo[resist1.id2].forEach(e => resists[0].push(e))
+      this.itemsComAtributo[resist2.id2] && this.itemsComAtributo[resist2.id2].forEach(e => resists[1].push(e))
+      this.itemsComAtributo[resist3.id2] && this.itemsComAtributo[resist3.id2].forEach(e => resists[2].push(e))
+      this.itemsComAtributo[resist4.id2] && this.itemsComAtributo[resist4.id2].forEach(e => resists[3].push(e))
+
+      this.itemsComAtributo[80] && this.itemsComAtributo[80].forEach(e => {
+        resists[0].push(e)
+        resists[1].push(e)
+        resists[2].push(e)
+        resists[3].push(e)
+      })
+      this.itemsComAtributo[910691] && this.itemsComAtributo[910691].forEach(e => {
+        resists[0].push(e)
+      })
+      this.itemsComAtributo[910692] && this.itemsComAtributo[910692].forEach(e => {
+        resists[0].push(e)
+        resists[1].push(e)
+      })
+      this.itemsComAtributo[910693] && this.itemsComAtributo[910693].forEach(e => {
+        resists[0].push(e)
+        resists[1].push(e)
+        resists[2].push(e)
+      })
+
+      return resists
     }
   },
   methods: {
@@ -210,8 +459,8 @@ export default {
       const danoElementalFixo = this.atributos[item.id] || 0
       const danoElementalTotal = this.atributos[120] || 0
       const danoElementalPrimeiroLista = index === 0 ? (this.atributos[910681] || 0) : 0
-      const danoElementalSegundoLista = index === 1 ? (this.atributos[910682] || 0) : 0
-      const danoElementalTerceiroLista = index === 2 ? (this.atributos[910683] || 0) : 0
+      const danoElementalSegundoLista = index <= 1 ? (this.atributos[910682] || 0) : 0
+      const danoElementalTerceiroLista = index <= 2 ? (this.atributos[910683] || 0) : 0
       const danoElementalLista = danoElementalPrimeiroLista + danoElementalSegundoLista + danoElementalTerceiroLista
 
       return danoElementalFixo + danoElementalTotal + danoElementalLista
@@ -220,8 +469,8 @@ export default {
       const resistenciaElementalFixo = this.atributos[item.id2] || 0
       const resistenciaElementalTotal = this.atributos[80] || 0
       const resistenciaElementalPrimeiroLista = index === 0 ? (this.atributos[910691] || 0) : 0
-      const resistenciaElementalSegundoLista = index === 1 ? (this.atributos[910692] || 0) : 0
-      const resistenciaElementalTerceiroLista = index === 2 ? (this.atributos[910693] || 0) : 0
+      const resistenciaElementalSegundoLista = index <= 1 ? (this.atributos[910692] || 0) : 0
+      const resistenciaElementalTerceiroLista = index <= 2 ? (this.atributos[910693] || 0) : 0
       const resistenciaElementalLista = resistenciaElementalPrimeiroLista + resistenciaElementalSegundoLista + resistenciaElementalTerceiroLista
 
       return resistenciaElementalFixo + resistenciaElementalTotal + resistenciaElementalLista
