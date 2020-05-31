@@ -140,11 +140,16 @@ const formatarItem = item => {
   let lvl = item.definition.item.level
   let iid = [ item.definition.item.graphicParameters.gfxId ]
   if (iid[0] !== gfx) iid.push(gfx)
-  if ([582, 420].includes(type)) lvl = 50
 
   let equipEffects = formatarEquipEffects(item.definition.equipEffects)
-  if (type === 582 || type === 420) equipEffects = formatarItemsComLevel(equipEffects, 50) // Pets
-  if (lvl === 0 && rarity === 3) equipEffects = formatarItemsComLevel(equipEffects, 100) // Makabra Items
+  if ([582, 420].includes(type)) {
+    equipEffects = formatarItemsComLevel(equipEffects, 50) // Pets
+    lvl = 50
+  }
+  if (lvl === 0 && rarity === 3) {
+    equipEffects = formatarItemsComLevel(equipEffects, 100) // Makabra Items
+    lvl = 100
+  }
 
   return {
     id,
