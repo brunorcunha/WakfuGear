@@ -181,7 +181,7 @@
                           />
                         </v-btn>
                       </template>
-                      <span>{{ i.title.pt }}</span>
+                      <span>{{ i.title[$lang] }}</span>
                     </v-tooltip>
                   </template>
                   <v-list
@@ -189,7 +189,7 @@
                     subheader
                   >
                     <v-subheader class="deep-orange accent-4 white--text">
-                      {{ i.title.pt }}
+                      {{ i.title[$lang] }}
                     </v-subheader>
                     <v-divider />
                     <v-list-tile @click="remover(k)">
@@ -199,6 +199,17 @@
                       <v-list-tile-action>
                         <v-icon small>
                           delete_forever
+                        </v-icon>
+                      </v-list-tile-action>
+                    </v-list-tile>
+                    <v-divider />
+                    <v-list-tile @click="abrirURL(i.type, i.id)">
+                      <v-list-tile-content>
+                        {{ $t('label.abrirsiteoficial') }}
+                      </v-list-tile-content>
+                      <v-list-tile-action>
+                        <v-icon small>
+                          open_in_new
                         </v-icon>
                       </v-list-tile-action>
                     </v-list-tile>
@@ -323,6 +334,13 @@ export default {
     },
     trocarGear (gear, index) {
       this.$store.dispatch('gears/selecionarAtual', { index })
+    },
+    abrirURL (type, id) {
+      if (this.$i18n.locale === 'pt') {
+        window.open(`https://www.wakfu.com/pt/mmorpg/enciclopedia/armas/${id}-${type}`)
+      } else {
+        window.open(`https://www.wakfu.com/en/mmorpg/encyclopedia/armors/${id}-${type}`)
+      }
     },
     async confirmarExcluir () {
       try {

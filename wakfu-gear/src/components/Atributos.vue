@@ -46,7 +46,7 @@
         tag="div"
         class="layout row wrap atr big"
       >
-        <template v-for="item in secoes.maestrias">
+        <template v-for="(item, index) in secoes.maestrias">
           <v-flex
             :key="`maestria${item.id}`"
             xs6
@@ -61,7 +61,7 @@
               <v-tooltip bottom>
                 <template #activator="{ on }">
                   <v-flex v-on="on">
-                    <div class="icone damage" /> 99.999
+                    <div class="icone damage" /> {{ somaDanoAtributos(item, index) }}
                   </v-flex>
                 </template>
                 <span>{{ equipEffects.find(e => e.id === item.id)[$lang] }}</span>
@@ -69,7 +69,7 @@
               <v-tooltip bottom>
                 <template #activator="{ on }">
                   <v-flex v-on="on">
-                    <div class="icone resist" /> 99.999
+                    <div class="icone resist" /> {{ somaResistenciaAtributos(item, index) }}
                   </v-flex>
                 </template>
                 <span>{{ equipEffects.find(e => e.id === item.id2)[$lang] }}</span>
@@ -171,6 +171,7 @@ export default {
       ],
       combate: [
         { id: 120, icone: 'sword' },
+        { id: 80, icone: 'resist' },
         { id: 24, icone: 'heal' },
         { id: 875, icone: 'parade' },
         { id: 150, icone: 'crit' },
@@ -202,6 +203,28 @@ export default {
     ...mapGetters('gears', ['gearAtual']),
     atributos () {
       return atributos.getAtributos(this.gearAtual)
+    }
+  },
+  methods: {
+    somaDanoAtributos (item, index) {
+      const danoElementalFixo = this.atributos[item.id] || 0
+      const danoElementalTotal = this.atributos[120] || 0
+      const danoElementalPrimeiroLista = index === 0 ? (this.atributos[910681] || 0) : 0
+      const danoElementalSegundoLista = index === 1 ? (this.atributos[910682] || 0) : 0
+      const danoElementalTerceiroLista = index === 2 ? (this.atributos[910683] || 0) : 0
+      const danoElementalLista = danoElementalPrimeiroLista + danoElementalSegundoLista + danoElementalTerceiroLista
+
+      return danoElementalFixo + danoElementalTotal + danoElementalLista
+    },
+    somaResistenciaAtributos (item, index) {
+      const resistenciaElementalFixo = this.atributos[item.id2] || 0
+      const resistenciaElementalTotal = this.atributos[80] || 0
+      const resistenciaElementalPrimeiroLista = index === 0 ? (this.atributos[910691] || 0) : 0
+      const resistenciaElementalSegundoLista = index === 1 ? (this.atributos[910692] || 0) : 0
+      const resistenciaElementalTerceiroLista = index === 2 ? (this.atributos[910693] || 0) : 0
+      const resistenciaElementalLista = resistenciaElementalPrimeiroLista + resistenciaElementalSegundoLista + resistenciaElementalTerceiroLista
+
+      return resistenciaElementalFixo + resistenciaElementalTotal + resistenciaElementalLista
     }
   }
 }

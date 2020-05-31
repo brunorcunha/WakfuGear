@@ -116,6 +116,13 @@ const formatarEquipEffects = equipEffects => {
   return equipFx.filter(e => ![1020, 1062, 400].includes(e.id))
 }
 
+const formatarPetEffects = equipEffects => {
+  equipEffects.forEach(fx => {
+    fx.params.unshift(fx.params[0] + (fx.params[1] * 50))
+  })
+  return equipEffects
+}
+
 const formatarItem = item => {
   const id = item.definition.item.id
   const title = item.title
@@ -131,7 +138,8 @@ const formatarItem = item => {
   if (iid[0] !== gfx) iid.push(gfx)
   if ([582, 420].includes(type)) lvl = 50
 
-  const equipEffects = formatarEquipEffects(item.definition.equipEffects)
+  let equipEffects = formatarEquipEffects(item.definition.equipEffects)
+  if (type === 582 || type === 420) equipEffects = formatarPetEffects(equipEffects)
 
   return {
     id,
