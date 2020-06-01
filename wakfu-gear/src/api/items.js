@@ -4,5 +4,6 @@ const endpoint = 'https://wakfu-api.netlify.app/.netlify/functions'
 
 export default {
   getItems: async () => (await Vue.http.get(`${endpoint}/items`)).body,
-  getVersion: async () => (await Vue.http.get(`${endpoint}/version`)).body
+  getVersion: async () => (await Vue.http.get(`${endpoint}/version`)).body,
+  getZenith: async id => (await Vue.http.get(`${endpoint}/zenith`, { params: { id } })).body
 }

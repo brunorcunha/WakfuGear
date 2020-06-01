@@ -29,7 +29,12 @@
               v-on="on"
               @click.stop="drawer = !drawer"
             >
-              <v-icon>filter_list</v-icon>
+              <v-icon v-if="drawer">
+                chevron_left
+              </v-icon>
+              <v-icon v-else>
+                chevron_right
+              </v-icon>
             </v-btn>
           </template>
           <span>{{ $t('label.filtros') }}</span>
@@ -62,9 +67,28 @@
               class="mr-0"
               icon
               v-on="on"
+              @click.stop="abrirImportar"
+            >
+              <v-icon>import_export</v-icon>
+            </v-btn>
+          </template>
+          <span>{{ $t('label.importar') }}</span>
+        </v-tooltip>
+
+        <v-tooltip bottom>
+          <template #activator="{ on }">
+            <v-btn
+              class="mr-0"
+              icon
+              v-on="on"
               @click.stop="drawerRight = !drawerRight"
             >
-              <v-icon>business_center</v-icon>
+              <v-icon v-if="!drawerRight">
+                chevron_left
+              </v-icon>
+              <v-icon v-else>
+                chevron_right
+              </v-icon>
             </v-btn>
           </template>
           <span>{{ $t('label.gears') }}</span>
@@ -83,6 +107,7 @@
     </template>
 
     <ConfirmDialog ref="confirmDialog" />
+    <ImportDialog ref="importDialog" />
   </v-layout>
 </template>
 
@@ -93,6 +118,7 @@ import Equipamento from '../components/Equipamento'
 import DataTable from './DataTable'
 import Filtros from '../components/Filtros'
 import ConfirmDialog from '../components/ConfirmDialog'
+import ImportDialog from '../components/ImportDialog'
 import Loading from '../components/Loading'
 
 export default {
@@ -102,6 +128,7 @@ export default {
     Filtros,
     DataTable,
     Equipamento,
+    ImportDialog,
     ConfirmDialog
   },
   data: () => ({
@@ -133,10 +160,16 @@ export default {
   },
   mounted () {
     Vue.prototype.$ConfirmDialog = this.$refs.confirmDialog
+    Vue.prototype.$ImportDialog = this.$refs.importDialog
 
     if (this.$vuetify.breakpoint.lgAndUp) {
       this.drawer = true
       this.drawerRight = true
+    }
+  },
+  methods: {
+    abrirImportar () {
+      this.$ImportDialog.abrir()
     }
   }
 }

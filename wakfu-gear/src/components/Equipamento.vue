@@ -61,22 +61,6 @@
                     </v-tooltip>
                   </template>
                   <v-list dense>
-                    <v-list-tile @click="novoConjunto">
-                      <v-list-tile-content><v-list-tile-title>{{ $t('label.novogear') }}</v-list-tile-title></v-list-tile-content>
-                      <v-list-tile-action>
-                        <v-icon color="green">
-                          add
-                        </v-icon>
-                      </v-list-tile-action>
-                    </v-list-tile>
-                    <v-list-tile @click="clonarConjunto">
-                      <v-list-tile-content><v-list-tile-title>{{ $t('label.clonar') }}</v-list-tile-title></v-list-tile-content>
-                      <v-list-tile-action>
-                        <v-icon color="orange">
-                          library_add
-                        </v-icon>
-                      </v-list-tile-action>
-                    </v-list-tile>
                     <v-menu
                       open-on-hover
                       right
@@ -103,6 +87,22 @@
                         @evento="trocarGear"
                       />
                     </v-menu>
+                    <v-list-tile @click="novoConjunto">
+                      <v-list-tile-content><v-list-tile-title>{{ $t('label.novogear') }}</v-list-tile-title></v-list-tile-content>
+                      <v-list-tile-action>
+                        <v-icon color="green">
+                          add
+                        </v-icon>
+                      </v-list-tile-action>
+                    </v-list-tile>
+                    <v-list-tile @click="confirmarClonar">
+                      <v-list-tile-content><v-list-tile-title>{{ $t('label.clonar') }}</v-list-tile-title></v-list-tile-content>
+                      <v-list-tile-action>
+                        <v-icon color="orange">
+                          library_add
+                        </v-icon>
+                      </v-list-tile-action>
+                    </v-list-tile>
                     <v-list-tile @click="confirmarExcluir">
                       <v-list-tile-content><v-list-tile-title>{{ $t('label.remover') }}</v-list-tile-title></v-list-tile-content>
                       <v-list-tile-action>
@@ -359,6 +359,7 @@ export default {
       const index = this.qnt
       this.$store.dispatch('gears/clonarGear', {})
       this.$store.dispatch('gears/selecionarAtual', { index })
+      this.$store.dispatch('gears/setNome', { nome: this.$i18n.t('label.clone') })
     },
     trocarGear (gear, index) {
       this.$store.dispatch('gears/selecionarAtual', { index })
@@ -369,6 +370,15 @@ export default {
       } else {
         window.open(`https://www.wakfu.com/en/mmorpg/encyclopedia/armors/${id}-${type}`)
       }
+    },
+    async confirmarClonar () {
+      try {
+        await this.$ConfirmDialog.abrir({
+          titulo: this.$i18n.t('dialog.clonar.titulo'),
+          mensagem: this.$i18n.t('dialog.clonar.msg')
+        })
+        this.clonarConjunto()
+      } catch (e) {}
     },
     async confirmarExcluir () {
       try {

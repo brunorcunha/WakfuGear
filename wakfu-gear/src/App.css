@@ -12,6 +12,8 @@ table { border-collapse: collapse; }
   border-bottom: 1px solid #D54E0E;
   padding: 0 15px;
   white-space: nowrap;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
 }
 #cabecalho.v-toolbar .v-toolbar__content, .cabecalho.v-toolbar .v-toolbar__content {
   position: relative;

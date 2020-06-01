@@ -115,6 +115,32 @@ const actions = {
     commit('addQntItens', { index })
     commit('salvarLS')
   },
+  async adicionarItems ({ commit, state, dispatch }, { items, index }) {
+    index = (index != null ? index : state.gearAtual)
+    const gear = { ...state.gears[index].gear }
+
+    items.forEach(item => {
+      const posicoesPossiveis = equipType.find(e => e.id === item.type).pos
+      let colocouItem = false
+
+      for (const i in posicoesPossiveis) {
+        const posicao = posicoesPossiveis[i]
+        if (!gear[posicao]) {
+          gear[posicao] = item
+          colocouItem = true
+          break
+        }
+      }
+      if (!colocouItem) {
+        const posicao = posicoesPossiveis[0]
+        gear[posicao] = item
+      }
+    })
+
+    commit('editarGear', { gear, index })
+    commit('addQntItens', { index })
+    commit('salvarLS')
+  },
   async removerItem ({ commit, state, dispatch }, { posicao, index }) {
     index = (index != null ? index : state.gearAtual)
     const gear = { ...state.gears[index].gear }

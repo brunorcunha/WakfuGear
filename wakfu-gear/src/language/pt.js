@@ -14,7 +14,10 @@ export const pt = {
     gears: 'Conjuntos',
     filtros: 'Filtros',
     filtrar: 'Filtrar',
+    importado: 'Importado',
+    clone: 'Clone',
     clonar: 'Clonar',
+    importar: 'Importar',
     mostrando: 'Mostrando {0} de',
     qntitens: '{0} itens',
     totalitens: 'Total de {0} itens',
@@ -76,6 +79,10 @@ export const pt = {
     excluir: {
       titulo: 'Confirmar',
       msg: 'Tem certeza que deseja excluir este conjunto?'
+    },
+    clonar: {
+      titulo: 'Confirmar',
+      msg: 'Deseja clonar este conjunto?'
     },
     confirmar: 'Sim',
     cancelar: 'Cancelar'

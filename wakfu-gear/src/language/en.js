@@ -14,7 +14,10 @@ export const en = {
     gears: 'Gears',
     filtros: 'Filters',
     filtrar: 'Filter',
+    importado: 'Imported',
+    clone: 'Clone',
     clonar: 'Clone',
+    importar: 'Import',
     mostrando: 'Showing {0} of',
     qntitens: '{0} items',
     totalitens: 'Total of {0} items',
@@ -76,6 +79,10 @@ export const en = {
     excluir: {
       titulo: 'Confirm',
       msg: 'Are you sure you want to delete this gear?'
+    },
+    clonar: {
+      titulo: 'Confirm',
+      msg: 'Do you want clone this gear?'
     },
     confirmar: 'Yes',
     cancelar: 'Cancel'
