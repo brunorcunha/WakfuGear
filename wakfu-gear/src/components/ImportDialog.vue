@@ -14,7 +14,7 @@
         color="deep-orange accent-4"
       >
         <v-toolbar-title class="white--text">
-          {{ title }}
+          {{ $t('label.importartitulo') }}
         </v-toolbar-title>
 
         <v-spacer />
@@ -66,7 +66,7 @@
             :disabled="loading"
             @click="importarZenith"
           >
-            Importar <v-icon>import_export</v-icon>
+            {{ $t('label.importar') }} <v-icon>import_export</v-icon>
           </v-btn>
         </v-flex>
       </v-layout>
@@ -117,7 +117,7 @@
           <v-textarea
             v-model="codigo"
             :disabled="loading"
-            label="Código Wakfu Gear"
+            :label="$t('label.wgcode')"
             placeholder="19699-19879-20218-20213-19859-25076-19710-20169-14147-20365-19884-26865"
             dense
           />
@@ -138,7 +138,7 @@
             :disabled="loading"
             @click="importar"
           >
-            Importar <v-icon>import_export</v-icon>
+            {{ $t('label.importar') }} <v-icon>import_export</v-icon>
           </v-btn>
         </v-flex>
       </v-layout>
@@ -153,7 +153,6 @@ import API from '../api/items'
 export default {
   name: 'ImportDialog',
   data: vm => ({
-    title: 'Importar Equipamentos',
     dialog: false,
     loading: false,
     codigo: '',

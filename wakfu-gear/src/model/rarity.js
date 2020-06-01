@@ -54,13 +54,13 @@ export const rarity = [
     fr: 'Epique',
     es: 'Epique',
     img: 'raridade/r6.png'
-  },
-  {
-    id: 10,
-    pt: 'Administrator',
-    en: 'Administrator',
-    fr: 'Administrator',
-    es: 'Administrator',
-    img: 'raridade/r6.png'
   }
+  // {
+  //   id: 10,
+  //   pt: 'Administrator',
+  //   en: 'Administrator',
+  //   fr: 'Administrator',
+  //   es: 'Administrator',
+  //   img: 'raridade/r6.png'
+  // }
 ]
