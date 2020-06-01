@@ -227,10 +227,15 @@ table { border-collapse: collapse; }
   background-color: #000;
 }
 
+small.link {
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 .linker > .ak-encyclo-detail {
   background: #f4f2f2;
   border: 1px solid #a9a9a9;
-  border-top: 0;
 }
 .ak-top{
   background: #d2d2d2;

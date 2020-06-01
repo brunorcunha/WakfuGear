@@ -1,27 +1,20 @@
 <template>
   <span v-if="!valor">-</span>
   <span v-else-if="!valor.id">{{ valor.text }}</span>
-  <v-tooltip
+  <ExternalState
     v-else
-    bottom
-  >
-    <template #activator="{ on }">
-      <small
-        class="link"
-        v-on="on"
-        @click="abrirDialog"
-      >{{ valor.text }} ({{ valor.lvl }})</small>
-    </template>
-    <span>{{ valor.text }} ({{ valor.lvl }})</span>
-  </v-tooltip>
+    :value="valor"
+  />
 </template>
 
 <script>
 import { states } from '../model/states'
 import { equipEffects } from '../model/equipEffects'
+import ExternalState from '../components/ExternalState'
 
 export default {
   name: 'DataValue',
+  components: { ExternalState },
   props: {
     value: { type: Object, default: null }
   },
@@ -37,9 +30,6 @@ export default {
     this.tratarValue(this.value)
   },
   methods: {
-    abrirDialog () {
-      this.$LinkerState.abrir(this.value)
-    },
     tratarValue (val) {
       const { item, atributo } = val
       const valor = item.equipEffects.find(e => e.id === atributo)

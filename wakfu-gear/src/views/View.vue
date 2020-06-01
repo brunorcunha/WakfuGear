@@ -83,7 +83,6 @@
     </template>
 
     <ConfirmDialog ref="confirmDialog" />
-    <ExternalState ref="linkerState" />
   </v-layout>
 </template>
 
@@ -94,7 +93,6 @@ import Equipamento from '../components/Equipamento'
 import DataTable from './DataTable'
 import Filtros from '../components/Filtros'
 import ConfirmDialog from '../components/ConfirmDialog'
-import ExternalState from '../components/ExternalState'
 import Loading from '../components/Loading'
 
 export default {
@@ -104,8 +102,7 @@ export default {
     Filtros,
     DataTable,
     Equipamento,
-    ConfirmDialog,
-    ExternalState
+    ConfirmDialog
   },
   data: () => ({
     drawer: false,
@@ -136,7 +133,6 @@ export default {
   },
   mounted () {
     Vue.prototype.$ConfirmDialog = this.$refs.confirmDialog
-    Vue.prototype.$LinkerState = this.$refs.linkerState
 
     if (this.$vuetify.breakpoint.lgAndUp) {
       this.drawer = true

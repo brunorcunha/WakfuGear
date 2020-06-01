@@ -1,39 +1,23 @@
 <template>
-  <v-dialog
-    v-model="dialog"
-    max-width="600px"
-    hide-overlay
-    persistent
-    @keydown.esc="cancelar"
+  <v-menu
+    v-if="!!value"
+    v-model="menu"
+    open-on-hover
+    bottom
+    right
+    offset-y
   >
-    <v-toolbar
-      class="cabecalho"
-      dark
-      dense
-      pr-0
-      color="deep-orange accent-4"
-    >
-      <v-toolbar-title class="white--text">
-        {{ title }}
-      </v-toolbar-title>
-
-      <v-spacer />
-
-      <v-btn
-        dark
-        flat
-        icon
-        @click="dialog = false"
-      >
-        <v-icon>close</v-icon>
-      </v-btn>
-    </v-toolbar>
-
+    <template #activator="{ on }">
+      <small
+        class="link"
+        v-on="on"
+      >{{ value.text }}</small>
+    </template>
     <v-card tile>
       <v-progress-linear
         v-if="loading"
         class="ma-0"
-        :indeterminate="true"
+        indeterminate
       />
       <div
         v-else
@@ -41,7 +25,7 @@
         v-html="html"
       />
     </v-card>
-  </v-dialog>
+  </v-menu>
 </template>
 
 <script>
@@ -50,26 +34,24 @@ import linker from '../api/linker'
 export default {
   name: 'ExternalState',
   props: {
-    value: { type: Number, default: null }
+    value: { type: Object, default: null }
   },
   data: () => ({
-    html: '',
-    title: '',
-    dialog: false,
-    loading: true
+    html: null,
+    menu: false,
+    loading: false
   }),
+  watch: {
+    menu (val) {
+      if (val && !this.loading) this.abrir()
+    }
+  },
   methods: {
-    async abrir (state) {
-      if (!this.dialog) this.dialog = true
-      this.title = state.text
+    async abrir () {
+      if (!this.value || this.html) return
       this.loading = true
-
-      this.html = await linker.get('state', { id: state.id, level: state.lvl, l: this.$lang })
-      this.html = this.html.replace('game/state/42/', 'game/state/64/')
+      this.html = await linker.get('state', { id: this.value.id, level: this.value.lvl, l: this.$lang })
       this.loading = false
-    },
-    cancelar () {
-      this.dialog = false
     }
   }
 }
