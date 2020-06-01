@@ -51,7 +51,7 @@ const getItems = async () => {
   const items = await getItemsSaved(versao, 'items')
   let itemsRetornados = removerItemsTipo(items)
   itemsRetornados = itemsRetornados.map(formatarItem)
-  itemsRetornados = removerItemsNivelZeroSemFx(itemsRetornados)
+  itemsRetornados = removerItemsNivelZeroUmSemFx(itemsRetornados)
   return itemsRetornados
 }
 
@@ -63,7 +63,8 @@ const verificarGFX = item => {
 }
 
 const removerItemsTipo = items => items.filter(item => ![647, 525, 683, 812, 811, 480, 537].includes(item.definition.item.baseParameters.itemTypeId))
-const removerItemsNivelZeroSemFx = items => items.filter(item => item.lvl > 0 || item.equipEffects.length > 0)
+// const removerItemsNivelZeroSemFx = items => items.filter(item => item.lvl > 0 || item.equipEffects.length > 0)
+const removerItemsNivelZeroUmSemFx = items => items.filter(item => item.lvl > 1 || item.equipEffects.length > 0)
 
 const formatarEquipEffects = equipEffects => {
   const IIDtoID = [
