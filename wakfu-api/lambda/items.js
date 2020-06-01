@@ -62,7 +62,7 @@ const verificarGFX = item => {
   return `${iid}` === `${type}${id}`
 }
 
-const removerItemsTipo = items => items.filter(item => ![647, 525, 683, 812, 811].includes(item.definition.item.baseParameters.itemTypeId))
+const removerItemsTipo = items => items.filter(item => ![647, 525, 683, 812, 811, 480, 537].includes(item.definition.item.baseParameters.itemTypeId))
 const removerItemsNivelZeroSemFx = items => items.filter(item => item.lvl > 0 || item.equipEffects.length > 0)
 
 const formatarEquipEffects = equipEffects => {
