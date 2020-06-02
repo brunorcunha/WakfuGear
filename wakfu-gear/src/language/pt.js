@@ -42,7 +42,9 @@ export const pt = {
     combate: 'Combate',
     secundarios: 'Secundários',
     versao: 'Versão: {0}',
-    fork: 'Clone o projeto no {0}.'
+    fork: 'Clone o projeto no {0}.',
+    maximo: 'Máximo',
+    minimo: 'Mínimo'
   },
   msg: {
     adicionarEquip: 'Adicione equipamentos a esse conjunto'

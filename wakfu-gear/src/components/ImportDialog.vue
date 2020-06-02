@@ -35,10 +35,15 @@
         indeterminate
       />
       <v-layout
+        row
+        wrap
         py-3
         px-4
       >
-        <v-flex xs9>
+        <v-flex
+          xs12
+          lg9
+        >
           <v-text-field
             v-model="linkZenith"
             :disabled="loading"
@@ -56,8 +61,9 @@
           </v-text-field>
         </v-flex>
         <v-flex
-          xs3
-          pl-4
+          xs12
+          lg3
+          :pl-4="!$vuetify.breakpoint.smAndDown"
         >
           <v-btn
             block

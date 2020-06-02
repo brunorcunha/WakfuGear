@@ -42,7 +42,9 @@ export const en = {
     combate: 'Battle',
     secundarios: 'Secondary',
     versao: 'Version: {0}',
-    fork: 'Fork the project on {0}.'
+    fork: 'Fork the project on {0}.',
+    maximo: 'Maximum',
+    minimo: 'Minimum'
   },
   msg: {
     adicionarEquip: 'Add equipment to this gear'

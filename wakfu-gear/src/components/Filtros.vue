@@ -102,10 +102,26 @@
         mb-5
       >
         <label style="font-size: 13px; color: rgba(0,0,0,.54);">{{ $t('label.nivel') }}</label>
+        <v-layout>
+          <v-flex px-2>
+            <v-text-field
+              v-model="filtros.niveis[0]"
+              :label="$t('label.minimo')"
+              type="number"
+            />
+          </v-flex>
+          <v-flex px-2>
+            <v-text-field
+              v-model="filtros.niveis[1]"
+              :label="$t('label.maximo')"
+              type="number"
+            />
+          </v-flex>
+        </v-layout>
         <v-range-slider
           v-model="filtros.niveis"
           ticks
-          class="px-2 mt-1"
+          class="px-2 mt-0"
           thumb-label="always"
           color="deep-orange accent-4"
           :step="1"

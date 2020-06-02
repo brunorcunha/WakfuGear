@@ -159,6 +159,7 @@ export default {
       this.drawer = true
     }
     EventBus.$on('addEquip', this.abrirDrawerEquipamentos)
+    EventBus.$on('terminouFiltragem', this.terminouFiltragem)
   },
   methods: {
     abrirImportar () {
@@ -166,6 +167,11 @@ export default {
     },
     abrirDrawerEquipamentos () {
       this.drawerRight = true
+    },
+    terminouFiltragem () {
+      if (this.$vuetify.breakpoint.smAndDown) {
+        this.drawer = false
+      }
     }
   }
 }

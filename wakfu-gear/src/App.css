@@ -4,7 +4,7 @@ table { border-collapse: collapse; }
 
 .progress{ flex-basis: 2px; flex-grow: 0; flex-shrink: 0; }
 .alturaInfo{ flex-basis: 117px; flex-grow: 0; flex-shrink: 0; }
-.larguraInfo{ flex-basis: 240px; flex-grow: 0; flex-shrink: 0; }
+.larguraInfo{ flex-basis: 240px; flex-grow: 0; flex-shrink: 0; transition: width 0.3s ease-out; }
 .scrollX { overflow: scroll; width: 100%; }
 .sh { overflow: hidden; }
 
@@ -79,12 +79,22 @@ table { border-collapse: collapse; }
   font-weight: bold;
   cursor: move;
   white-space: nowrap; text-overflow: ellipsis; overflow: hidden;
+  transition: width 0.3s ease-out;
 }
 #atributos::after {
   content: '';
   position: relative;
   height: 18px;
   display: inline-block;
+}
+.retraido #atributos td {
+  width: 40px;
+}
+.retraido #atributos.larguraInfo, .retraido #info.larguraInfo {
+  flex-basis: 40px;
+}
+.retraido #atributos td span, .retraido #info .texto {
+  display: none;
 }
 
 #dados td {
@@ -217,7 +227,7 @@ table { border-collapse: collapse; }
   width: 100%; height: 44px;
   opacity: .5;
 }
-.v-btn.error:after {
+.v-btn.larguraInfo:after {
   background-image: url('../static/btn.png');
 }
 
@@ -340,6 +350,7 @@ small.link {
 }
 
 .icone { background-repeat: no-repeat; background-position: 6px center; }
+.retraido .icone { background-position: center; }
 
 .icone.i20 { background-image: url(../static/atributos/tags_34.png); }
 .icone.i41 { background-image: url(../static/atributos/tags_02.png); }

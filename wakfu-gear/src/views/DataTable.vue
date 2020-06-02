@@ -1,5 +1,5 @@
 <template>
-  <v-content class="white">
+  <v-content :class="`white ${retrair ? 'retraido' : null}`">
     <v-container
       fluid
       fill-height
@@ -15,12 +15,14 @@
             id="info"
             class="larguraInfo"
           >
-            <div class="caption">
-              {{ $t('label.mostrando', [itemsLimitados.length]) }}
-            </div>
-            {{ $t('label.qntitens', [itemsFiltrados.length]) }} >
-            <div class="caption">
-              {{ $t('label.totalitens', [items.length]) }}
+            <div class="texto">
+              <div class="caption">
+                {{ $t('label.mostrando', [itemsLimitados.length]) }}
+              </div>
+              {{ $t('label.qntitens', [itemsFiltrados.length]) }} >
+              <div class="caption">
+                {{ $t('label.totalitens', [items.length]) }}
+              </div>
             </div>
           </v-flex>
 
@@ -66,7 +68,7 @@
                     @click="ordenar(atributo)"
                   >
                     <td :class="`icone i${atributo}`">
-                      {{ traduzir(equipEffects, atributo) }}
+                      <span>{{ traduzir(equipEffects, atributo) }}</span>
                     </td>
                   </tr>
                 </template>
@@ -123,6 +125,7 @@ export default {
     value: { type: Array, default: () => [] }
   },
   data: () => ({
+    retrair: false,
     ordenarPor: null,
     ordemAsc: null,
     itemsFiltrados: [],
@@ -139,6 +142,9 @@ export default {
     ...mapGetters('filtros', ['filtros'])
   },
   async mounted () {
+    if (this.$vuetify.breakpoint.smAndDown) {
+      this.retrair = true
+    }
     await this.eventoFiltragem(this.filtros)
 
     this.$refs.dados.addEventListener('scroll', this.scrolling)
@@ -214,6 +220,11 @@ export default {
     scrolling (evt) {
       this.$refs.atributos.scrollTop = evt.target.scrollTop
       this.$refs.items.scrollLeft = evt.target.scrollLeft
+
+      if (!this.$vuetify.breakpoint.smAndDown) {
+        if (evt.target.scrollLeft < 20) this.retrair = false
+        else this.retrair = true
+      }
     }
   }
 }
