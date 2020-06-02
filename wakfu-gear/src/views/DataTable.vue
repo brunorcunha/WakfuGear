@@ -142,9 +142,6 @@ export default {
     ...mapGetters('filtros', ['filtros'])
   },
   async mounted () {
-    if (this.$vuetify.breakpoint.smAndDown) {
-      this.retrair = true
-    }
     await this.eventoFiltragem(this.filtros)
 
     this.$refs.dados.addEventListener('scroll', this.scrolling)
@@ -221,10 +218,8 @@ export default {
       this.$refs.atributos.scrollTop = evt.target.scrollTop
       this.$refs.items.scrollLeft = evt.target.scrollLeft
 
-      if (!this.$vuetify.breakpoint.smAndDown) {
-        if (evt.target.scrollLeft < 20) this.retrair = false
-        else this.retrair = true
-      }
+      if (evt.target.scrollLeft < 20) this.retrair = false
+      else this.retrair = true
     }
   }
 }

@@ -1,10 +1,5 @@
 <template>
-  <v-dialog
-    :value="true"
-    persistent
-    width="500"
-    content-class="elevation-0"
-  >
+  <div id="overlayloading">
     <div id="loading">
       <transition name="slide-y-reverse-transition">
         <p
@@ -15,7 +10,7 @@
         </p>
       </transition>
     </div>
-  </v-dialog>
+  </div>
 </template>
 
 <script>
@@ -49,10 +44,15 @@ export default {
 
 <style>
   #loading {
-    position: relative;
+    position: absolute;
     background: url(../../static/load1.png) no-repeat center -3px;
     width: 500px;
     height: 300px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: auto;
   }
   #loading:after {
     content: '';
@@ -76,4 +76,20 @@ export default {
 
   @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
   @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+  #overlayloading {
+    background-color: rgba(0, 0, 0, .9);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
+
+  .v-dialog--animated {
+    -webkit-animation-duration: 0.15s;
+    animation-duration: 0.15s;
+    -webkit-animation-name: animate-dialog;
+    animation-name: animate-dialog;
+    -webkit-animation-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    animation-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
 </style>
