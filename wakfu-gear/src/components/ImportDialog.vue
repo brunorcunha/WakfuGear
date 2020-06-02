@@ -71,43 +71,6 @@
         </v-flex>
       </v-layout>
       <v-divider />
-<!--      <v-layout-->
-<!--        py-2-->
-<!--        px-4-->
-<!--      >-->
-<!--        <v-flex xs9>-->
-<!--          <v-text-field-->
-<!--            v-model="linkMethod"-->
-<!--            :disabled="loading"-->
-<!--            label="Method Wakfu Builder"-->
-<!--            placeholder="https://builder.methodwakfu.com/builder/code/xxxxxxxxx"-->
-<!--            hide-details-->
-<!--            dense-->
-<!--          >-->
-<!--            <template #prepend>-->
-<!--              <img-->
-<!--                src="https://builder.methodwakfu.com/favicon.ico"-->
-<!--                height="25"-->
-<!--              >-->
-<!--            </template>-->
-<!--          </v-text-field>-->
-<!--        </v-flex>-->
-<!--        <v-flex-->
-<!--          xs3-->
-<!--          pl-4-->
-<!--        >-->
-<!--          <v-btn-->
-<!--            block-->
-<!--            large-->
-<!--            color="primary"-->
-<!--            :disabled="loading"-->
-<!--            @click="importarMethod"-->
-<!--          >-->
-<!--            Importar <v-icon>import_export</v-icon>-->
-<!--          </v-btn>-->
-<!--        </v-flex>-->
-<!--      </v-layout>-->
-<!--      <v-divider />-->
       <v-layout
         py-2
         px-4

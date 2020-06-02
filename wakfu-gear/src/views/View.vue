@@ -50,14 +50,6 @@
             >
               {{ $t('label.equipamentos') }}
             </v-btn>
-            <v-btn
-              color="red"
-              depressed
-              block
-              value="center"
-            >
-              {{ $t('label.gears') }}
-            </v-btn>
           </v-btn-toggle>
         </v-flex>
 
@@ -120,6 +112,7 @@ import Filtros from '../components/Filtros'
 import ConfirmDialog from '../components/ConfirmDialog'
 import ImportDialog from '../components/ImportDialog'
 import Loading from '../components/Loading'
+import EventBus from '../event-bus'
 
 export default {
   name: 'WGView',
@@ -164,12 +157,15 @@ export default {
 
     if (this.$vuetify.breakpoint.lgAndUp) {
       this.drawer = true
-      this.drawerRight = true
     }
+    EventBus.$on('addEquip', this.abrirDrawerEquipamentos)
   },
   methods: {
     abrirImportar () {
       this.$ImportDialog.abrir()
+    },
+    abrirDrawerEquipamentos () {
+      this.drawerRight = true
     }
   }
 }

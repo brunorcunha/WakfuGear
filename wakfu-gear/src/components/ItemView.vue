@@ -54,6 +54,7 @@
 
     <div class="menu">
       <v-menu
+        v-model="vmenu"
         bottom
         right
         transition="slide-y-transition"
@@ -131,6 +132,7 @@
 import { mapGetters } from 'vuex'
 import { equipType } from '../model/equipType'
 import ListGears from './ListGears'
+import EventBus from '../event-bus'
 
 export default {
   components: { ListGears },
@@ -138,6 +140,7 @@ export default {
     value: { type: Object, default: null }
   },
   data: () => ({
+    vmenu: false,
     item: null,
     equipType
   }),
@@ -157,6 +160,8 @@ export default {
     },
     adicionarAoGear (gear, index) {
       this.$store.dispatch('gears/adicionarItem', { item: this.item, index })
+      EventBus.$emit('addEquip')
+      this.vmenu = false
     }
   }
 }
