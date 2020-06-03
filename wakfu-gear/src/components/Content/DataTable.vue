@@ -103,16 +103,16 @@
 </template>
 
 <script>
-import EventBus from '../event-bus'
+import EventBus from '../../event-bus'
 import { mapGetters } from 'vuex'
 import draggable from 'vuedraggable'
 
-import filtros from '../functions/filtros'
-import DataValue from '../components/DataValue'
-import ItemView from '../components/ItemView'
+import filtros from '../../functions/filtros'
+import DataValue from './DataValue'
+import ItemView from './ItemView'
 
-import { equipType } from '../model/equipType'
-import { equipEffects } from '../model/equipEffects'
+import { equipType } from '../../model/equipType'
+import { equipEffects } from '../../model/equipEffects'
 
 export default {
   name: 'DataTable',

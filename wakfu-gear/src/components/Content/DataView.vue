@@ -62,11 +62,11 @@
 <script>
 import { mapGetters } from 'vuex'
 
-import filtros from '../functions/filtros'
-import EventBus from '../event-bus'
-import ItemView from '../components/ItemView'
+import filtros from '../../functions/filtros'
+import EventBus from '../../event-bus'
+import ItemView from './ItemView'
 
-import { equipType } from '../model/equipType'
+import { equipType } from '../../model/equipType'
 
 export default {
   name: 'DataTable',
@@ -168,7 +168,7 @@ export default {
     border-radius: 5px;
     box-shadow: inset 0px 0px 20px 0px rgba(0,0,0,0.75);
     border: 1px solid rgba(255, 255, 255, .1);
-    background: url(../../static/bg.jpg) center;
+    background: url(../../../static/bg.jpg) center;
     background-size: auto 100%;
   }
   .itemview {

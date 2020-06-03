@@ -165,13 +165,13 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import DropBox from './DropBox'
+import DropBox from '../DropBox'
 import Idioma from './Idioma'
-import EventBus from '../event-bus'
+import EventBus from '../../event-bus'
 
-import { equipType } from '../model/equipType'
-import { equipEffects } from '../model/equipEffects'
-import { rarity } from '../model/rarity'
+import { equipType } from '../../model/equipType'
+import { equipEffects } from '../../model/equipEffects'
+import { rarity } from '../../model/rarity'
 import LocalStorage from './LocalStorage'
 // import { states } from '../model/states'
 

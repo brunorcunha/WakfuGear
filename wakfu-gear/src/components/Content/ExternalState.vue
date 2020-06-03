@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import linker from '../api/linker'
+import linker from '../../api/linker'
 
 export default {
   name: 'ExternalState',

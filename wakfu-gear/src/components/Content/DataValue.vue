@@ -8,9 +8,9 @@
 </template>
 
 <script>
-import { states } from '../model/states'
-import { equipEffects } from '../model/equipEffects'
-import ExternalState from '../components/ExternalState'
+import { states } from '../../model/states'
+import { equipEffects } from '../../model/equipEffects'
+import ExternalState from './ExternalState'
 
 export default {
   name: 'DataValue',

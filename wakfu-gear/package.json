@@ -13,6 +13,7 @@
     "unit": "jest --config test/unit/jest.conf.js --coverage"
   },
   "dependencies": {
+    "copy-text-to-clipboard": "^2.2.0",
     "semver": "^6.3.0",
     "vue": "^2.6.11",
     "vue-css-donut-chart": "^1.1.6",

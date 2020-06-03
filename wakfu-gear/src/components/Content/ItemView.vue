@@ -130,9 +130,9 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { equipType } from '../model/equipType'
-import ListGears from './ListGears'
-import EventBus from '../event-bus'
+import { equipType } from '../../model/equipType'
+import ListGears from '../DrawerRight/ListGears'
+import EventBus from '../../event-bus'
 
 export default {
   components: { ListGears },

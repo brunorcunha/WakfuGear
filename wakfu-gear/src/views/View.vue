@@ -106,9 +106,9 @@
 <script>
 import Vue from 'vue'
 import { mapGetters } from 'vuex'
-import Equipamento from '../components/Equipamento'
-import DataTable from './DataTable'
-import Filtros from '../components/Filtros'
+import Equipamento from '../components/DrawerRight/Equipamento'
+import DataTable from '../components/Content/DataTable'
+import Filtros from '../components/DrawerLeft/Filtros'
 import ConfirmDialog from '../components/ConfirmDialog'
 import ImportDialog from '../components/ImportDialog'
 import Loading from '../components/Loading'

@@ -1,7 +1,6 @@
 <template>
   <v-dialog
     v-model="dialog"
-    persistent
     :max-width="opcoes.width"
     @keydown.esc="cancelar"
   >
@@ -28,14 +27,12 @@
         <v-spacer />
         <v-btn
           color="error"
-          text
           @click="cancelar"
         >
           {{ label.cancelar }}
         </v-btn>
         <v-btn
           color="primary darken-1"
-          text
           @click="confirmar"
         >
           {{ label.confirmar }}
