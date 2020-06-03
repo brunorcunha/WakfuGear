@@ -125,7 +125,7 @@
           thumb-label="always"
           color="deep-orange accent-4"
           :step="1"
-          :max="200"
+          :max="215"
           :min="0"
         />
       </v-flex>
@@ -181,7 +181,7 @@ export default {
   data: () => ({
     filtros: {
       nome: '',
-      niveis: [0, 200],
+      niveis: [0, 215],
       tipos: [],
       raridades: [],
       bonus: [],
