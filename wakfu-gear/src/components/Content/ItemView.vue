@@ -152,11 +152,11 @@ export default {
   },
   methods: {
     abrirURL (type, id) {
-      if (this.$i18n.locale === 'pt') {
-        window.open(`https://www.wakfu.com/pt/mmorpg/enciclopedia/armas/${id}-${type}`)
-      } else {
-        window.open(`https://www.wakfu.com/en/mmorpg/encyclopedia/armors/${id}-${type}`)
-      }
+      const lang = this.$i18n.locale === 'pt' ? 'pt' : 'en'
+      const enciclopedia = lang === 'pt' ? 'enciclopedia' : 'encyclopedia'
+      const armor = lang === 'pt' ? 'armas' : 'armors'
+      const url = `https://www.wakfu.com/${lang}/mmorpg/${enciclopedia}/${armor}/${id}-${type}`
+      window.open(url)
     },
     adicionarAoGear (gear, index) {
       this.$store.dispatch('gears/adicionarItem', { item: this.item, index })

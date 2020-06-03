@@ -68,8 +68,10 @@ export default {
       this.$store.dispatch('gears/removerItem', { posicao })
     },
     abrirURL (type, id) {
-      const lang = this.$i18n.locale
-      const url = `https://www.wakfu.com/${lang === 'pt' ? 'pt' : 'en'}/mmorpg/enciclopedia/${lang === 'pt' ? 'armas' : 'armors'}/${id}-${type}`
+      const lang = this.$i18n.locale === 'pt' ? 'pt' : 'en'
+      const enciclopedia = lang === 'pt' ? 'enciclopedia' : 'encyclopedia'
+      const armor = lang === 'pt' ? 'armas' : 'armors'
+      const url = `https://www.wakfu.com/${lang}/mmorpg/${enciclopedia}/${armor}/${id}-${type}`
       window.open(url)
     }
   }
