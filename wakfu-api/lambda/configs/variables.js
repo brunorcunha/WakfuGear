@@ -1,4 +1,5 @@
 exports.ALLOWED_ORIGINS = [
+  'http://localhost:9000/',
   'http://localhost:8080/',
   'https://wakfu-gear.netlify.app'
 ]

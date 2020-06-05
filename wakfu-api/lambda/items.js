@@ -1,45 +1,31 @@
 'use strict';
-const AWS = require('aws-sdk')
-const request = require('request-promise')
 const { fs } = require('./configs/cache')
-const {
-  ALLOWED_ORIGINS,
-  endpointWAPI
-} = require('./configs/variables')
+const { ALLOWED_ORIGINS } = require('./configs/variables');
+const { WAPI } = require('./configs/wakfu');
 
-const WAPIrequestVersao = async () => {
-  const response = await request(`${endpointWAPI}/config.json`)
-  return JSON.parse(response).version
+const FSreadFile = async (version, tipo) => {
+  return (await fs.readFile(`${version}/${tipo}.json`)).Body.toString()
 }
 
-const WAPIrequestItems = async (versao, tipo) => {
-  const response = await request(`${endpointWAPI}/${versao}/${tipo}.json`)
-  return response
+const FSwriteFile = async (version, tipo, data) => {
+  return await fs.writeFileSync(`${version}/${tipo}.json`, data)
 }
 
-const FSreadFile = async (versao, tipo) => {
-  return (await fs.readFile(`${versao}/${tipo}.json`)).Body.toString()
-}
-
-const FSwriteFile = async (versao, tipo, data) => {
-  return await fs.writeFileSync(`${versao}/${tipo}.json`, data)
-}
-
-const getItemsSaved = async (versao, tipo) => {
+const getItemsSaved = async (version, tipo) => {
   let response = ''
   try {
-    await fs.access(`${versao}/${tipo}.json`)
-    response = await FSreadFile(versao, tipo)
+    await fs.access(`${version}/${tipo}.json`)
+    response = await FSreadFile(version, tipo)
   } catch (e) {
-    response = await WAPIrequestItems(versao, tipo);
-    await FSwriteFile(versao, tipo, response)
+    response = await WAPI.items(version, tipo)
+    await FSwriteFile(version, tipo, response)
   }
   return JSON.parse(response)
 }
 
 const getItems = async () => {
-  const versao = await WAPIrequestVersao()
-  const items = await getItemsSaved(versao, 'items')
+  const version = await WAPI.version()
+  const items = await getItemsSaved(version, 'items')
   let itemsRetornados = removerItemsTipo(items)
   itemsRetornados = itemsRetornados.map(formatarItem)
   itemsRetornados = removerItemsNivelZeroUmSemFx(itemsRetornados)
@@ -158,10 +144,6 @@ const formatarItem = item => {
 }
 
 module.exports.handler = async (event, context, callback) => {
-  const ALLOWED_ORIGINS = [
-    'http://localhost:8080/',
-    'https://wakfu-gear.netlify.app'
-  ]
   const { origin } = event.headers
   const headerCORS = (ALLOWED_ORIGINS.includes(origin)) ? origin : '*'
   try {

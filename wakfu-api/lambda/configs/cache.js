@@ -11,7 +11,6 @@ const {
 } = process.env;
 
 const uploadPath = path.join('.','.','cache');
-console.log(uploadPath);
 
 let fs = {
   access: Key => nodefs.access(`${uploadPath}/${Key.replace(/\//, '-')}`),
@@ -37,7 +36,6 @@ if(NODE_ENV !== 'development'){
       const bufferObject = new Buffer.from(payload)
       return s3.putObject({...S3_PARAMS, Key, ContentType: 'application/json', Body: bufferObject }).promise()
     }
-
   };
 }
 
