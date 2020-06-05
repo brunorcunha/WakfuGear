@@ -4,6 +4,7 @@
     bottom
     left
     offset-x
+    content-class="pointerevent"
   >
     <template #activator="{ on }">
       <slot

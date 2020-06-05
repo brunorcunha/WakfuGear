@@ -445,3 +445,7 @@ small.link {
 }
 .inlineblock { display: inline-block; }
 .paddingleft { padding-left: 15px; }
+
+.pointerevent.v-menu__content {
+  pointer-events: none !important;
+}

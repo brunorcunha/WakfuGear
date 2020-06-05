@@ -5,6 +5,7 @@
     left
     offset-x
     class="inlineblock"
+    content-class="pointerevent"
   >
     <template #activator="{ on: hover }">
       <slot :hover="hover" />
