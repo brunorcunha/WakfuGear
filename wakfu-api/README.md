@@ -5,13 +5,13 @@ Projeto Lambda (Serverless) para fornecer dados da API oficial de Wakfu ao Wakfu
 
 ## Configurações
 
-Os arquivos JSON oficiais da API de Wakfu são salvas no S3 da AWS (Amazon). 
+Os arquivos JSON oficiais da API de Wakfu são salvas no S3 da AWS (Amazon).
 * Crie uma conta na AWS e salve a ACCESS KEY (Com o respectivo SECRET).
 * Crie um bucket no S3.
 * Crie [variáveis de ambiente](https://www.netlify.com/docs/continuous-deployment/?_ga=2.156412605.728163330.1566152904-1872813885.1563017719#build-environment-variables) com as seguintes informações:
 ```
-MY_AWS_ACCESS_KEY_ID = SUA_KEY
-MY_AWS_SECRET_ACCESS_KEY = SECRET_DA_KEY
+AWS_ACCESS_KEY_ID = SUA_KEY
+AWS_SECRET_ACCESS_KEY = SECRET_DA_KEY
 S3_BUCKET_NAME = NOME_DO_BUCKET
 ```
 

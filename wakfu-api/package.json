@@ -6,7 +6,7 @@
   "scripts": {
     "serve": "netlify-lambda serve lambda",
     "build": "netlify-lambda build lambda",
-    "start": "npm run serve"
+    "start": "npm install && npm run serve"
   },
   "dependencies": {
     "aws-sdk": "^2.686.0",

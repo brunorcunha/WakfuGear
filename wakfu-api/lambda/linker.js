@@ -9,6 +9,7 @@ const getLinker = async (resource, params) => {
 
 module.exports.handler = async (event, context, callback) => {
   const ALLOWED_ORIGINS = [
+    'http://localhost:9001/',
     'http://localhost:8080/',
     'https://wakfu-gear.netlify.app'
   ]

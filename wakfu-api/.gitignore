@@ -1,12 +1,13 @@
 # package directories
 node_modules
 jspm_packages
-package-lock.json
 
 # Serverless directories
 .serverless
 
 # compiled output
+!cache/.keep
+cache
 /dist
 /lambda/dist
 /functions

@@ -1,35 +1,26 @@
 'use strict';
 const AWS = require('aws-sdk')
 const request = require('request-promise')
-
-const { MY_AWS_ACCESS_KEY_ID, MY_AWS_SECRET_ACCESS_KEY, S3_BUCKET_NAME, AWS_REGION } = process.env
-const s3 = new AWS.S3({
-  signatureVersion: 'v4',
-  credentials: new AWS.Credentials(MY_AWS_ACCESS_KEY_ID, MY_AWS_SECRET_ACCESS_KEY),
-  region: AWS_REGION
-})
-const S3_PARAMS = { Bucket: S3_BUCKET_NAME }
-const fs = {
-  access: Key => s3.headObject({ ...S3_PARAMS, Key }).promise(),
-  readFile: Key => s3.getObject({ ...S3_PARAMS, Key }).promise(),
-  writeFileSync: (Key, payload) => {
-    const bufferObject = new Buffer.from(payload)
-    return s3.putObject({...S3_PARAMS, Key, ContentType: 'application/json', Body: bufferObject }).promise()
-  }
-}
-const endpointWAPI = 'https://wakfu.cdn.ankama.com/gamedata'
+const { fs } = require('./configs/cache')
+const {
+  ALLOWED_ORIGINS,
+  endpointWAPI
+} = require('./configs/variables')
 
 const WAPIrequestVersao = async () => {
   const response = await request(`${endpointWAPI}/config.json`)
   return JSON.parse(response).version
 }
+
 const WAPIrequestItems = async (versao, tipo) => {
   const response = await request(`${endpointWAPI}/${versao}/${tipo}.json`)
   return response
 }
+
 const FSreadFile = async (versao, tipo) => {
   return (await fs.readFile(`${versao}/${tipo}.json`)).Body.toString()
 }
+
 const FSwriteFile = async (versao, tipo, data) => {
   return await fs.writeFileSync(`${versao}/${tipo}.json`, data)
 }
@@ -40,7 +31,7 @@ const getItemsSaved = async (versao, tipo) => {
     await fs.access(`${versao}/${tipo}.json`)
     response = await FSreadFile(versao, tipo)
   } catch (e) {
-    response = await WAPIrequestItems(versao, tipo)
+    response = await WAPIrequestItems(versao, tipo);
     await FSwriteFile(versao, tipo, response)
   }
   return JSON.parse(response)

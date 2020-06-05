@@ -1,0 +1,33 @@
+version: '3'
+services:
+  web:
+    build:
+      context: ./wakfu-gear
+      dockerfile: Dockerfile
+    working_dir: /usr/src/app
+    command: npm start
+    env_file: .env
+    environment:
+      PUBLIC_URL: http://0.0.0.0:8080/
+      HOST: 0.0.0.0
+      PORT: 8080
+      NODE_ENV: development
+      API_URL: http://localhost:9000
+    volumes:
+      - ./wakfu-gear:/usr/src/app
+    ports:
+      - "8080:8080"
+
+  api:
+    build:
+      context: wakfu-api
+      dockerfile: Dockerfile
+    working_dir: /usr/src/app
+    command: npm start
+    env_file: .env
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./wakfu-api:/usr/src/app
+    ports:
+      - "9000:9000"
