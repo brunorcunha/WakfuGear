@@ -14,6 +14,7 @@ const defaultGear = () => ({
     PET: null,
     ACCESSORY: null,
     COSTUME: null,
+    MOUNT: null,
     FIRST_WEAPON: null,
     SECOND_WEAPON: null
   },

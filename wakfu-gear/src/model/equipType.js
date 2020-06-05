@@ -357,6 +357,19 @@ export const equipType = [
     img: 'tipo/582.png'
   },
   {
+    id: 611,
+    iid: null,
+    pos: [
+      'MOUNT'
+    ],
+    dis: [],
+    fr: 'Montures',
+    en: 'Mounts',
+    es: 'Monturas',
+    pt: 'Montarias',
+    img: 'tipo/611.png'
+  },
+  {
     id: 646,
     iid: 521,
     pos: [

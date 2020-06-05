@@ -121,7 +121,7 @@ const formatarItem = item => {
   if (iid[0] !== gfx) iid.push(gfx)
 
   let equipEffects = formatarEquipEffects(item.definition.equipEffects)
-  if ([582, 420].includes(type)) {
+  if ([582, 420, 611].includes(type)) {
     equipEffects = formatarItemsComLevel(equipEffects, 50) // Pets
     lvl = 50
   }
