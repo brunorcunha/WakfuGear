@@ -3,10 +3,10 @@ const nodefs = require('fs');
 const path = require('path');
 
 const {
-  AWS_ACCESS_KEY_ID,
-  AWS_SECRET_ACCESS_KEY,
+  MY_AWS_ACCESS_KEY_ID,
+  MY_AWS_SECRET_ACCESS_KEY,
   S3_BUCKET_NAME,
-  AWS_REGION,
+  MY_AWS_REGION,
   NODE_ENV
 } = process.env;
 
@@ -25,8 +25,8 @@ if(NODE_ENV !== 'development'){
 
   const s3 = new AWS.S3({
     signatureVersion: 'v4',
-    credentials: new AWS.Credentials(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY),
-    region: AWS_REGION
+    credentials: new AWS.Credentials(MY_AWS_ACCESS_KEY_ID, MY_AWS_SECRET_ACCESS_KEY),
+    region: MY_AWS_REGION
   });
 
   fs = {
