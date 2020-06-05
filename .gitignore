@@ -1,7 +1,6 @@
 # package directories
 node_modules
 jspm_packages
-package-lock.json
 
 # Serverless directories
 .serverless
@@ -31,3 +30,6 @@ selenium-debug.log
 .DS_Store
 Thumbs.db
 unnamed.patch
+
+# config files
+.env

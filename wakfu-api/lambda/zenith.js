@@ -1,6 +1,6 @@
 'use strict';
-const AWS = require('aws-sdk')
 const request = require('request-promise')
+const { ALLOWED_ORIGINS } = require('./configs/variables');
 
 const requestBuild = id => {
   return request({
@@ -11,10 +11,6 @@ const requestBuild = id => {
 }
 
 module.exports.handler = async (event, context, callback) => {
-  const ALLOWED_ORIGINS = [
-    'http://localhost:8080/',
-    'https://wakfu-gear.netlify.app'
-  ]
   const { origin } = event.headers
   const { id } = event.queryStringParameters
   const headerCORS = (ALLOWED_ORIGINS.includes(origin)) ? origin : '*'

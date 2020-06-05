@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-const endpoint = 'https://wakfu-api.netlify.app/.netlify/functions'
+const endpoint = process.env.API_URL
 
 export default {
   get: async (resource, params) => (await Vue.http.post(`${endpoint}/linker`, { resource, params })).body
