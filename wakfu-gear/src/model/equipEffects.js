@@ -13,7 +13,7 @@ export const equipEffectsOfficialAPI = {
 
 export const equipEffects = [
   {
-    id: 0,
+    id: 39,
     iid: [],
     fr: 'Armure',
     en: 'Armor',

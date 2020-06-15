@@ -252,6 +252,10 @@ small.link {
   background: #f4f2f2;
   border: 1px solid #a9a9a9;
 }
+.linker .ak-encyclo-detail-illu img {
+  width: 42px;
+  height: 42px;
+}
 .ak-top{
   background: #d2d2d2;
   border-bottom: 1px solid #a9a9a9;
@@ -359,7 +363,7 @@ small.link {
 .icone.i41 { background-image: url(../static/atributos/tags_02.png); }
 .icone.i191 { background-image: url(../static/atributos/tags_28.png); }
 .icone.i31 { background-image: url(../static/atributos/tags_01.png); }
-.icone.i0 { background-image: url(../static/atributos/tags_42.png); }
+.icone.i0, .icone.i39 { background-image: url(../static/atributos/tags_42.png); }
 .icone.i123 { background-image: url(../static/atributos/tags_11.png); }
 .icone.i122 { background-image: url(../static/atributos/tags_10.png); }
 .icone.i124 { background-image: url(../static/atributos/tags_12.png); }
