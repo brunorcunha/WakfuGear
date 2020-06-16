@@ -171,11 +171,9 @@ export default {
       this.$store.dispatch('gears/adicionarGear', {})
       this.$store.dispatch('gears/selecionarAtual', { index })
     },
-    clonarConjunto () {
-      const index = this.qnt
-      this.$store.dispatch('gears/clonarGear', {})
-      this.$store.dispatch('gears/selecionarAtual', { index })
-      this.$store.dispatch('gears/setNome', { nome: this.$i18n.t('label.clone') })
+    clonarConjunto (index) {
+      this.$store.dispatch('gears/clonarGear', { index })
+      this.$store.dispatch('gears/setNome', { nome: this.$i18n.t('label.clone'), index })
     },
     trocarGear (gear, index) {
       this.$store.dispatch('gears/selecionarAtual', { index })

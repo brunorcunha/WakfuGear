@@ -6,12 +6,8 @@
     offset-x
     content-class="pointerevent"
   >
-    <template #activator="{ on }">
-      <slot
-        :on="lista && lista.length > 0 ? on : null"
-        :nome="nome"
-        :total="total"
-      />
+    <template #activator="{ on: hover }">
+      <slot :hover="hover" />
     </template>
     <v-card>
       <v-list
@@ -19,17 +15,18 @@
         subheader
       >
         <v-subheader class="deep-orange accent-4 white--text">
-          {{ nome }}
-          <v-spacer />
-          <span>{{ total || '0' }}</span>
+          {{ gear.nome }}
         </v-subheader>
-        <template v-for="(item, index) in lista">
-          <div :key="`ia${index}`">
+        <template v-for="(item, index) in gear.gear">
+          <div
+            v-if="!!item"
+            :key="`gear${gear.nome}${index}`"
+          >
             <v-divider />
             <v-list-tile class="menulist">
               <v-list-tile-action>
                 <v-img
-                  :src="`${url}${item.item.iid[0]}.png`"
+                  :src="`${url}${item.iid[0]}.png`"
                   height="30"
                   width="30"
                   lazy-src="/static/erro2.png"
@@ -37,13 +34,24 @@
                 />
               </v-list-tile-action>
               <v-list-tile-content class="fontsmall">
-                <v-list-tile-title>{{ item.item.title[$lang] }}</v-list-tile-title>
+                <v-list-tile-title>
+                  {{ item.title[$lang] }}
+                </v-list-tile-title>
               </v-list-tile-content>
               <v-list-tile-avatar class="fontsmall">
-                {{ item.valor }}
+                {{ $t('label.nv') }}{{ item.lvl }}
               </v-list-tile-avatar>
             </v-list-tile>
           </div>
+        </template>
+        <template v-if="gear.qntItens === 0">
+          <v-alert
+            :value="true"
+            type="info"
+            class="py-0"
+          >
+            {{ $t('alert.add_equips') }}
+          </v-alert>
         </template>
       </v-list>
     </v-card>
@@ -52,11 +60,9 @@
 
 <script>
 export default {
-  name: 'AtributosPopUp',
+  name: 'GearsPopUp',
   props: {
-    nome: { type: String, default: '' },
-    total: { type: Number, default: 0 },
-    lista: { type: Array, default: () => [] }
+    gear: { type: Object, default: () => ({}) }
   },
   data: () => ({
     url: 'http://s.ankama.com/www/static.ankama.com/wakfu/portal/game/item/42/'

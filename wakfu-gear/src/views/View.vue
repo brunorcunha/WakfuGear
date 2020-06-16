@@ -9,6 +9,7 @@
         app
         right
         width="450"
+        class="corFundoMenu"
       >
         <Equipamento />
       </v-navigation-drawer>
@@ -59,20 +60,6 @@
               class="mr-0"
               icon
               v-on="on"
-              @click.stop="abrirImportar"
-            >
-              <v-icon>import_export</v-icon>
-            </v-btn>
-          </template>
-          <span>{{ $t('label.importar') }}</span>
-        </v-tooltip>
-
-        <v-tooltip bottom>
-          <template #activator="{ on }">
-            <v-btn
-              class="mr-0"
-              icon
-              v-on="on"
               @click.stop="drawerRight = !drawerRight"
             >
               <v-icon v-if="!drawerRight">
@@ -98,6 +85,7 @@
       <DataTable />
     </template>
 
+    <InputDialog ref="inputDialog" />
     <ConfirmDialog ref="confirmDialog" />
     <ImportDialog ref="importDialog" />
   </v-layout>
@@ -110,6 +98,7 @@ import Equipamento from '../components/DrawerRight/Equipamento'
 import DataTable from '../components/Content/DataTable'
 import Filtros from '../components/DrawerLeft/Filtros'
 import ConfirmDialog from '../components/ConfirmDialog'
+import InputDialog from '../components/InputDialog'
 import ImportDialog from '../components/ImportDialog'
 import Loading from '../components/Loading'
 import EventBus from '../event-bus'
@@ -121,6 +110,7 @@ export default {
     Filtros,
     DataTable,
     Equipamento,
+    InputDialog,
     ImportDialog,
     ConfirmDialog
   },
@@ -154,17 +144,16 @@ export default {
   mounted () {
     Vue.prototype.$ConfirmDialog = this.$refs.confirmDialog
     Vue.prototype.$ImportDialog = this.$refs.importDialog
+    Vue.prototype.$InputDialog = this.$refs.inputDialog
 
     if (this.$vuetify.breakpoint.lgAndUp) {
       this.drawer = true
+      this.abrirDrawerEquipamentos()
     }
     EventBus.$on('addEquip', this.abrirDrawerEquipamentos)
     EventBus.$on('terminouFiltragem', this.terminouFiltragem)
   },
   methods: {
-    abrirImportar () {
-      this.$ImportDialog.abrir()
-    },
     abrirDrawerEquipamentos () {
       this.drawerRight = true
     },

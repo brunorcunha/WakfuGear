@@ -45,8 +45,10 @@
 export default {
   data: () => ({
     langs: [
+      { locale: 'en', nome: 'English' },
+      { locale: 'fr', nome: 'Français' },
       { locale: 'pt', nome: 'Português' },
-      { locale: 'en', nome: 'English' }
+      { locale: 'es', nome: 'Español' }
     ]
   }),
   methods: {

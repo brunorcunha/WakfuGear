@@ -1,12 +1,15 @@
 export const en = {
   label: {
+    gearnovo: 'Gear New',
     fogo: 'Fire',
     agua: 'Water',
     terra: 'Earth',
     ar: 'Air',
+    ou: 'Or',
     nome: 'Name',
     bonus: 'Effects',
     nivel: 'Level',
+    nv: 'Lv.',
     mostrar: 'Show',
     obrigatorio: 'Required',
     raridade: 'Rarity',
@@ -79,6 +82,11 @@ export const en = {
     'Epic'
   ],
   dialog: {
+    editarNome: {
+      titulo: 'Edit Title',
+      msg: 'Choose the new title of the gear "{nome}".',
+      label: 'New Title'
+    },
     atualizar: {
       titulo: 'Update Items',
       msg: 'A new version of the items has been found. Do you want to update?'
@@ -91,13 +99,15 @@ export const en = {
       titulo: 'Confirm',
       msg: 'Do you want clone this gear?'
     },
-    confirmar: 'Yes',
+    sim: 'Yes',
+    confirmar: 'Confirm',
     cancelar: 'Cancel'
   },
   alert: {
     one_relic: 'Only 1 relic per gear.',
     one_epic: 'Only 1 epic per gear.',
-    one_unique: 'Only 1 unique ring per gear.'
+    one_unique: 'Only 1 unique ring per gear.',
+    add_equips: 'Add equipment to this gear.'
   },
   localstorage: {
     dados: 'Data',

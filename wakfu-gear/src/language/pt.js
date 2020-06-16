@@ -1,12 +1,15 @@
 export const pt = {
   label: {
+    gearnovo: 'Conjunto Novo',
     fogo: 'Fogo',
     agua: 'Água',
     terra: 'Terra',
     ar: 'Ar',
+    ou: 'Ou',
     nome: 'Nome',
     bonus: 'Bônus',
     nivel: 'Nível',
+    nv: 'Nv.',
     mostrar: 'Mostrar',
     obrigatorio: 'Obrigatório',
     raridade: 'Raridade',
@@ -20,7 +23,7 @@ export const pt = {
     importartitulo: 'Importar Equipamentos',
     importar: 'Importar',
     importado: 'Importado',
-    exportargear: 'Exportar Gear',
+    exportargear: 'Exportar Conjunto',
     wgcode: 'Código Wakfu Gear',
     mostrando: 'Mostrando {0} de',
     qntitens: '{0} itens',
@@ -31,7 +34,7 @@ export const pt = {
     atual: 'Atual',
     opcoes: 'Opções',
     remover: 'Remover',
-    removegear: 'Remover Conjunto',
+    removergear: 'Remover Conjunto',
     novogear: 'Adicionar Novo Conjunto',
     trocargear: 'Trocar Conjunto',
     adicionaraogear: 'Adicionar ao Conjunto',
@@ -79,25 +82,32 @@ export const pt = {
     'Épico'
   ],
   dialog: {
+    editarNome: {
+      titulo: 'Editar Título',
+      msg: 'Escolha o novo título do conjunto "{nome}".',
+      label: 'Novo Título'
+    },
     atualizar: {
       titulo: 'Atualizar Itens',
       msg: 'Uma nova versão dos itens foi encontrada. Deseja atualizar?'
     },
     excluir: {
       titulo: 'Confirmar',
-      msg: 'Tem certeza que deseja excluir este conjunto?'
+      msg: 'Tem certeza que deseja excluir o conjunto "{nome}"?'
     },
     clonar: {
       titulo: 'Confirmar',
-      msg: 'Deseja clonar este conjunto?'
+      msg: 'Deseja clonar o conjunto "{nome}"?'
     },
-    confirmar: 'Sim',
+    sim: 'Sim',
+    confirmar: 'Confirmar',
     cancelar: 'Cancelar'
   },
   alert: {
     one_relic: 'Somente 1 relíquia por conjunto.',
     one_epic: 'Somente 1 épico por conjunto.',
-    one_unique: 'Somente 1 anel único por conjunto.'
+    one_unique: 'Somente 1 anel único por conjunto.',
+    add_equips: 'Adicione equipamentos a este conjunto.'
   },
   localstorage: {
     dados: 'Dados',

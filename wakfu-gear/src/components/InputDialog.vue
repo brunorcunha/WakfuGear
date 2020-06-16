@@ -21,6 +21,15 @@
         {{ mensagem }}
       </v-card-text>
 
+      <v-card-text class="pt-0">
+        <v-text-field
+          v-model="valor"
+          :label="label.campo"
+          :placeholder="label.placeholder"
+          hide-details
+        />
+      </v-card-text>
+
       <v-divider />
 
       <v-card-actions>
@@ -47,7 +56,7 @@
 
 <script>
 export default {
-  name: 'ConfirmDialog',
+  name: 'InputDialog',
   props: {
     labelCancelar: { type: String, default: null },
     labelConfirmar: { type: String, default: null }
@@ -57,8 +66,11 @@ export default {
     resolve: null,
     reject: null,
     titulo: null,
+    valor: '',
     mensagem: null,
     label: {
+      campo: '',
+      placeholder: '',
       cancelar: '',
       confirmar: ''
     },
@@ -69,13 +81,16 @@ export default {
   }),
   mounted () {
     this.label.cancelar = this.labelCancelar ? this.labelCancelar : this.$i18n.t('dialog.cancelar')
-    this.label.confirmar = this.labelConfirmar ? this.labelConfirmar : this.$i18n.t('dialog.sim')
+    this.label.confirmar = this.labelConfirmar ? this.labelConfirmar : this.$i18n.t('dialog.confirmar')
   },
   methods: {
     abrir (obj) {
       this.dialog = true
+      this.valor = ''
       this.titulo = obj.titulo
       this.mensagem = obj.mensagem
+      this.label.campo = obj.label
+      this.label.placeholder = obj.placeholder
       this.opcoes = { ...this.opcoes, ...obj.opcoes }
 
       return new Promise((resolve, reject) => {
@@ -84,7 +99,7 @@ export default {
       })
     },
     confirmar () {
-      this.resolve()
+      this.resolve(this.valor)
       this.dialog = false
     },
     cancelar () {

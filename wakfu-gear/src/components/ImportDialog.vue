@@ -54,7 +54,7 @@
           >
             <template #prepend>
               <img
-                src="https://zenithwakfu.com/images/menu/logo.png"
+                src="static/zenith.png"
                 height="25"
               >
             </template>
@@ -77,6 +77,11 @@
         </v-flex>
       </v-layout>
       <v-divider />
+      <div class="ou">
+        <span>
+          {{ $t('label.ou') }}
+        </span>
+      </div>
       <v-layout
         py-2
         px-4

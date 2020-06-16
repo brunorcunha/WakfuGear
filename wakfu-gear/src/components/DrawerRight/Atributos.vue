@@ -22,7 +22,7 @@
             v-slot="{ on, nome, total }"
             :lista="itemsComAtributo[atributo.id]"
             :total="atributos[atributo.id]"
-            :nome="equipEffects.find(e => e.id === atributo.id)[$lang]"
+            :nome="(equipEffects.find(e => e.id === atributo.id) || {})[$lang]"
           >
             <v-flex v-on="on">
               <div class="py-1">
@@ -63,7 +63,7 @@
                 v-slot="{ on, nome, total }"
                 :lista="itemsAtributoDanoOrdem[index]"
                 :total="somaDanoAtributos(atributo, index)"
-                :nome="equipEffects.find(e => e.id === atributo.id)[$lang]"
+                :nome="(equipEffects.find(e => e.id === atributo.id) || {})[$lang]"
               >
                 <v-flex v-on="on">
                   <div class="icone damage" /> {{ total }}
@@ -74,7 +74,7 @@
                 v-slot="{ on, nome, total }"
                 :lista="itemsAtributoResistenciaOrdem[index]"
                 :total="somaResistenciaAtributos(atributo, index)"
-                :nome="equipEffects.find(e => e.id === atributo.id2)[$lang]"
+                :nome="(equipEffects.find(e => e.id === atributo.id2) || {})[$lang]"
               >
                 <v-flex v-on="on">
                   <div class="icone resist" /> {{ total }}
@@ -104,7 +104,7 @@
             v-slot="{ on, nome, total }"
             :lista="itemsComAtributo[atributo.id]"
             :total="atributos[atributo.id]"
-            :nome="equipEffects.find(e => e.id === atributo.id)[$lang]"
+            :nome="(equipEffects.find(e => e.id === atributo.id) || {})[$lang]"
           >
             <v-flex
               xs6
@@ -143,7 +143,7 @@
             v-slot="{ on, nome, total }"
             :lista="itemsComAtributo[atributo.id]"
             :total="atributos[atributo.id]"
-            :nome="equipEffects.find(e => e.id === atributo.id)[$lang]"
+            :nome="(equipEffects.find(e => e.id === atributo.id) || {})[$lang]"
           >
             <v-flex
               xs6

@@ -46,13 +46,14 @@ table { border-collapse: collapse; }
 #info {
   background: #00A19C url(../static/bg.jpg) center;
   background-size: 200% 150%;
-  font-size: 30px;
+  font-size: 26px;
   color: #fff;
   text-align: right;
   font-weight: bold;
   text-shadow: 0 0 1px #000;
   line-height: 26px;
   padding: 18px 20px;
+  padding-left: 0;
 }
 #info .caption {margin-right: 25px;}
 #itemsTable tr { position: relative; }
@@ -408,7 +409,7 @@ small.link {
 .icone.i304 { background-image: url(../static/atributos/tags_99.png); }
 .icone.i2001 { background-image: url(../static/atributos/tags_97.png); }
 
-.menulist .v-list__tile{ height: 32px !important; }
+.menulist .v-list__tile{ height: 32px !important; padding-left: 0; }
 
 .bg {
   background: url(../static/bg.jpg) center;
@@ -448,8 +449,45 @@ small.link {
   color: rgba(255,255,255,.4);
 }
 .inlineblock { display: inline-block; }
-.paddingleft { padding-left: 15px; }
+.paddingleft { padding-left: 30px !important; }
 
 .pointerevent.v-menu__content {
   pointer-events: none !important;
+}
+.gearsList .v-list__tile {
+  padding-left: 0;
+  padding-right: 0;
+}
+.gearsList .v-list__tile:hover {
+  background: #FFF4F2;
+}
+.gearsList .v-list__tile__content {
+  padding-left: 16px;
+  cursor: pointer;
+}
+.gearsList .v-list__tile__avatar {
+  padding-right: 16px;
+}
+.ou {
+  text-align: center;
+  margin-top: -10px;
+  color: #acacac;
+}
+.ou span {
+  background: #fff;
+  padding: 0 5px;
+}
+.tituloGear {
+  color: #fff;
+  text-shadow: 1px 1px #000;
+  margin-top: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.corFundoMenu {
+  background-color: #F3F2F2 !important;
+}
+.corFundoBranco {
+  background-color: #fff !important;
 }

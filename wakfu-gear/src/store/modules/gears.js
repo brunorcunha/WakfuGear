@@ -28,6 +28,7 @@ const state = {
 }
 
 const getters = {
+  allGears: state => state.gears,
   gears: state => state.gears.map(gear => gear.nome),
   gearAtual: state => state.gears[state.gearAtual].gear,
   indexAtual: state => state.gearAtual,
