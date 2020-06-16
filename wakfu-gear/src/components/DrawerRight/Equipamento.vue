@@ -15,7 +15,7 @@
           <v-icon left>
             add
           </v-icon>
-          Adicionar Conjunto
+          {{ $t('label.novogear') }}
         </v-btn>
         <v-btn
           outline
@@ -27,7 +27,7 @@
           <v-icon left>
             import_export
           </v-icon>
-          Importar
+          {{ $t('label.importar') }}
         </v-btn>
       </v-toolbar>
 
