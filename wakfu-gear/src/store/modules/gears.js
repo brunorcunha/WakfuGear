@@ -55,8 +55,9 @@ const actions = {
     if (LS) {
       LS = JSON.parse(LS)
       LS.gears.forEach(gear => { gear.qntItens = Object.keys(gear.gear).reduce((total, atual) => !gear.gear[atual] ? total : total + 1, 0) })
+      const index = LS.gearAtual ? LS.gearAtual : 0
       commit('init', { LS })
-      commit('setAtual', { index: LS.gearAtual })
+      commit('setAtual', { index })
     } else {
       commit('addGear', {})
       commit('setAtual', { index: 0 })
