@@ -167,10 +167,10 @@ export default {
       this.$store.dispatch('gears/adicionarItems', { items })
     },
     async importarZenith () {
-      if (!this.linkZenith.includes('zenithwakfu.com/builder/')) return this.erro('Link errado!')
+      this.linkZenith = this.linkZenith.replace('www.', '')
+      if (!this.linkZenith.includes('https://zenithwakfu.com/builder/')) return this.erro('Link errado!')
       this.loading = true
-      const url = this.linkZenith.replace('https://zenithwakfu.com/builder/', '').replace('https://www.zenithwakfu.com/builder/', '')
-      const getID = encodeURIComponent(url)
+      const getID = encodeURIComponent(this.linkZenith.replace('https://zenithwakfu.com/builder/', ''))
       try {
         const json = await API.getZenith(getID)
         await this.criarGear(json.gear)
