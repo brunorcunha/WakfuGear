@@ -103,7 +103,7 @@
 
       <DataView v-if="false" />
       <DataTable v-show="aba === 'equips'" />
-      <DataTableDamage v-if="aba === 'calc'" />
+      <DataTableDamage v-show="aba === 'calc'" />
       <DataTableGears v-show="aba === 'gears'" />
     </template>
 
