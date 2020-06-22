@@ -66,6 +66,7 @@ const actions = {
   },
   selecionarAtual ({ commit, state, dispatch }, { index }) {
     commit('setAtual', { index })
+    commit('salvarLS')
   },
   setNome ({ commit }, { nome, index }) {
     index = (index != null ? index : state.gearAtual)
