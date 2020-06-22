@@ -17,11 +17,11 @@
           >
             <div class="texto">
               <div class="caption">
-                {{ $t('label.mostrando', [itemsLimitados.length]) }}
+                {{ $t('label.comparandogears') }}
               </div>
-              {{ $t('label.qntitens', [itemsFiltrados.length]) }} >
+              {{ $t('label.qntgears', [qnt]) }} >
               <div class="caption">
-                {{ $t('label.totalitens', [items.length]) }}
+                {{ $t('label.importeouadd') }}
               </div>
             </div>
           </v-flex>
@@ -32,11 +32,15 @@
           >
             <table id="itemsTable">
               <tr>
-                <draggable v-model="itemsLimitados">
-                  <template v-for="item in itemsLimitados">
-                    <ItemView
-                      :key="`iL${item.id}`"
-                      :value="item"
+                <draggable
+                  v-model="atributosGears"
+                  @end="onEndDrag"
+                >
+                  <template v-for="(gear, gid) in gears">
+                    <GearView
+                      :key="`iG${gid}${gear.nome}`"
+                      :value="gear"
+                      :gid="gid"
                     />
                   </template>
                 </draggable>
@@ -60,12 +64,11 @@
             class="larguraInfo sh"
           >
             <table>
-              <draggable v-model="itemsAtributos">
-                <template v-for="(atributo, index) in itemsAtributos">
+              <draggable v-model="atributos">
+                <template v-for="(atributo, index) in atributos">
                   <tr
                     :key="`atr${index}`"
                     :class="ordenarPor === atributo ? (!!ordemAsc ? 'ordemAscSelecionada' : 'ordemSelecionada') : null"
-                    @click="ordenar(atributo)"
                   >
                     <v-tooltip bottom>
                       <template #activator="{ on }">
@@ -90,12 +93,12 @@
             shrink
           >
             <table id="dados">
-              <template v-for="(atributo, indAtr) in itemsAtributos">
+              <template v-for="(atributo, indAtr) in atributos">
                 <tr
                   :key="`tr${indAtr}`"
                   :class="ordenarPor === atributo ? 'atributoSelecionado' : null"
                 >
-                  <template v-for="(item, indIte) in itemsLimitados">
+                  <template v-for="(item, indIte) in atributosGears">
                     <td :key="`i${indAtr}_${indIte}`">
                       <DataValue :value="{ item, atributo }" />
                     </td>
@@ -111,34 +114,33 @@
 </template>
 
 <script>
-import EventBus from '../../event-bus'
 import { mapGetters } from 'vuex'
 import draggable from 'vuedraggable'
+import atributos from '../../functions/atributos'
 
-import filtros from '../../functions/filtros'
 import DataValue from './DataValue'
-import ItemView from './ItemView'
+import GearView from './GearView'
 
 import { equipType } from '../../model/equipType'
 import { equipEffects } from '../../model/equipEffects'
 
 export default {
-  name: 'DataTableEquips',
+  name: 'DataTableGears',
   components: {
     draggable,
     DataValue,
-    ItemView
+    GearView
   },
   props: {
     value: { type: Array, default: () => [] }
   },
   data: () => ({
+    gears: [],
+    atributosGears: [],
+    atributos: [],
     retrair: false,
     ordenarPor: null,
     ordemAsc: null,
-    itemsFiltrados: [],
-    itemsLimitados: [],
-    itemsAtributos: [],
     hover: null,
     mostrar: 20,
     progress: true,
@@ -146,76 +148,36 @@ export default {
     equipType
   }),
   computed: {
-    ...mapGetters('items', ['items', 'itemsList']),
-    ...mapGetters('filtros', ['filtros'])
+    ...mapGetters('gears', ['allGears', 'qnt'])
+  },
+  watch: {
+    allGears: {
+      handler: function () {
+        this.organizarGears()
+      },
+      deep: true
+    }
   },
   async mounted () {
-    await this.eventoFiltragem(this.filtros)
+    this.organizarGears()
 
     this.$refs.dados.addEventListener('scroll', this.scrolling)
-    EventBus.$on('filtrar', this.eventoFiltragem)
-  },
-  beforeDestroy () {
-    EventBus.$off('filtrar')
   },
   methods: {
-    async ordenar (id) {
-      this.ordemAsc = !this.ordemAsc
-      if (this.ordenarPor !== id) this.ordemAsc = !true
-      this.ordenarPor = id
+    async organizarGears () {
       this.progress = true
 
-      this.itemsOrdenados = await this.ordenarDados(this.itemsFiltrados)
-      this.itemsLimitados = await this.limitarDados(this.itemsOrdenados)
-      this.itemsAtributos = await this.extrairAtributosDados(this.itemsOrdenados)
+      this.gears = JSON.parse(JSON.stringify(this.allGears))
+      this.atributosGears = this.gears.map(gear => atributos.getAtributos(gear.gear))
+      this.atributos = this.extrairAtributosDados(this.atributosGears)
 
       this.progress = false
     },
-    async ordenarDados (items) {
-      if (this.ordenarPor) {
-        items.sort((a, b) => {
-          if (a.equipEffects && b.equipEffects) {
-            const aTmp = a.equipEffects.find(e => e.id === this.ordenarPor) || { params: [0] }
-            const bTmp = b.equipEffects.find(e => e.id === this.ordenarPor) || { params: [0] }
-            if (aTmp.params[0] > bTmp.params[0]) return -1
-            if (aTmp.params[0] < bTmp.params[0]) return 1
-          }
-          return 0
-        })
-      }
-      if (this.ordemAsc) items.reverse()
-      return items
-    },
-    async eventoFiltragem (filtros) {
-      this.progress = true
-
-      this.itemsFiltrados = await this.filtrarDados(this.items, filtros)
-      this.itemsOrdenados = await this.ordenarDados(this.itemsFiltrados)
-      this.itemsLimitados = await this.limitarDados(this.itemsOrdenados)
-      this.itemsAtributos = await this.extrairAtributosDados(this.itemsOrdenados)
-
-      this.progress = false
-      EventBus.$emit('terminouFiltragem')
-    },
-    async filtrarDados (items, filtro) {
-      if (filtros.existeFiltroNome(filtro)) items = filtros.filtroNome(items, filtro)
-      else {
-        items = filtros.filtroLevel(items, filtro)
-        items = filtros.filtroRaridade(items, filtro)
-        items = filtros.filtroTipo(items, filtro)
-        items = filtros.filtroBonus(items, filtro)
-      }
-
-      return items
-    },
-    limitarDados (items) {
-      return filtros.filtroLimit(items, { limit: this.mostrar })
-    },
-    extrairAtributosDados (items) {
+    extrairAtributosDados (gears) {
       return [
         ...new Set(
-          items.map(
-            item => item.equipEffects.map(fx => fx.id)
+          gears.map(
+            gear => Object.keys(gear).map(item => parseInt(item))
           ).flat()
         )
       ].sort()
@@ -230,6 +192,10 @@ export default {
 
       if (evt.target.scrollLeft < 240) this.retrair = false
       else this.retrair = true
+    },
+    onEndDrag (ev) {
+      const { oldIndex, newIndex } = ev
+      this.gears.splice(newIndex, 0, this.gears.splice(oldIndex, 1)[0])
     }
   }
 }

@@ -65,6 +65,7 @@
           :items="itemsList"
           clearable
           dense
+          @change="emitirFiltros"
         />
       </v-flex>
 

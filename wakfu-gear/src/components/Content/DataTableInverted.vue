@@ -1,5 +1,5 @@
 <template>
-  <v-content :class="`white ${retrair ? 'retraido' : null}`">
+  <v-content :class="`invertido white ${retrair ? 'retraido' : null}`">
     <v-container
       fluid
       fill-height
@@ -17,11 +17,7 @@
           >
             <div class="texto">
               <div class="caption">
-                {{ $t('label.mostrando', [itemsLimitados.length]) }}
-              </div>
-              {{ $t('label.qntitens', [itemsFiltrados.length]) }} >
-              <div class="caption">
-                {{ $t('label.totalitens', [items.length]) }}
+                {{ $t('label.mostrando', [itemsLimitados.length]) }} {{ $t('label.qntitens', [itemsFiltrados.length]) }}
               </div>
             </div>
           </v-flex>
@@ -32,25 +28,26 @@
           >
             <table id="itemsTable">
               <tr>
-                <draggable v-model="itemsLimitados">
-                  <template v-for="item in itemsLimitados">
-                    <ItemView
-                      :key="`iL${item.id}`"
-                      :value="item"
-                    />
+                <draggable v-model="itemsAtributos">
+                  <template v-for="(atributo, index) in itemsAtributos">
+                    <td
+                      :key="`atr${index}`"
+                    >
+                      <v-tooltip bottom>
+                        <template #activator="{ on }">
+                          <div
+                            :class="`icone i${atributo}`"
+                            v-on="on"
+                          />
+                        </template>
+                        <span>{{ traduzir(equipEffects, atributo) }}</span>
+                      </v-tooltip>
+                    </td>
                   </template>
                 </draggable>
               </tr>
             </table>
           </v-flex>
-        </v-layout>
-
-        <v-layout class="progress">
-          <v-progress-linear
-            :indeterminate="progress"
-            height="2"
-            class="my-0"
-          />
         </v-layout>
 
         <v-layout overflow-hidden>
@@ -60,24 +57,19 @@
             class="larguraInfo sh"
           >
             <table>
-              <draggable v-model="itemsAtributos">
-                <template v-for="(atributo, index) in itemsAtributos">
-                  <tr
-                    :key="`atr${index}`"
-                    :class="ordenarPor === atributo ? (!!ordemAsc ? 'ordemAscSelecionada' : 'ordemSelecionada') : null"
-                    @click="ordenar(atributo)"
-                  >
-                    <v-tooltip bottom>
-                      <template #activator="{ on }">
-                        <td
-                          :class="`icone i${atributo}`"
-                          v-on="on"
-                        >
-                          <span>{{ traduzir(equipEffects, atributo) }}</span>
-                        </td>
-                      </template>
-                      <span>{{ traduzir(equipEffects, atributo) }}</span>
-                    </v-tooltip>
+              <draggable v-model="itemsLimitados">
+                <template v-for="(item, index) in itemsLimitados">
+                  <tr :key="`item${index}`">
+                    <td>
+                      <v-tooltip bottom>
+                        <template #activator="{ on }">
+                          <span :class="`nome r${item.rarity} text-truncate`">
+                            {{ item.title[$lang] || '' }}
+                          </span>
+                        </template>
+                        <span>{{ item.title[$lang] || '' }}</span>
+                      </v-tooltip>
+                    </td>
                   </tr>
                 </template>
               </draggable>
@@ -90,13 +82,10 @@
             shrink
           >
             <table id="dados">
-              <template v-for="(atributo, indAtr) in itemsAtributos">
-                <tr
-                  :key="`tr${indAtr}`"
-                  :class="ordenarPor === atributo ? 'atributoSelecionado' : null"
-                >
-                  <template v-for="(item, indIte) in itemsLimitados">
-                    <td :key="`i${indAtr}_${indIte}`">
+              <template v-for="(item, indIte) in itemsLimitados">
+                <tr :key="`tr${indIte}`">
+                  <template v-for="(atributo, indAtr) in itemsAtributos">
+                    <td :key="`td${indAtr}_${indIte}`">
                       <DataValue :value="{ item, atributo }" />
                     </td>
                   </template>
@@ -117,17 +106,15 @@ import draggable from 'vuedraggable'
 
 import filtros from '../../functions/filtros'
 import DataValue from './DataValue'
-import ItemView from './ItemView'
 
 import { equipType } from '../../model/equipType'
 import { equipEffects } from '../../model/equipEffects'
 
 export default {
-  name: 'DataTableEquips',
+  name: 'DataTableInverted',
   components: {
     draggable,
-    DataValue,
-    ItemView
+    DataValue
   },
   props: {
     value: { type: Array, default: () => [] }
@@ -198,13 +185,11 @@ export default {
       EventBus.$emit('terminouFiltragem')
     },
     async filtrarDados (items, filtro) {
-      if (filtros.existeFiltroNome(filtro)) items = filtros.filtroNome(items, filtro)
-      else {
-        items = filtros.filtroLevel(items, filtro)
-        items = filtros.filtroRaridade(items, filtro)
-        items = filtros.filtroTipo(items, filtro)
-        items = filtros.filtroBonus(items, filtro)
-      }
+      items = filtros.filtroNome(items, filtro)
+      items = filtros.filtroLevel(items, filtro)
+      items = filtros.filtroRaridade(items, filtro)
+      items = filtros.filtroTipo(items, filtro)
+      items = filtros.filtroBonus(items, filtro)
 
       return items
     },

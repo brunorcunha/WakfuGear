@@ -55,7 +55,7 @@ table { border-collapse: collapse; }
   padding: 18px 20px;
   padding-left: 0;
 }
-#info .caption {margin-right: 25px;}
+#info .caption {margin-right: 22px;}
 #itemsTable tr { position: relative; }
 #itemsTable tr > div { margin-right: 18px; border-right: 1px solid rgba(255,255,255,0.03); }
 
@@ -105,7 +105,7 @@ table { border-collapse: collapse; }
   text-align: center;
   padding: 2px 8px;
   border-right: 1px solid #C0C0C0;
-  white-space: nowrap; text-overflow: ellipsis; overflow: hidden;
+  white-space: nowrap; text-overflow: ellipsis; overflow-x: hidden;
 }
 
 .itemHeader {
@@ -114,7 +114,7 @@ table { border-collapse: collapse; }
   height: 117px;
   background: #0C3139 url(../static/bg.jpg) center;
   cursor: move;
-  border-right: 1px solid rgba(0,0,0,.1)
+  border-right: 1px solid rgba(0,0,0,.1);
 }
 .itemHeader .img {
   position: absolute;
@@ -124,10 +124,23 @@ table { border-collapse: collapse; }
   left: 1px;
   z-index: 1;
 }
-.itemHeader:hover .img {
+.itemHeader .imggear {
+  position: absolute;
+  width: 100%;
+  height: 70px;
+  top: 20px;
+  z-index: 1;
+  right: 0;
+  text-align: center;
+}
+.itemHeader .imggear .v-image {
+  margin: 0 -15px;
+  display: inline-block;
+}
+.itemHeader:hover .img, .itemHeader:hover .v-image  {
   filter: drop-shadow(1px 1px 0 #333) drop-shadow(-1px -1px 0 #333) drop-shadow(0px 0px 10px #333);
 }
-.itemHeader .nome {
+.itemHeader .nome, .larguraInfo .nome {
   position: absolute;
   line-height: 20px;
   padding:0 5px;
@@ -144,7 +157,7 @@ table { border-collapse: collapse; }
   font-size: 12px;
   z-index: 2;
 }
-.itemHeader .tipo {
+.itemHeader .tipo, #atributos .tipo {
   position: absolute;
   top: 10px;
   left: 7px;
@@ -185,6 +198,22 @@ table { border-collapse: collapse; }
 .raridade.r7 { background-image: url(../static/raridade/r6.png); }
 .raridade.r6 { background-image: url(../static/raridade/r7.png); }
 
+.raridadegear {
+  width: 100%;
+  top: 75px;
+  left: 5px;
+  position: absolute;
+}
+.raridadegear .raridade {
+  position: relative;
+  top: auto;
+  right: auto;
+  bottom: auto;
+  left: auto;
+  display: inline-block;
+  margin-right: -10px;
+}
+
 .tipo { background: url(../static/tipo/120.png) no-repeat center; }
 .tipo.t120 { background-image: url(../static/tipo/120.png); }
 .tipo.t103 { background-image: url(../static/tipo/103.png); }
@@ -207,6 +236,21 @@ table { border-collapse: collapse; }
 .tipo.t537 { background-image: url(../static/tipo/537.png); }
 .tipo.t647 { background-image: url(../static/tipo/647.png); }
 .tipo.t683, .tipo.t812 { background-image: url(../static/tipo/683.png); }
+
+.tipogear {
+  width: 100%;
+  top: 8px;
+  left: 5px;
+  position: absolute;
+}
+.tipogear .tipo {
+  position: relative;
+  top: auto;
+  right: auto;
+  bottom: auto;
+  left: auto;
+  display: inline-block;
+}
 
 .nome.r1 { color: #FFF; }
 .nome.r2 { color: #00E170; }
@@ -357,53 +401,58 @@ small.link {
   padding: .3rem;
 }
 
-.icone { background-repeat: no-repeat; background-position: 6px center; }
+.icone { min-width: 24px; background-repeat: no-repeat; background-position: 6px center; }
 .retraido .icone { background-position: center; }
 
-.icone.i20 { background-image: url(../static/atributos/tags_34.png); }
-.icone.i41 { background-image: url(../static/atributos/tags_02.png); }
-.icone.i191 { background-image: url(../static/atributos/tags_28.png); }
-.icone.i31 { background-image: url(../static/atributos/tags_01.png); }
-.icone.i0, .icone.i39 { background-image: url(../static/atributos/tags_42.png); }
+.icone.earth { background-image: url(../static/atributos/mini_12.png); }
+.icone.fire { background-image: url(../static/atributos/mini_11.png); }
+.icone.water { background-image: url(../static/atributos/mini_03.png); }
+.icone.air { background-image: url(../static/atributos/mini_05.png); }
+.icone.damage { background-image: url(../static/atributos/tags_09.png); }
+.icone.i20, .icone.hp { background-image: url(../static/atributos/tags_34.png); }
+.icone.i41, .icone.mp { background-image: url(../static/atributos/tags_02.png); }
+.icone.i191, .icone.wp { background-image: url(../static/atributos/tags_28.png); }
+.icone.i31, .icone.pa { background-image: url(../static/atributos/tags_01.png); }
+.icone.i0, .icone.i39, .icone.armor { background-image: url(../static/atributos/tags_42.png); }
 .icone.i123 { background-image: url(../static/atributos/tags_11.png); }
 .icone.i122 { background-image: url(../static/atributos/tags_10.png); }
 .icone.i124 { background-image: url(../static/atributos/tags_12.png); }
 .icone.i125 { background-image: url(../static/atributos/tags_13.png); }
-.icone.i80 { background-image: url(../static/atributos/tags_03.png); }
-.icone.i910691 { background-image: url(../static/atributos/tags_03.png); }
-.icone.i910692 { background-image: url(../static/atributos/tags_03.png); }
-.icone.i910693 { background-image: url(../static/atributos/tags_03.png); }
-.icone.i82 { background-image: url(../static/atributos/tags_04.png); }
-.icone.i84 { background-image: url(../static/atributos/tags_05.png); }
-.icone.i83 { background-image: url(../static/atributos/tags_06.png); }
-.icone.i85 { background-image: url(../static/atributos/tags_07.png); }
+.icone.i80, .icone.resist { background-image: url(../static/atributos/tags_031.png); }
+.icone.i910691 { background-image: url(../static/atributos/tags_241.png); }
+.icone.i910692 { background-image: url(../static/atributos/tags_242.png); }
+.icone.i910693 { background-image: url(../static/atributos/tags_243.png); }
+.icone.i82, .fire .icone.resist { background-image: url(../static/atributos/tags_04.png); }
+.icone.i84, .earth .icone.resist { background-image: url(../static/atributos/tags_05.png); }
+.icone.i83, .water .icone.resist { background-image: url(../static/atributos/tags_06.png); }
+.icone.i85, .air .icone.resist { background-image: url(../static/atributos/tags_07.png); }
 
-.icone.i120 { background-image: url(../static/atributos/tags_22.png); }
-.icone.i910681 { background-image: url(../static/atributos/tags_22.png); }
-.icone.i910682 { background-image: url(../static/atributos/tags_22.png); }
-.icone.i910683 { background-image: url(../static/atributos/tags_22.png); }
-.icone.i24, .icone.i26 { background-image: url(../static/atributos/tags_18.png); }
-.icone.i875 { background-image: url(../static/atributos/tags_24.png); }
-.icone.i150 { background-image: url(../static/atributos/tags_14.png); }
-.icone.i171 { background-image: url(../static/atributos/tags_25.png); }
-.icone.i160 { background-image: url(../static/atributos/tags_08.png); }
-.icone.i175 { background-image: url(../static/atributos/tags_16.png); }
-.icone.i173 { background-image: url(../static/atributos/tags_15.png); }
-.icone.i166 { background-image: url(../static/atributos/tags_31.png); }
-.icone.i162 { background-image: url(../static/atributos/tags_36.png); }
-.icone.i184 { background-image: url(../static/atributos/tags_29.png); }
-.icone.i234 { background-image: url(../static/atributos/tags_33.png); }
-.icone.i177 { background-image: url(../static/atributos/will.png); }
+.icone.i120, .icone.sword { background-image: url(../static/atributos/tags_22.png); }
+.icone.i910681 { background-image: url(../static/atributos/tags_221.png); }
+.icone.i910682 { background-image: url(../static/atributos/tags_222.png); }
+.icone.i910683 { background-image: url(../static/atributos/tags_223.png); }
+.icone.i24, .icone.i26, .icone.heal { background-image: url(../static/atributos/tags_18.png); }
+.icone.i875, .icone.parade { background-image: url(../static/atributos/tags_24.png); }
+.icone.i150, .icone.crit { background-image: url(../static/atributos/tags_14.png); }
+.icone.i171, .icone.init { background-image: url(../static/atributos/tags_25.png); }
+.icone.i160, .icone.range { background-image: url(../static/atributos/tags_08.png); }
+.icone.i175, .icone.dodge { background-image: url(../static/atributos/tags_16.png); }
+.icone.i173, .icone.lock { background-image: url(../static/atributos/tags_15.png); }
+.icone.i166, .icone.wisdom { background-image: url(../static/atributos/tags_31.png); }
+.icone.i162, .icone.prosp { background-image: url(../static/atributos/tags_36.png); }
+.icone.i184, .icone.control { background-image: url(../static/atributos/tags_29.png); }
+.icone.i234, .icone.kit { background-image: url(../static/atributos/tags_33.png); }
+.icone.i177, .icone.will { background-image: url(../static/atributos/will.png); }
 
-.icone.i149 { background-image: url(../static/atributos/tags_40.png); }
-.icone.i180 { background-image: url(../static/atributos/tags_26.png); }
-.icone.i988 { background-image: url(../static/atributos/tags_39.png); }
-.icone.i71 { background-image: url(../static/atributos/tags_38.png); }
-.icone.i1052 { background-image: url(../static/atributos/tags_23.png); }
-.icone.i1053 { background-image: url(../static/atributos/tags_20.png); }
-.icone.i1051 { background-image: url(../static/atributos/tags_19.png); }
-.icone.i1050 { background-image: url(../static/atributos/tags_21.png); }
-.icone.i1055 { background-image: url(../static/atributos/tags_17.png); }
+.icone.i149, .icone.mastcrit { background-image: url(../static/atributos/tags_40.png); }
+.icone.i180, .icone.mastrear { background-image: url(../static/atributos/tags_26.png); }
+.icone.i988, .icone.critresist { background-image: url(../static/atributos/tags_39.png); }
+.icone.i71, .icone.rearresist { background-image: url(../static/atributos/tags_38.png); }
+.icone.i1052, .icone.melee { background-image: url(../static/atributos/tags_23.png); }
+.icone.i1053, .icone.dist { background-image: url(../static/atributos/tags_20.png); }
+.icone.i1051, .icone.single { background-image: url(../static/atributos/tags_19.png); }
+.icone.i1050, .icone.area { background-image: url(../static/atributos/tags_21.png); }
+.icone.i1055, .icone.berserk { background-image: url(../static/atributos/tags_17.png); }
 .icone.i832 { background-image: url(../static/atributos/tags_98.png); }
 .icone.i979 { background-image: url(../static/atributos/tags_98.png); }
 .icone.i304 { background-image: url(../static/atributos/tags_99.png); }
@@ -411,9 +460,11 @@ small.link {
 
 .menulist .v-list__tile{ height: 32px !important; padding-left: 0; }
 
-.bg {
+.bgView, .bg {
   background: url(../static/bg.jpg) center;
   background-size: 100% 100%;
+}
+.bg {
   min-height: 165px;
   max-height: 165px;
   height: 165px;
@@ -490,4 +541,127 @@ small.link {
 }
 .corFundoBranco {
   background-color: #fff !important;
+}
+#dados tr:hover {
+  background: #fff4f2;
+}
+.ordemSelecionada {
+  background: #fafafa;
+}
+.ordemSelecionada > td:after {
+  content: '▼';
+}
+.ordemAscSelecionada > td:after {
+  content: '▲';
+}
+.atributoSelecionado {
+  background: #fafafa;
+}
+#dados tr:hover {
+  background: #fff4f2;
+}
+.itemHeader {
+  cursor: pointer !important;
+  border: 0 !important;
+}
+.infoview {
+  color: #fff;
+  padding: 10px 25px;
+  color: rgba(255, 255, 255, .9);
+}
+.blockview {
+  line-height: 0;
+  text-align: center;
+  margin: 0 20px 10px 20px;
+  padding: 20px 10px;
+  border-radius: 5px;
+  box-shadow: inset 0px 0px 20px 0px rgba(0,0,0,0.75);
+  border: 1px solid rgba(255, 255, 255, .1);
+  background: url(../static/bg.jpg) center;
+  background-size: auto 100%;
+}
+.itemview {
+  display: inline-block;
+  border: 1px solid rgba(0, 0, 0, .1);
+  border-radius: 3px;
+  margin: 5px;
+  overflow: hidden;
+}
+
+.invertido #dados td, .invertido .icone, .invertido #itemsTable td {
+  max-width: 50px;
+  min-width: 50px;
+}
+.invertido .icone {
+  height: 50px;
+  background-position: center;
+}
+.invertido #info {
+  line-height: 16px;
+  padding: 17px 10px;
+  margin: 0;
+}
+.invertido .alturaInfo {
+  flex-basis: 50px;
+}
+.invertido #itemsTable td {
+  background: #fff;
+  border-right: 1px solid rgba(0,0,0,.2);
+}
+.invertido .nome {
+  text-shadow: 0 0 1px #000, 0 0 1px #000;
+  position: relative;
+  top: auto;
+  bottom: auto;
+  left: auto;
+  right: auto;
+}
+.invertido #atributos table {
+  margin-right: -1px;
+}
+.invertido #atributos td {
+  background: url(../static/bg.jpg) center no-repeat;
+  background-size: 180% auto;
+}
+.invertido #header {
+  border-bottom: 1px solid #ccc;
+}
+.invertido #atributos td {
+  border-bottom: 1px solid rgba(255, 255, 255, .1);
+}
+#atributos td.indice {
+  cursor: auto;
+}
+.maiordano {
+  font-weight: bold;
+  font-size: 15px;
+}
+.segundomaiordano {
+  font-size: 15px;
+}
+.menordano {
+  font-size: 13px;
+  color: #dd2c00;
+}
+.menordano:after, .maiordano:after, .segundomaiordano:after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  border: 2px solid #00E170;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.menordano:after {
+  border: 1px solid #FF7B00;
+}
+.segundomaiordano:after {
+  border: 1px solid #00E170;
+}
+.linkBranco {
+  color: #fff;
+  text-decoration: none;
+}
+.mnr-24 {
+  margin-right: -24px;
 }

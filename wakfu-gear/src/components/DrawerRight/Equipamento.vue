@@ -116,6 +116,7 @@ import EquipsView from './EquipsView'
 import AlertsView from './AlertsView'
 import Atributos from './Atributos'
 import ListGearsOpcoes from './ListGearsOpcoes'
+import EventBus from '../../event-bus'
 
 export default {
   name: 'Equipamento',
@@ -126,6 +127,9 @@ export default {
   }),
   computed: {
     ...mapGetters('gears', ['qnt', 'nome', 'indexAtual'])
+  },
+  mounted () {
+    EventBus.$on('abrirGear', this.abrirGear)
   },
   methods: {
     abrirImportar () {
@@ -146,6 +150,10 @@ export default {
         })
         this.$store.dispatch('gears/setNome', { nome: novoNome, index: this.indexAtual })
       } catch (e) {}
+    },
+    abrirGear (index) {
+      this.tab = 1
+      this.$store.dispatch('gears/selecionarAtual', { index })
     }
   }
 }

@@ -42,14 +42,33 @@
         </v-tooltip>
 
         <v-flex text-xs-center>
-          <v-btn-toggle mandatory>
+          <v-btn-toggle
+            v-model="aba"
+            mandatory
+          >
             <v-btn
               color="red"
               depressed
               block
-              value="left"
+              value="equips"
             >
               {{ $t('label.equipamentos') }}
+            </v-btn>
+            <v-btn
+              color="red"
+              depressed
+              block
+              value="gears"
+            >
+              {{ $t('label.gears') }}
+            </v-btn>
+            <v-btn
+              color="red"
+              depressed
+              block
+              value="calc"
+            >
+              {{ $t('label.calculadora') }}
             </v-btn>
           </v-btn-toggle>
         </v-flex>
@@ -82,7 +101,10 @@
         <Filtros />
       </v-navigation-drawer>
 
-      <DataTable />
+      <DataView v-if="false" />
+      <DataTable v-show="aba === 'equips'" />
+      <DataTableDamage v-if="aba === 'calc'" />
+      <DataTableGears v-show="aba === 'gears'" />
     </template>
 
     <InputDialog ref="inputDialog" />
@@ -96,6 +118,9 @@ import Vue from 'vue'
 import { mapGetters } from 'vuex'
 import Equipamento from '../components/DrawerRight/Equipamento'
 import DataTable from '../components/Content/DataTable'
+import DataTableDamage from '../components/Content/DataTableDamage'
+import DataView from '../components/Content/DataView'
+import DataTableGears from '../components/Content/DataTableGears'
 import Filtros from '../components/DrawerLeft/Filtros'
 import ConfirmDialog from '../components/ConfirmDialog'
 import InputDialog from '../components/InputDialog'
@@ -108,7 +133,10 @@ export default {
   components: {
     Loading,
     Filtros,
+    DataTableDamage,
     DataTable,
+    DataTableGears,
+    DataView,
     Equipamento,
     InputDialog,
     ImportDialog,
@@ -117,6 +145,7 @@ export default {
   data: () => ({
     drawer: false,
     drawerRight: false,
+    aba: 'equips',
     right: null,
     left: null,
     dados: null
@@ -151,11 +180,24 @@ export default {
       this.abrirDrawerEquipamentos()
     }
     EventBus.$on('addEquip', this.abrirDrawerEquipamentos)
+    EventBus.$on('filtrar', this.repassarFiltragem)
+    EventBus.$on('abrirGear', this.abrirDrawerEquipamentos)
     EventBus.$on('terminouFiltragem', this.terminouFiltragem)
+  },
+  beforeDestroy () {
+    EventBus.$off('addEquip')
+    EventBus.$off('filtrar')
+    EventBus.$off('abrirGear')
+    EventBus.$off('terminouFiltragem')
   },
   methods: {
     abrirDrawerEquipamentos () {
       this.drawerRight = true
+    },
+    async repassarFiltragem () {
+      if (this.aba !== 'equips') {
+        this.aba = 'equips'
+      }
     },
     terminouFiltragem () {
       if (this.$vuetify.breakpoint.smAndDown) {

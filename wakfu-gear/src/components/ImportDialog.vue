@@ -141,6 +141,9 @@ export default {
   methods: {
     abrir () {
       this.dialog = true
+      this.linkZenith = ''
+      this.codigo = ''
+      this.linkMethod = ''
     },
     cancelar () {
       this.dialog = false

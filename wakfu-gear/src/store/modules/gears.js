@@ -54,6 +54,7 @@ const actions = {
     let LS = localStorage.getItem('gears')
     if (LS) {
       LS = JSON.parse(LS)
+      LS.gears.forEach(gear => { gear.qntItens = Object.keys(gear.gear).reduce((total, atual) => !gear.gear[atual] ? total : total + 1, 0) })
       commit('init', { LS })
       commit('setAtual', { index: LS.gearAtual })
     } else {
@@ -71,7 +72,10 @@ const actions = {
     commit('salvarLS')
   },
   async adicionarGear ({ commit }, { gear }) {
-    if (gear) gear = JSON.parse(JSON.stringify(gear))
+    if (gear) {
+      gear = JSON.parse(JSON.stringify(gear))
+      gear.qntItens = Object.keys(gear.gear).reduce((total, atual) => !gear.gear[atual] ? total : total + 1, 0)
+    }
     commit('addGear', { gear })
     commit('salvarLS')
   },

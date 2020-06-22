@@ -5,6 +5,7 @@ import 'vuetify/dist/vuetify.min.css'
 import { i18n } from './language/lang'
 import moment from 'moment'
 import VueResource from 'vue-resource'
+import numeral from 'numeral'
 
 import Donut from 'vue-css-donut-chart'
 import 'vue-css-donut-chart/dist/vcdonut.css'
@@ -21,6 +22,7 @@ Vue.use(VueResource)
 Vue.use(Donut)
 
 Vue.mixin(FunctionsMixin)
+Vue.filter('formatNumber', value => numeral(value).format('0,0'))
 
 Vue.config.productionTip = false
 

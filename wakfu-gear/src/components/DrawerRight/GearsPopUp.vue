@@ -45,13 +45,9 @@
           </div>
         </template>
         <template v-if="gear.qntItens === 0">
-          <v-alert
-            :value="true"
-            type="info"
-            class="py-0"
-          >
+          <div class="pa-6">
             {{ $t('alert.add_equips') }}
-          </v-alert>
+          </div>
         </template>
       </v-list>
     </v-card>

@@ -32,22 +32,26 @@ export default {
   methods: {
     tratarValue (val) {
       const { item, atributo } = val
-      const valor = item.equipEffects.find(e => e.id === atributo)
-      if (valor && valor.params[0] != null) {
-        if (atributo === 304) {
-          const efeito = states.find(e => e.id === valor.params[0])
-          this.valor = {
-            text: efeito[this.$lang],
-            id: valor.params[0],
-            lvl: valor.params[2]
+      const valor = !item.equipEffects ? item[atributo] : item.equipEffects.find(e => e.id === atributo)
+      if (valor != null) {
+        const param = !valor.params ? valor : valor.params[0]
+        const paramlvl = !valor.params ? null : valor.params[2]
+        if (param != null) {
+          if (atributo === 304) {
+            const efeito = states.find(e => e.id === param)
+            this.valor = {
+              text: efeito[this.$lang],
+              id: param,
+              lvl: paramlvl
+            }
+          } else {
+            this.valor = { text: param }
+            if (equipEffects.find(e => e.iid.includes(atributo))) this.valor = { text: -param }
           }
-        } else {
-          this.valor = { text: valor.params[0] }
-          if (equipEffects.find(e => e.iid.includes(atributo))) this.valor = { text: -valor.params[0] }
         }
-      } else {
-        this.valor = null
+        return
       }
+      this.valor = null
     }
   }
 }

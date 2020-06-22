@@ -6,6 +6,10 @@ const thisFiltros = {
     if (!filtros || !filtros.niveis || !Array.isArray(filtros[filtro])) return false
     return true
   },
+  existeFiltroNome: (filtros) => {
+    if (!filtros || !filtros.nome || filtros.nome.length === 0) return false
+    return true
+  },
 
   filtroNome: (items, filtros) => {
     if (!filtros || !filtros.nome || filtros.nome.length === 0) return items

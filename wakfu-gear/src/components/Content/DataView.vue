@@ -4,24 +4,33 @@
       fluid
       fill-height
       pa-0
+      class="scroll"
       @mouseleave="hover = null"
     >
       <v-layout
         column
-        class="bg"
+        class="bgView"
       >
-        <div class="bg">
+        <div class="bgView">
           <v-layout
             shrink
             class="infoview"
           >
-            <v-flex xs12 pt-1>
+            <v-flex
+              xs12
+              pt-1
+            >
               {{ $t('label.mostrando', [itemsLimitados.length]) }}
               {{ $t('label.qntitens', [itemsFiltrados.length]) }} >
               {{ $t('label.totalitens', [items.length]) }}
             </v-flex>
             <v-spacer />
-            <v-flex pt-1 pr-1>{{ $t('label.mostrar') }}: </v-flex>
+            <v-flex
+              pt-1
+              pr-1
+            >
+              {{ $t('label.mostrar') }}:
+            </v-flex>
             <v-btn-toggle
               v-model="mostrar"
               mandatory
@@ -145,37 +154,4 @@ export default {
 </script>
 
 <style>
-  #dados tr:hover {
-    background: #fff4f2;
-  }
-  .itemHeader {
-    cursor: pointer !important;
-    border: 0 !important;
-  }
-  .bg {
-    background: #0C3139;
-  }
-  .infoview {
-    color: #fff;
-    padding: 10px 25px;
-    color: rgba(255, 255, 255, .9);
-  }
-  .blockview {
-    line-height: 0;
-    text-align: center;
-    margin: 0 20px 10px 20px;
-    padding: 20px 10px;
-    border-radius: 5px;
-    box-shadow: inset 0px 0px 20px 0px rgba(0,0,0,0.75);
-    border: 1px solid rgba(255, 255, 255, .1);
-    background: url(../../../static/bg.jpg) center;
-    background-size: auto 100%;
-  }
-  .itemview {
-    display: inline-block;
-    border: 1px solid rgba(0, 0, 0, .1);
-    border-radius: 3px;
-    margin: 5px;
-    overflow: hidden;
-  }
 </style>

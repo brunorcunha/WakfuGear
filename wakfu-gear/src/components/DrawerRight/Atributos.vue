@@ -53,7 +53,7 @@
           >
             <v-layout
               row
-              class="py-1"
+              :class="`py-1 ${atributo.icone}`"
             >
               <v-flex shrink>
                 <div :class="`icone ${atributo.icone}`" />
@@ -385,39 +385,4 @@ export default {
     width: 24px;
     height: 24px;
   }
-  .icone.hp { background-image: url(../../../static/atributos/tags_34.png); }
-  .icone.mp { background-image: url(../../../static/atributos/tags_02.png); }
-  .icone.wp { background-image: url(../../../static/atributos/tags_28.png); }
-  .icone.pa { background-image: url(../../../static/atributos/tags_01.png); }
-  .icone.armor { background-image: url(../../../static/atributos/tags_42.png); }
-  .icone.earth { background-image: url(../../../static/atributos/mini_12.png); }
-  .icone.fire { background-image: url(../../../static/atributos/mini_11.png); }
-  .icone.water { background-image: url(../../../static/atributos/mini_03.png); }
-  .icone.air { background-image: url(../../../static/atributos/mini_05.png); }
-  .icone.damage { background-image: url(../../../static/atributos/tags_09.png); }
-  .icone.resist { background-image: url(../../../static/atributos/tags_03.png); }
-
-  .icone.sword { background-image: url(../../../static/atributos/tags_22.png); }
-  .icone.heal { background-image: url(../../../static/atributos/tags_18.png); }
-  .icone.parade { background-image: url(../../../static/atributos/tags_24.png); }
-  .icone.crit { background-image: url(../../../static/atributos/tags_14.png); }
-  .icone.init { background-image: url(../../../static/atributos/tags_25.png); }
-  .icone.range { background-image: url(../../../static/atributos/tags_08.png); }
-  .icone.dodge { background-image: url(../../../static/atributos/tags_16.png); }
-  .icone.lock { background-image: url(../../../static/atributos/tags_15.png); }
-  .icone.wisdom { background-image: url(../../../static/atributos/tags_31.png); }
-  .icone.prosp { background-image: url(../../../static/atributos/tags_36.png); }
-  .icone.control { background-image: url(../../../static/atributos/tags_29.png); }
-  .icone.kit { background-image: url(../../../static/atributos/tags_33.png); }
-  .icone.will { background-image: url(../../../static/atributos/will.png); }
-
-  .icone.mastcrit { background-image: url(../../../static/atributos/tags_40.png); }
-  .icone.mastrear { background-image: url(../../../static/atributos/tags_26.png); }
-  .icone.critresist { background-image: url(../../../static/atributos/tags_39.png); }
-  .icone.rearresist { background-image: url(../../../static/atributos/tags_38.png); }
-  .icone.melee { background-image: url(../../../static/atributos/tags_23.png); }
-  .icone.dist { background-image: url(../../../static/atributos/tags_20.png); }
-  .icone.single { background-image: url(../../../static/atributos/tags_19.png); }
-  .icone.area { background-image: url(../../../static/atributos/tags_21.png); }
-  .icone.berserk { background-image: url(../../../static/atributos/tags_17.png); }
 </style>
