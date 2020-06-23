@@ -25,14 +25,14 @@
                 dark
                 class="ma-0"
                 v-on="on"
-                @click="atualizarItens"
+                @click="abrirConfigs"
               >
                 <v-icon size="16">
-                  backup
+                  settings
                 </v-icon>
               </v-btn>
             </template>
-            <span>{{ $t('label.atualizaritens') }}</span>
+            <span>{{ $t('label.configs') }}</span>
           </v-tooltip>
         </div>
         <img
@@ -142,8 +142,6 @@
           <v-icon>arrow_right</v-icon>
         </v-btn>
       </v-flex>
-
-      <localStorage v-if="ehDev" />
     </v-flex>
 
     <v-flex>
@@ -173,12 +171,10 @@ import EventBus from '../../event-bus'
 import { equipType } from '../../model/equipType'
 import { equipEffects } from '../../model/equipEffects'
 import { rarity } from '../../model/rarity'
-import LocalStorage from './LocalStorage'
-// import { states } from '../model/states'
 
 export default {
   name: 'Filtros',
-  components: { LocalStorage, DropBox, Idioma },
+  components: { DropBox, Idioma },
   data: () => ({
     filtros: {
       nome: '',
@@ -224,43 +220,19 @@ export default {
     },
     async emitirFiltros () {
       this.progress = true
+      EventBus.$emit('trocarTab')
       EventBus.$emit('filtrar', this.filtros)
       this.$store.dispatch('filtros/salvar', this.filtros)
     },
     terminouFiltragem () {
       this.progress = false
+    },
+    abrirConfigs () {
+      this.$ConfigDialog.abrir()
     }
   }
 }
 </script>
 
 <style>
-  #logo img {
-    padding: 7px 0;
-    filter: drop-shadow(1px 1px 0 #333) drop-shadow(-1px -1px 0 #333) drop-shadow(0px 0px 10px #333);
-  }
-  .versao {
-    position: absolute;
-    color: rgba(255, 255, 255, .9);
-    font-size: 11px;
-    padding: 5px;
-    left: 0;
-    top: 0;
-  }
-  .atualizar, .lang {
-    position: absolute;
-    padding: 0 5px;
-    right: 0;
-    bottom: 0;
-    z-index: 9;
-  }
-  .lang {
-    top: 0;
-  }
-  .v-slider__thumb-label__container { bottom: -70px; top: auto; }
-  .v-slider__thumb-label { border-radius: 0 50% 50% 50%; }
-  .v-chip--select-multi { margin: 3px 1px 0 0; }
-  .scroll { overflow-y: auto; }
-  .foot { border-top: 1px solid #C0C0C0; }
-  .foot small{ color: rgba(0, 0, 0, .7); font-size: 12px; }
 </style>

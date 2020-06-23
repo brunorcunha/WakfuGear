@@ -1,5 +1,5 @@
 <template>
-  <v-content class="white">
+  <v-content>
     <v-container
       fluid
       fill-height

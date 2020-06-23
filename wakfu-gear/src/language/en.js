@@ -67,7 +67,9 @@ export const en = {
     Berserk: 'Berserk',
     BskCrit: 'BskCrit',
     comparandodanogears: 'Comparing the Damage',
-    calculadoradano: 'Understand the Calculation'
+    calculadoradano: 'Understand the Calculation',
+    configs: 'Settings',
+    moreinfos: 'More Information'
   },
   msg: {
     adicionarEquip: 'Add equipment to this gear'
@@ -130,7 +132,8 @@ export const en = {
     dados: 'Data',
     nomes: 'Names',
     filtros: 'Filters',
-    gears: 'Gears'
+    gears: 'Gears',
+    disponivel: 'Disponível'
   },
   loading: [
     'Loading',

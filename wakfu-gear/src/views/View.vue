@@ -50,24 +50,30 @@
               color="red"
               depressed
               block
+              class="px-4"
               value="equips"
             >
+              <img src="../../static/tipo/-2.png" class="mr-2" />
               {{ $t('label.equipamentos') }}
             </v-btn>
             <v-btn
               color="red"
               depressed
               block
+              class="px-4"
               value="gears"
             >
+              <img src="../../static/tipo/604.png" class="mr-2" />
               {{ $t('label.gears') }}
             </v-btn>
             <v-btn
               color="red"
               depressed
               block
+              class="px-4"
               value="calc"
             >
+              <img src="../../static/tipo/571.png" class="mr-2" />
               {{ $t('label.calculadora') }}
             </v-btn>
           </v-btn-toggle>
@@ -110,6 +116,7 @@
     <InputDialog ref="inputDialog" />
     <ConfirmDialog ref="confirmDialog" />
     <ImportDialog ref="importDialog" />
+    <ConfigDialog ref="configDialog" />
   </v-layout>
 </template>
 
@@ -122,6 +129,7 @@ import DataTableDamage from '../components/Content/DataTableDamage'
 import DataView from '../components/Content/DataView'
 import DataTableGears from '../components/Content/DataTableGears'
 import Filtros from '../components/DrawerLeft/Filtros'
+import ConfigDialog from '../components/ConfigDialog'
 import ConfirmDialog from '../components/ConfirmDialog'
 import InputDialog from '../components/InputDialog'
 import ImportDialog from '../components/ImportDialog'
@@ -140,6 +148,7 @@ export default {
     Equipamento,
     InputDialog,
     ImportDialog,
+    ConfigDialog,
     ConfirmDialog
   },
   data: () => ({
@@ -174,19 +183,20 @@ export default {
     Vue.prototype.$ConfirmDialog = this.$refs.confirmDialog
     Vue.prototype.$ImportDialog = this.$refs.importDialog
     Vue.prototype.$InputDialog = this.$refs.inputDialog
+    Vue.prototype.$ConfigDialog = this.$refs.configDialog
 
     if (this.$vuetify.breakpoint.lgAndUp) {
       this.drawer = true
       this.abrirDrawerEquipamentos()
     }
     EventBus.$on('addEquip', this.abrirDrawerEquipamentos)
-    EventBus.$on('filtrar', this.repassarFiltragem)
+    EventBus.$on('trocarTab', this.repassarFiltragem)
     EventBus.$on('abrirGear', this.abrirDrawerEquipamentos)
     EventBus.$on('terminouFiltragem', this.terminouFiltragem)
   },
   beforeDestroy () {
     EventBus.$off('addEquip')
-    EventBus.$off('filtrar')
+    EventBus.$off('trocarTab')
     EventBus.$off('abrirGear')
     EventBus.$off('terminouFiltragem')
   },

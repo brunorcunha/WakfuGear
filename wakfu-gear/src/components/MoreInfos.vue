@@ -1,30 +1,22 @@
 <template>
-  <v-flex
-    pt-4
-    text-xs-center
-  >
-    <v-flex text-xs-center>
-      LocalStorage
-    </v-flex>
-    <vc-donut
-      :sections="sections"
-      :size="100"
-      :thickness="40"
-      has-legend
-      legend-placement="top"
-    >
-      <h1>{{ value }}%</h1>
-    </vc-donut>
-    <v-flex
-      text-xs-center
-      mt-2
-    >
-      {{ totalMB }} / {{ limitMB }} MB
-    </v-flex>
+  <v-flex>
+    <v-subheader class="lssub deep-orange accent-4 white--text">
+      {{ $t('label.moreinfos') }} (v{{ versao }})
+    </v-subheader>
+    <div class="pa-2 infolines">
+      <v-layout><v-flex>Items</v-flex><v-flex>9.999</v-flex></v-layout>
+      <v-layout><v-flex>Relics</v-flex><v-flex>9.999</v-flex></v-layout>
+      <v-layout><v-flex>Epics</v-flex><v-flex>9.999</v-flex></v-layout>
+      <v-layout><v-flex>Lembrança</v-flex><v-flex>9.999</v-flex></v-layout>
+      <v-layout><v-flex>Pets</v-flex><v-flex>9.999</v-flex></v-layout>
+      <v-layout><v-flex>Mounts</v-flex><v-flex>9.999</v-flex></v-layout>
+    </div>
   </v-flex>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'LocalStorage',
   data: () => ({
@@ -34,6 +26,7 @@ export default {
     sections: []
   }),
   computed: {
+    ...mapGetters('items', ['versao']),
     LS () {
       return window.localStorage
     },

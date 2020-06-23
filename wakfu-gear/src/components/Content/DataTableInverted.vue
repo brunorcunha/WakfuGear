@@ -1,5 +1,5 @@
 <template>
-  <v-content :class="`invertido white ${retrair ? 'retraido' : null}`">
+  <v-content :class="`invertido ${retrair ? 'retraido' : ''}`">
     <v-container
       fluid
       fill-height

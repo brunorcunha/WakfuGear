@@ -130,7 +130,8 @@ export const es = {
     dados: 'Datos',
     nomes: 'Nombres',
     filtros: 'Filtros',
-    gears: 'Gears'
+    gears: 'Gears',
+    disponivel: 'Disponível'
   },
   loading: [
     'Cargando',

@@ -67,7 +67,9 @@ export const pt = {
     Berserk: 'Berserk',
     BskCrit: 'BskCrit',
     comparandodanogears: 'Comparando o Dano',
-    calculadoradano: 'Entenda o Cálculo'
+    calculadoradano: 'Entenda o Cálculo',
+    configs: 'Configurações',
+    moreinfos: 'Mais Informações'
   },
   msg: {
     adicionarEquip: 'Adicione equipamentos a esse conjunto'
@@ -130,7 +132,8 @@ export const pt = {
     dados: 'Dados',
     nomes: 'Nomes',
     filtros: 'Filtros',
-    gears: 'Conjuntos'
+    gears: 'Conjuntos',
+    disponivel: 'Disponível'
   },
   loading: [
     'Carregando',

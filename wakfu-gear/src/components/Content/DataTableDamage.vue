@@ -1,5 +1,5 @@
 <template>
-  <v-content :class="`white ${retrair ? 'retraido' : null}`">
+  <v-content :class="`${retrair ? 'retraido' : ''}`">
     <v-container
       fluid
       fill-height
@@ -234,8 +234,7 @@ export default {
       this.$refs.atributos.scrollTop = evt.target.scrollTop
       this.$refs.items.scrollLeft = evt.target.scrollLeft
 
-      if (evt.target.scrollLeft < 240) this.retrair = false
-      else this.retrair = true
+      this.retrair = false
     },
     onEndDrag (ev) {
       const { oldIndex, newIndex } = ev

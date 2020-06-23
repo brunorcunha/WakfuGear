@@ -1,12 +1,17 @@
 <template>
-  <v-app>
+  <v-app :dark="darkTheme">
     <router-view />
   </v-app>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-  name: 'App'
+  name: 'App',
+  computed: {
+    ...mapGetters('configs', ['darkTheme'])
+  }
 }
 </script>
 

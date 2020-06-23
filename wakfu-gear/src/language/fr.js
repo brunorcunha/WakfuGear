@@ -130,7 +130,8 @@ export const fr = {
     dados: 'Données',
     nomes: 'Noms',
     filtros: 'Filtres',
-    gears: 'Gears'
+    gears: 'Gears',
+    disponivel: 'Disponível'
   },
   loading: [
     'Chargement',
