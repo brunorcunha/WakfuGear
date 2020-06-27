@@ -112,7 +112,7 @@
             >
               <v-layout row>
                 <div :class="`icone ${atributo.icone}`" />
-                <v-flex class="fontsmall">
+                <v-flex class="fontsmall pl-1">
                   {{ nome }}
                 </v-flex>
                 <v-flex shrink>
@@ -151,7 +151,7 @@
             >
               <v-layout row>
                 <div :class="`icone ${atributo.icone}`" />
-                <v-flex class="fontsmall">
+                <v-flex class="fontsmall pl-1">
                   {{ nome }}
                 </v-flex>
                 <v-flex shrink>

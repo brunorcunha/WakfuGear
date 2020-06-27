@@ -4,29 +4,37 @@
       {{ $t('label.moreinfos') }} (v{{ versao }})
     </v-subheader>
     <div class="pa-2 infolines">
-      <v-layout><v-flex>Items</v-flex><v-flex>9.999</v-flex></v-layout>
-      <v-layout><v-flex>Relics</v-flex><v-flex>9.999</v-flex></v-layout>
-      <v-layout><v-flex>Epics</v-flex><v-flex>9.999</v-flex></v-layout>
-      <v-layout><v-flex>Lembrança</v-flex><v-flex>9.999</v-flex></v-layout>
-      <v-layout><v-flex>Pets</v-flex><v-flex>9.999</v-flex></v-layout>
-      <v-layout><v-flex>Mounts</v-flex><v-flex>9.999</v-flex></v-layout>
+      <v-layout><v-flex>{{ $t('info.itens') }}</v-flex><v-flex>{{ (infos.totalItens || 0) | formatNumber }}</v-flex></v-layout>
+      <v-layout><v-flex>{{ $t('info.altonivel') }}</v-flex><v-flex>{{ (infos.highlvl || 0) | formatNumber }}</v-flex></v-layout>
+      <v-layout><v-flex>{{ $t('info.reliquias') }}</v-flex><v-flex>{{ (infos.reliquias || 0) | formatNumber }}</v-flex></v-layout>
+      <v-layout><v-flex>{{ $t('info.epicos') }}</v-flex><v-flex>{{ (infos.epicos || 0) | formatNumber }}</v-flex></v-layout>
+      <v-layout><v-flex>{{ $t('info.lembrancas') }}</v-flex><v-flex>{{ (infos.souveniers || 0) | formatNumber }}</v-flex></v-layout>
+      <v-layout><v-flex>{{ $t('info.mascotes') }}</v-flex><v-flex>{{ (infos.pets || 0) | formatNumber }}</v-flex></v-layout>
+      <v-layout><v-flex>{{ $t('info.montarias') }}</v-flex><v-flex>{{ (infos.mounts || 0) | formatNumber }}</v-flex></v-layout>
+      <v-layout><v-flex>{{ $t('info.sematributos') }}</v-flex><v-flex>{{ (infos.cosmeticos || 0) | formatNumber }}</v-flex></v-layout>
+      <v-layout><v-flex>{{ $t('info.comefeitos') }}</v-flex><v-flex>{{ (infos.efeito || 0) | formatNumber }}</v-flex></v-layout>
+      <v-layout><v-flex>{{ $t('info.armas') }}</v-flex><v-flex>{{ (infos.armas || 0) | formatNumber }}</v-flex></v-layout>
+      <v-layout><v-flex>{{ $t('info.segundamao') }}</v-flex><v-flex>{{ (infos.segunda || 0) | formatNumber }}</v-flex></v-layout>
+      <v-layout><v-flex>{{ $t('info.escudos') }}</v-flex><v-flex>{{ (infos.escudos || 0) | formatNumber }}</v-flex></v-layout>
     </div>
   </v-flex>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import { equipType } from '../model/equipType'
 
 export default {
-  name: 'LocalStorage',
+  name: 'MoreInfos',
   data: () => ({
     value: null,
     total: 0,
     limit: 5200000,
-    sections: []
+    sections: [],
+    infos: {}
   }),
   computed: {
-    ...mapGetters('items', ['versao']),
+    ...mapGetters('items', ['items', 'versao']),
     LS () {
       return window.localStorage
     },
@@ -39,14 +47,18 @@ export default {
   },
   watch: {
     LS () {
-      this.atualizar()
+      this.atualizarLS()
+    },
+    items () {
+      this.atualizarInfos()
     }
   },
   mounted () {
-    this.atualizar()
+    this.atualizarLS()
+    this.atualizarInfos()
   },
   methods: {
-    atualizar () {
+    atualizarLS () {
       this.total = Object.keys(this.LS).map(key => this.LS[key].length).reduce((a, b) => a + b)
       this.value = Math.round((this.total / this.limit) * 100)
       this.getPorcentagens()
@@ -65,6 +77,50 @@ export default {
       fn(this.$i18n.t('localstorage.nomes'), 'itensList')
       fn(this.$i18n.t('localstorage.filtros'), 'filtros')
       fn(this.$i18n.t('localstorage.gears'), 'gears')
+    },
+    atualizarInfos () {
+      const totalItens = this.items.length
+      let epicos = 0
+      let reliquias = 0
+      let souveniers = 0
+      let pets = 0
+      let mounts = 0
+      let cosmeticos = 0
+      let highlvl = 0
+      let efeito = 0
+      let armas = 0
+      let segunda = 0
+      let escudos = 0
+      const tipos = equipType.map(e => [e.id, e.iid])
+      this.items.forEach(atual => {
+        const subtipo = tipos.find(e => e[0] === atual.type)[1]
+        epicos += atual.rarity === 7 ? 1 : 0
+        reliquias += atual.rarity === 5 ? 1 : 0
+        souveniers += atual.rarity === 6 ? 1 : 0
+        pets += atual.type === 582 ? 1 : 0
+        mounts += atual.type === 611 ? 1 : 0
+        cosmeticos += atual.equipEffects.length === 0 ? 1 : 0
+        highlvl += atual.lvl >= 200 ? 1 : 0
+        efeito += atual.equipEffects.some(e => e.id === 304) ? 1 : 0
+        armas += (subtipo === 518 || subtipo === 519) ? 1 : 0
+        segunda += (subtipo === 520) ? 1 : 0
+        escudos += (atual.type === 189) ? 1 : 0
+      })
+
+      this.infos = {
+        totalItens,
+        epicos,
+        reliquias,
+        souveniers,
+        pets,
+        mounts,
+        cosmeticos,
+        highlvl,
+        efeito,
+        armas,
+        segunda,
+        escudos
+      }
     }
   }
 }

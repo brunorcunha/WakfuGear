@@ -59,6 +59,13 @@
 
     <div class="imggear">
       <v-img
+        v-if="items.length === 0"
+        aspect-ratio="1"
+        src="/static/erro.png"
+        width="70"
+        height="70"
+      />
+      <v-img
         v-if="items.length >= 1"
         aspect-ratio="1"
         lazy-src="/static/erro.png"

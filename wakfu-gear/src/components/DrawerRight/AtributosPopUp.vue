@@ -39,7 +39,7 @@
               <v-list-tile-content class="fontsmall">
                 <v-list-tile-title>{{ item.item.title[$lang] }}</v-list-tile-title>
               </v-list-tile-content>
-              <v-list-tile-avatar class="fontsmall">
+              <v-list-tile-avatar class="fontsmall text-xs-right">
                 {{ item.valor }}
               </v-list-tile-avatar>
             </v-list-tile>

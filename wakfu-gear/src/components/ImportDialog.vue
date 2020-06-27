@@ -2,7 +2,7 @@
   <v-dialog
     v-model="dialog"
     max-width="800px"
-    persistent
+    transition="dialog-bottom-transition"
     @keydown.esc="cancelar"
   >
     <v-card>
@@ -88,12 +88,11 @@
         wrap
       >
         <v-flex xs12>
-          <v-textarea
+          <v-text-field
             v-model="codigo"
             :disabled="loading"
             :label="$t('label.wgcode')"
             placeholder="19699-19879-20218-20213-19859-25076-19710-20169-14147-20365-19884-26865"
-            dense
           />
         </v-flex>
         <v-flex v-if="alertCodigo">
@@ -153,18 +152,6 @@ export default {
         type: 'error',
         msg
       }
-    },
-    async criarGear (arrayItems) {
-      const items = []
-      this.items.forEach(item => {
-        if (arrayItems.some(codigo => codigo === item.id)) {
-          items.push(item)
-        }
-      })
-      const index = this.qnt
-      this.$store.dispatch('gears/adicionarGear', {})
-      this.$store.dispatch('gears/selecionarAtual', { index })
-      this.$store.dispatch('gears/adicionarItems', { items })
     },
     async importarZenith () {
       this.linkZenith = this.linkZenith.replace('www.', '')

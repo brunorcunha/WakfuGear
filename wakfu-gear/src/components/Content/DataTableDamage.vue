@@ -154,12 +154,25 @@ export default {
     progress: true
   }),
   computed: {
-    ...mapGetters('gears', ['allGears', 'qnt'])
+    ...mapGetters('gears', ['allGears', 'qnt']),
+    ...mapGetters('configs', ['calculoDano', 'showDano'])
   },
   watch: {
     allGears: {
-      handler: function () {
+      handler () {
         this.organizarGears()
+      },
+      deep: true
+    },
+    calculoDano: {
+      handler () {
+        this.organizarGears()
+      },
+      deep: true
+    },
+    showDano: {
+      handler () {
+        this.organizarIndices()
       },
       deep: true
     }
@@ -173,10 +186,15 @@ export default {
   methods: {
     organizarIndices () {
       this.indices = []
-      const posicoes = ['Frente', 'Costas']
-      const alvos = ['ST', 'ZONA']
-      const distancias = ['CAC', 'DIST']
-      const multiplicadores = ['Normal', 'Critico', 'Berserk', 'BskCrit']
+      const posicoes = this.showDano.posicoes || ['Frente', 'Costas']
+      const alvos = this.showDano.alvos || ['ST', 'ZONA']
+      const distancias = this.showDano.distancias || ['CAC', 'DIST']
+      const multiplicadores = ['Normal']
+      if (this.showDano.multiplicadores.includes('Critico')) multiplicadores.push('Critico')
+      if (this.showDano.multiplicadores.includes('Berserk')) {
+        multiplicadores.push('Berserk')
+        if (this.showDano.multiplicadores.includes('Critico')) multiplicadores.push('BskCrit')
+      }
       for (var i in posicoes) {
         for (var j in alvos) {
           for (var k in distancias) {
@@ -202,9 +220,9 @@ export default {
     calcularDanos (gears) {
       return gears.map(gear => calcularDano({
         gear,
-        danoBase: 100,
-        danoBaseCritico: 125,
-        resistencia: 0,
+        danoBase: this.calculoDano.danoBase,
+        danoBaseCritico: this.calculoDano.criticoBase,
+        resistencia: this.calculoDano.resistencia,
         danosCausados: 0
       }))
     },

@@ -53,7 +53,10 @@
               class="px-4"
               value="equips"
             >
-              <img src="../../static/tipo/-2.png" class="mr-2" />
+              <img
+                src="../../static/tipo/-2.png"
+                class="mr-2"
+              >
               {{ $t('label.equipamentos') }}
             </v-btn>
             <v-btn
@@ -63,7 +66,10 @@
               class="px-4"
               value="gears"
             >
-              <img src="../../static/tipo/604.png" class="mr-2" />
+              <img
+                src="../../static/tipo/604.png"
+                class="mr-2"
+              >
               {{ $t('label.gears') }}
             </v-btn>
             <v-btn
@@ -73,7 +79,10 @@
               class="px-4"
               value="calc"
             >
-              <img src="../../static/tipo/571.png" class="mr-2" />
+              <img
+                src="../../static/tipo/571.png"
+                class="mr-2"
+              >
               {{ $t('label.calculadora') }}
             </v-btn>
           </v-btn-toggle>
@@ -116,6 +125,7 @@
     <InputDialog ref="inputDialog" />
     <ConfirmDialog ref="confirmDialog" />
     <ImportDialog ref="importDialog" />
+    <ExportDialog ref="exportDialog" />
     <ConfigDialog ref="configDialog" />
   </v-layout>
 </template>
@@ -133,6 +143,7 @@ import ConfigDialog from '../components/ConfigDialog'
 import ConfirmDialog from '../components/ConfirmDialog'
 import InputDialog from '../components/InputDialog'
 import ImportDialog from '../components/ImportDialog'
+import ExportDialog from '../components/ExportDialog'
 import Loading from '../components/Loading'
 import EventBus from '../event-bus'
 
@@ -148,6 +159,7 @@ export default {
     Equipamento,
     InputDialog,
     ImportDialog,
+    ExportDialog,
     ConfigDialog,
     ConfirmDialog
   },
@@ -172,16 +184,24 @@ export default {
         })
         this.atualizarItens()
       } catch (e) {}
+    },
+    existItems (val) {
+      if (this.$route.redirectedFrom) {
+        const [, gearHash] = this.$route.redirectedFrom.split('/')
+        if (val && gearHash) this.importarGear(gearHash)
+      }
     }
   },
   created () {
     this.$store.dispatch('items/init', { lang: this.$lang })
     this.$store.dispatch('filtros/init')
     this.$store.dispatch('gears/init')
+    this.$store.dispatch('configs/init')
   },
   mounted () {
     Vue.prototype.$ConfirmDialog = this.$refs.confirmDialog
     Vue.prototype.$ImportDialog = this.$refs.importDialog
+    Vue.prototype.$ExportDialog = this.$refs.exportDialog
     Vue.prototype.$InputDialog = this.$refs.inputDialog
     Vue.prototype.$ConfigDialog = this.$refs.configDialog
 
@@ -189,6 +209,7 @@ export default {
       this.drawer = true
       this.abrirDrawerEquipamentos()
     }
+
     EventBus.$on('addEquip', this.abrirDrawerEquipamentos)
     EventBus.$on('trocarTab', this.repassarFiltragem)
     EventBus.$on('abrirGear', this.abrirDrawerEquipamentos)
@@ -204,14 +225,29 @@ export default {
     abrirDrawerEquipamentos () {
       this.drawerRight = true
     },
+    abrirAbaGears () {
+      this.aba = 'gears'
+    },
+    abrirAbaEquips () {
+      this.aba = 'equips'
+    },
     async repassarFiltragem () {
-      if (this.aba !== 'equips') {
-        this.aba = 'equips'
-      }
+      if (this.aba !== 'equips') this.abrirAbaEquips()
     },
     terminouFiltragem () {
       if (this.$vuetify.breakpoint.smAndDown) {
         this.drawer = false
+      }
+    },
+    async importarGear (gearHash) {
+      if (this.podeSerDecrypted(gearHash)) {
+        this.abrirDrawerEquipamentos()
+        this.abrirAbaGears()
+        const { nome, itemsID } = this.decrypt(gearHash)
+        const index = await this.criarGear(itemsID)
+        this.$store.dispatch('gears/setNome', { nome })
+
+        EventBus.$emit('abrirGear', index)
       }
     }
   }

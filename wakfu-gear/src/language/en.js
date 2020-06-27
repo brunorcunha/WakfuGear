@@ -53,6 +53,8 @@ export const en = {
     secundarios: 'Secondary',
     versao: 'Version: {0}',
     fork: 'Fork the project on {0}.',
+    nivelmaximo: 'Maximum Level',
+    nivelminimo: 'Minimum Level',
     maximo: 'Maximum',
     minimo: 'Minimum',
     calculadora: 'Damage',
@@ -66,13 +68,55 @@ export const en = {
     Critico: 'Critical',
     Berserk: 'Berserk',
     BskCrit: 'BskCrit',
+    limpartudo: 'Clean all',
+    temaescuro: 'Dark Theme',
+    geral: 'General',
+    basedano: 'Base Damage',
+    basecritico: 'Base Critical Damage',
+    resistencia: 'Resistance',
+    resistenciap: 'Resistance in %',
     comparandodanogears: 'Comparing the Damage',
     calculadoradano: 'Understand the Calculation',
+    calculodano: 'Damage Calculation',
+    tabelatransposta: 'Table Transposed [Disabled]',
     configs: 'Settings',
-    moreinfos: 'More Information'
+    moreinfos: 'More Information',
+    posicaoconjurador: 'Caster Position',
+    alvofeitico: 'Target of the Spell',
+    distanciaalvo: 'Target Distance',
+    multiplicadores: 'Multipliers',
+    critico: 'Critical',
+    berserk: 'Berserk',
+    distancia: 'Distance',
+    cac: 'Melee',
+    alvounico: 'Single Target',
+    salvar: 'Save',
+    zona: 'Zone',
+    frente: 'Front',
+    costas: 'Back',
+    url: 'URL'
   },
   msg: {
-    adicionarEquip: 'Add equipment to this gear'
+    adicionarEquip: 'Add equipment to this gear',
+    atualizaritens: 'Download the latest version of the equipment.',
+    temaescuro: 'Toggles between the white theme and the dark theme.',
+    tabelatransposta: 'Switch between row or column table views.',
+    copy: 'Copied to the clipboard!'
+  },
+  info: {
+    itens: 'Items',
+    altonivel: 'High Level (200+)',
+    reliquias: 'Relics',
+    epicos: 'Epics',
+    lembrancas: 'Souvenirs',
+    mascotes: 'Pets',
+    montarias: 'Mounts',
+    sematributos: 'No Attributes',
+    comefeitos: 'With Effects',
+    armas: 'Weapons',
+    segundamao: 'Second Hand',
+    escudos: 'Shields',
+    url: 'URL'
   },
   tipo: {
     amuleto: 'Amulet',
@@ -114,6 +158,10 @@ export const en = {
       titulo: 'Confirm',
       msg: 'Are you sure you want to delete this gear?'
     },
+    ls: {
+      titulo: 'Confirm',
+      msg: 'Are you sure you want to delete all data saved locally?'
+    },
     clonar: {
       titulo: 'Confirm',
       msg: 'Do you want clone this gear?'
@@ -133,7 +181,8 @@ export const en = {
     nomes: 'Names',
     filtros: 'Filters',
     gears: 'Gears',
-    disponivel: 'Disponível'
+    configs: 'Settings',
+    disponivel: 'Free'
   },
   loading: [
     'Loading',

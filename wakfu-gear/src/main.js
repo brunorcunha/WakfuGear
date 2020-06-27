@@ -27,6 +27,7 @@ Vue.filter('formatNumber', value => numeral(value).format('0,0'))
 Vue.config.productionTip = false
 
 Vue.prototype.moment = moment
+Vue.prototype.$instanceStorage = {}
 
 const lsFiltros = localStorage.getItem('filtros')
 const lang = lsFiltros ? JSON.parse(lsFiltros).lang : 'pt'

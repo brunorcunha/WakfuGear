@@ -6,8 +6,10 @@ const atributos = {
         item = gear[item]
         if (item) {
           item.equipEffects.forEach(fx => {
-            if (!atr[fx.id]) atr[fx.id] = 0
-            atr[fx.id] += fx.params[0]
+            if (fx.id !== 304) {
+              if (!atr[fx.id]) atr[fx.id] = 0
+              atr[fx.id] += fx.params[0]
+            }
           })
         }
       })

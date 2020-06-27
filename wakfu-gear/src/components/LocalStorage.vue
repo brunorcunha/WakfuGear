@@ -2,6 +2,16 @@
   <v-flex text-xs-center>
     <v-subheader class="lssub deep-orange accent-4 white--text">
       LocalStorage
+      <v-spacer />
+      <v-btn
+        outline
+        small
+        dark
+        class="mx-0"
+        @click="limparLS"
+      >
+        {{ $t('label.limpartudo') }}
+      </v-btn>
     </v-subheader>
     <div class="pa-2">
       <vc-donut
@@ -25,6 +35,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'LocalStorage',
   data: () => ({
@@ -34,6 +46,7 @@ export default {
     sections: []
   }),
   computed: {
+    ...mapGetters('items', ['items', 'versao']),
     LS () {
       return window.localStorage
     },
@@ -45,7 +58,10 @@ export default {
     }
   },
   watch: {
-    LS () {
+    items () {
+      this.atualizar()
+    },
+    versao () {
       this.atualizar()
     }
   },
@@ -72,8 +88,19 @@ export default {
       this.sections.push(fn(this.$i18n.t('localstorage.nomes'), 'itensList'))
       this.sections.push(fn(this.$i18n.t('localstorage.filtros'), 'filtros'))
       this.sections.push(fn(this.$i18n.t('localstorage.gears'), 'gears'))
-      const disponivel = this.sections.reduce((total, atual) => total - atual.value, 100)
-      this.sections.push({ label: this.$i18n.t('localstorage.disponivel'), value: disponivel, color: '#eeeeee' })
+      this.sections.push(fn(this.$i18n.t('localstorage.configs'), 'configs'))
+      // const disponivel = this.sections.reduce((total, atual) => total - atual.value, 100)
+      // this.sections.push({ label: this.$i18n.t('localstorage.disponivel'), value: disponivel, color: '#eeeeee' })
+    },
+    async limparLS () {
+      try {
+        await this.$ConfirmDialog.abrir({
+          titulo: this.$i18n.t('dialog.ls.titulo'),
+          mensagem: this.$i18n.t('dialog.ls.msg')
+        })
+        localStorage.clear()
+        location.reload(true)
+      } catch (e) {}
     }
   }
 }

@@ -53,6 +53,8 @@ export const es = {
     secundarios: 'Secundario',
     versao: 'Versión: {0}',
     fork: 'Fork el proyecto en {0}.',
+    nivelmaximo: 'Nível Máximo',
+    nivelminimo: 'Nível Mínimo',
     maximo: 'Máximo',
     minimo: 'Mínimo',
     calculadora: 'Daño',
@@ -66,11 +68,54 @@ export const es = {
     Critico: 'Crítico',
     Berserk: 'Berserk',
     BskCrit: 'BskCrit',
+    limpartudo: 'Limpiar Todo',
+    temaescuro: 'Tema Oscuro',
+    geral: 'General',
+    basedano: 'Daño Base',
+    basecritico: 'Daño Crítico Base',
+    resistencia: 'Resistencia',
+    resistenciap: 'Resistencia en %',
     comparandodanogears: 'Comparando el Daño',
-    calculadoradano: 'Comprender el Cálculo'
+    calculadoradano: 'Comprender el Cálculo',
+    calculodano: 'Cálculo de Daños',
+    salvar: 'Sauver',
+    tabelatransposta: 'Tabla Transpuesta [Deshabilitada]',
+    configs: 'Configuraciones',
+    moreinfos: 'Mas informaciones',
+    posicaoconjurador: 'Posición del Lanzador',
+    alvofeitico: 'Objetivo de Hechizo',
+    distanciaalvo: 'Distancia del Blanco',
+    multiplicadores: 'Multiplicadores',
+    critico: 'Crítico',
+    berserk: 'Berserk',
+    distancia: 'Distancia',
+    cac: 'Cuerpo a Cuerpo',
+    alvounico: 'Único Objetivo',
+    zona: 'Zona',
+    frente: 'Frente',
+    costas: 'Espalda',
+    url: 'URL'
   },
   msg: {
-    adicionarEquip: 'Agregar equipo a este gear'
+    adicionarEquip: 'Agregar equipo a este gear',
+    atualizaritens: 'Descargue la última versión del equipo.',
+    temaescuro: 'Alterna entre el tema blanco y el tema más oscuro.',
+    tabelatransposta: 'Cambiar entre vistas de tabla de fila o columna.',
+    copy: 'Copiado al portapapeles!'
+  },
+  info: {
+    itens: 'Equipo',
+    altonivel: 'Alto Nivel (200+)',
+    reliquias: 'Reliquias',
+    epicos: 'Épico',
+    lembrancas: 'Recuerdos',
+    mascotes: 'Mascotas',
+    montarias: 'Monturas',
+    sematributos: 'Sin Atributos',
+    comefeitos: 'Con Efectos',
+    armas: 'Armas',
+    segundamao: 'Segunda Mano',
+    escudos: 'Escudos'
   },
   tipo: {
     amuleto: 'Amuleto',
@@ -112,6 +157,10 @@ export const es = {
       titulo: 'Confirmar',
       msg: '¿Estás seguro de que deseas eliminar este gear?'
     },
+    ls: {
+      titulo: 'Confirmar',
+      msg: '¿Está seguro de que desea eliminar todos los datos guardados localmente?'
+    },
     clonar: {
       titulo: 'Confirmar',
       msg: '¿Quieres clonar este gear?'
@@ -131,7 +180,8 @@ export const es = {
     nomes: 'Nombres',
     filtros: 'Filtros',
     gears: 'Gears',
-    disponivel: 'Disponível'
+    configs: 'Configuraciones',
+    disponivel: 'Disponible'
   },
   loading: [
     'Cargando',

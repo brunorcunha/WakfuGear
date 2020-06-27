@@ -48,11 +48,14 @@ export const fr = {
     trocaridioma: 'Changer de langue',
     tituloconjunto: 'Titre de le Gear',
     principais: 'Général',
+    geral: 'Général',
     maestrias: 'Maîtrise',
     combate: 'Bataille',
     secundarios: 'Secondaire',
     versao: 'Version: {0}',
     fork: 'Fork le projet sur {0}.',
+    nivelmaximo: 'Niveau Maximum',
+    nivelminimo: 'Niveau Minimum',
     maximo: 'Maximum',
     minimo: 'Minimum',
     calculadora: 'Dommage',
@@ -66,11 +69,53 @@ export const fr = {
     Critico: 'Critique',
     Berserk: 'Berserk',
     BskCrit: 'BskCrit',
+    limpartudo: 'Nettoie tout',
+    basedano: 'Dégâts de Base',
+    basecritico: 'Dégâts Critiques de Base',
+    resistencia: 'Résistance',
+    resistenciap: 'Résistance en %',
     comparandodanogears: 'Comparaison des Dommages',
-    calculadoradano: 'Comprendre le Calcul'
+    calculadoradano: 'Comprendre le Calcul',
+    calculodano: 'Calcul des Dommages',
+    temaescuro: 'Thème Sombre',
+    salvar: 'Sauver',
+    tabelatransposta: 'Table Transposée [Désactivée]',
+    configs: 'Paramètres',
+    moreinfos: 'Plus d\'information',
+    posicaoconjurador: 'Position de la Roulette',
+    alvofeitico: 'Cible de Sort',
+    distanciaalvo: 'Distance Cible',
+    multiplicadores: 'Multiplicateurs',
+    critico: 'Critique',
+    berserk: 'Berserk',
+    distancia: 'Distance',
+    cac: 'Mêlée',
+    alvounico: 'Seule Cible',
+    zona: 'Zone',
+    frente: 'Face',
+    costas: 'Arrière',
+    url: 'URL'
   },
   msg: {
-    adicionarEquip: 'Ajouter de l\'équipement à cet Gear'
+    adicionarEquip: 'Ajouter de l\'équipement à cet Gear',
+    atualizaritens: 'Téléchargez la dernière version de l\'équipement.',
+    temaescuro: 'Bascule entre le thème blanc et le thème plus sombre.',
+    tabelatransposta: 'Basculez entre les vues de table de ligne ou de colonne.',
+    copy: 'Copié dans le presse-papiers!'
+  },
+  info: {
+    itens: 'Équipement',
+    altonivel: 'Haut Niveau (200+)',
+    reliquias: 'Reliques',
+    epicos: 'Épique',
+    lembrancas: 'Souvenirs',
+    mascotes: 'Mascottes',
+    montarias: 'Montures',
+    sematributos: 'Aucun Attribut',
+    comefeitos: 'Avec Effets',
+    armas: 'Armes',
+    segundamao: 'Seconde Main',
+    escudos: 'Boucliers'
   },
   tipo: {
     amuleto: 'Amulette',
@@ -112,6 +157,10 @@ export const fr = {
       titulo: 'Confirmer',
       msg: 'Êtes-vous sûr de vouloir supprimer cet Gear?'
     },
+    ls: {
+      titulo: 'Confirmer',
+      msg: 'Voulez-vous vraiment supprimer toutes les données enregistrées localement?'
+    },
     clonar: {
       titulo: 'Confirmer',
       msg: 'Voulez-vous cloner cet gear?'
@@ -131,6 +180,7 @@ export const fr = {
     nomes: 'Noms',
     filtros: 'Filtres',
     gears: 'Gears',
+    configs: 'Paramètres',
     disponivel: 'Disponível'
   },
   loading: [

@@ -38,14 +38,14 @@
                   {{ item.title[$lang] }}
                 </v-list-tile-title>
               </v-list-tile-content>
-              <v-list-tile-avatar class="fontsmall">
+              <v-list-tile-avatar class="fontsmall pr-2">
                 {{ $t('label.nv') }}{{ item.lvl }}
               </v-list-tile-avatar>
             </v-list-tile>
           </div>
         </template>
         <template v-if="gear.qntItens === 0">
-          <div class="pa-6">
+          <div class="pa-3">
             {{ $t('alert.add_equips') }}
           </div>
         </template>

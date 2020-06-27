@@ -1,4 +1,4 @@
-const state = {
+const defaultState = () => ({
   darkTheme: false,
   tabSelected: 'equips',
   drawerLeft: true,
@@ -8,26 +8,47 @@ const state = {
     danoBase: 100,
     criticoBase: 125,
     resistencia: 0
+  },
+  showDano: {
+    posicoes: ['Frente', 'Costas'],
+    alvos: ['ST', 'ZONA'],
+    distancias: ['CAC', 'DIST'],
+    multiplicadores: ['Critico', 'Berserk']
   }
+})
+
+const state = {
+  configs: defaultState()
 }
 
 const getters = {
-  darkTheme: state => state.darkTheme
+  darkTheme: state => state.configs.darkTheme,
+  calculoDano: state => state.configs.calculoDano,
+  showDano: state => state.configs.showDano
 }
 
 const mutations = {
-  setDarkTheme: (state, dark) => { state.darkTheme = dark }
+  setConfig: (state, config) => { state.configs = config },
+  setDarkTheme: (state, dark) => { state.configs.darkTheme = dark },
+  setCalculoDano: (state, obj) => { state.configs.calculoDano = obj },
+  setShowDano: (state, obj) => { state.configs.showDano = obj },
+  salvarLS: (state) => { localStorage.setItem('configs', JSON.stringify(state.configs)) }
 }
 
 const actions = {
-  async init ({ commit }) {
-    commit('setFiltros', JSON.parse(localStorage.getItem('filtros') || '{}'))
+  init ({ commit }) {
+    let configs = defaultState()
+    if (localStorage.getItem('configs')) configs = JSON.parse(localStorage.getItem('configs'))
+    commit('setConfig', configs)
   },
-  async setDarkTheme ({ commit }, dark) {
+  setDarkTheme ({ commit }, dark) {
     commit('setDarkTheme', dark)
+    commit('salvarLS')
   },
-  async salvar ({ commit }, configs) {
-    commit('setConfigs', localStorage.setItem('configs', JSON.stringify(configs)))
+  setDanos ({ commit }, obj) {
+    commit('setCalculoDano', obj.calculoDano)
+    commit('setShowDano', obj.showDanos)
+    commit('salvarLS')
   }
 }
 

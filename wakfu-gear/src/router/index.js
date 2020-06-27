@@ -7,7 +7,10 @@ Vue.use(Router)
 const router = new Router({
   mode: 'history',
   routes: [{
-    path: '',
+    path: '/:id',
+    redirect: '/'
+  }, {
+    path: '/',
     component: View
   }],
   scrollBehavior (to, from, savedPosition) {

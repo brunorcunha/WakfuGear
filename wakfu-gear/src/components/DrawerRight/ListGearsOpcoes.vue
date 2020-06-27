@@ -57,7 +57,10 @@
                     </v-list-tile-action>
                   </v-list-tile>
                   <v-divider />
-                  <v-list-tile @click="confirmarClonar(gear, index)">
+                  <v-list-tile
+                    v-if="gear.qntItens > 0"
+                    @click="confirmarClonar(gear, index)"
+                  >
                     <v-list-tile-content><v-list-tile-title>{{ $t('label.clonargear') }}</v-list-tile-title></v-list-tile-content>
                     <v-list-tile-action>
                       <v-icon color="orange">
@@ -75,7 +78,10 @@
                     </v-list-tile-action>
                   </v-list-tile>
                   <v-divider />
-                  <v-list-tile @click="exportarClipboard(gear, index)">
+                  <v-list-tile
+                    v-if="gear.qntItens > 0"
+                    @click="exportarClipboard(gear, index)"
+                  >
                     <v-list-tile-content><v-list-tile-title>{{ $t('label.exportargear') }}</v-list-tile-title></v-list-tile-content>
                     <v-list-tile-action>
                       <v-icon color="primary">
@@ -142,7 +148,9 @@ export default {
       this.$store.dispatch('gears/clonarGear', { index })
       this.$store.dispatch('gears/setNome', { nome: this.$i18n.t('label.clone'), index })
     },
-    exportarClipboard (gear, index) {}
+    exportarClipboard (gear, index) {
+      this.$ExportDialog.abrir(gear)
+    }
   }
 }
 </script>

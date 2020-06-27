@@ -16,6 +16,7 @@ export const pt = {
     equipamentos: 'Equipamentos',
     gears: 'Conjuntos',
     filtros: 'Filtros',
+    salvar: 'Salvar',
     filtrar: 'Filtrar',
     clone: 'Clone',
     clonar: 'Clonar',
@@ -48,11 +49,14 @@ export const pt = {
     trocaridioma: 'Trocar Idioma',
     tituloconjunto: 'Título do Conjunto',
     principais: 'Principais',
+    geral: 'Geral',
     maestrias: 'Maestrias',
     combate: 'Combate',
     secundarios: 'Secundários',
     versao: 'Versão: {0}',
     fork: 'Clone o projeto no {0}.',
+    nivelmaximo: 'Nível Máximo',
+    nivelminimo: 'Nível Mínimo',
     maximo: 'Máximo',
     minimo: 'Mínimo',
     calculadora: 'Dano',
@@ -66,13 +70,52 @@ export const pt = {
     Critico: 'Critico',
     Berserk: 'Berserk',
     BskCrit: 'BskCrit',
+    limpartudo: 'Limpar Tudo',
+    temaescuro: 'Tema Escuro',
+    basedano: 'Dano Base',
+    basecritico: 'Dano Crítico Base',
+    resistencia: 'Resistência',
+    resistenciap: 'Resistência Em %',
     comparandodanogears: 'Comparando o Dano',
     calculadoradano: 'Entenda o Cálculo',
+    calculodano: 'Cálculo de Dano',
+    tabelatransposta: 'Tabela Transposta [Desabilitado]',
     configs: 'Configurações',
-    moreinfos: 'Mais Informações'
+    moreinfos: 'Mais Informações',
+    posicaoconjurador: 'Posição do Conjurador',
+    alvofeitico: 'Alvo do Feitiço',
+    distanciaalvo: 'Distância do Alvo',
+    multiplicadores: 'Multiplicadores',
+    critico: 'Crítico',
+    berserk: 'Berserk',
+    distancia: 'Distância',
+    cac: 'Corpo-a-Corpo',
+    alvounico: 'Alvo Único',
+    zona: 'Zona',
+    frente: 'Frente',
+    costas: 'Costas',
+    url: 'URL'
   },
   msg: {
-    adicionarEquip: 'Adicione equipamentos a esse conjunto'
+    adicionarEquip: 'Adicione equipamentos a esse conjunto',
+    atualizaritens: 'Baixa a versão mais recente dos equipamentos.',
+    temaescuro: 'Alterna entre o tema branco e o tema mais escuro.',
+    tabelatransposta: 'Alterna entre as exibições de tabela em linha ou coluna.',
+    copy: 'Copiado para a área de transferência!'
+  },
+  info: {
+    itens: 'Itens',
+    altonivel: 'Alto Nível (200+)',
+    reliquias: 'Relíquias',
+    epicos: 'Épicos',
+    lembrancas: 'Lembranças',
+    mascotes: 'Mascotes',
+    montarias: 'Montarias',
+    sematributos: 'Sem Atributos',
+    comefeitos: 'Com Efeitos',
+    armas: 'Armas',
+    segundamao: 'Armas de Segunda Mão',
+    escudos: 'Escudos'
   },
   tipo: {
     amuleto: 'Amuleto',
@@ -114,6 +157,10 @@ export const pt = {
       titulo: 'Confirmar',
       msg: 'Tem certeza que deseja excluir o conjunto "{nome}"?'
     },
+    ls: {
+      titulo: 'Confirmar',
+      msg: 'Tem certeza que deseja excluir todos os dados salvos localmente?'
+    },
     clonar: {
       titulo: 'Confirmar',
       msg: 'Deseja clonar o conjunto "{nome}"?'
@@ -133,6 +180,7 @@ export const pt = {
     nomes: 'Nomes',
     filtros: 'Filtros',
     gears: 'Conjuntos',
+    configs: 'Configurações',
     disponivel: 'Disponível'
   },
   loading: [

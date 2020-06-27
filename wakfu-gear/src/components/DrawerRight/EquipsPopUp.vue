@@ -25,7 +25,7 @@
               <v-list-tile-content class="fontsmall">
                 <v-list-tile-title>{{ equipEffects.find(e => e.id === item.id)[$lang] }}</v-list-tile-title>
               </v-list-tile-content>
-              <v-list-tile-avatar class="fontsmall">
+              <v-list-tile-avatar class="fontsmall text-xs-right">
                 {{ item.params[0] }}
               </v-list-tile-avatar>
             </v-list-tile>
