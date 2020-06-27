@@ -23,6 +23,7 @@
 
       <v-card-text class="pt-0">
         <v-text-field
+          ref="campo"
           v-model="valor"
           :label="label.campo"
           :placeholder="label.placeholder"
@@ -92,6 +93,7 @@ export default {
       this.label.campo = obj.label
       this.label.placeholder = obj.placeholder
       this.opcoes = { ...this.opcoes, ...obj.opcoes }
+      this.focarCampo()
 
       return new Promise((resolve, reject) => {
         this.resolve = resolve
@@ -105,6 +107,10 @@ export default {
     cancelar () {
       this.reject()
       this.dialog = false
+    },
+    async focarCampo () {
+      await this.$nextTick()
+      this.$refs.campo.focus()
     }
   }
 }

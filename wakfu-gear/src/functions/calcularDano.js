@@ -1,4 +1,4 @@
-export default ({ gear, danoBase, danoBaseCritico, resistencia, danosCausados }) => {
+export default ({ gear, danoBase, danoBaseCritico, resistencia, danosCausados, filtros }) => {
   let Gear, Resistencia, DanoBase, DanoBaseCritico
 
   const valorDanoFrente = 1
@@ -41,9 +41,9 @@ export default ({ gear, danoBase, danoBaseCritico, resistencia, danosCausados })
   const calcularDano = (posicao, ehCritico, ehBerserk, ehCaC, ehST) => {
     const calculoDano = !ehCritico ? DanoBase : DanoBaseCritico
     const calculoDanosCausados = valorDanosCausados()
-    const ehCostas = (posicao === 'costas')
+    const ehCostas = (posicao === 'Costas')
     let calculoPosicao = valorDanoFrente
-    if (posicao === 'lado') calculoPosicao = valorDanoLado
+    if (posicao === 'Lado') calculoPosicao = valorDanoLado
     else if (ehCostas) calculoPosicao = valorDanoCostas
     const calculoDominios = calcularDominios(ehCostas, ehBerserk, ehCaC, ehST, ehCritico)
     const calculoResistencia = valorResistencia()
@@ -60,9 +60,9 @@ export default ({ gear, danoBase, danoBaseCritico, resistencia, danosCausados })
   }
 
   const montarArray = () => {
-    const posicoes = ['frente', 'costas']
-    const alvos = ['st', 'zona']
-    const distancias = ['cac', 'distancia']
+    const posicoes = filtros.posicoes
+    const alvos = filtros.alvos
+    const distancias = filtros.distancias
 
     const array = []
     for (const i in posicoes) {
@@ -74,13 +74,19 @@ export default ({ gear, danoBase, danoBaseCritico, resistencia, danosCausados })
           const alvo = alvos[k]
           const ehST = alvo === 'st'
           const resultadoNormal = calcularDano(posicao, false, false, ehCaC, ehST)
-          const resultadoBerserk = calcularDano(posicao, false, true, ehCaC, ehST)
-          const resultadoCritico = calcularDano(posicao, true, false, ehCaC, ehST)
-          const resultadoBerserkCritico = calcularDano(posicao, true, true, ehCaC, ehST)
           array.push({ posicao, distancia, alvo, resultado: resultadoNormal })
-          array.push({ posicao, distancia, alvo, resultado: resultadoCritico })
-          array.push({ posicao, distancia, alvo, resultado: resultadoBerserk })
-          array.push({ posicao, distancia, alvo, resultado: resultadoBerserkCritico })
+          if (filtros.multiplicadores.includes('Berserk')) {
+            const resultadoBerserk = calcularDano(posicao, false, true, ehCaC, ehST)
+            array.push({ posicao, distancia, alvo, resultado: resultadoBerserk })
+            if (filtros.multiplicadores.includes('Critico')) {
+              const resultadoBerserkCritico = calcularDano(posicao, true, true, ehCaC, ehST)
+              array.push({ posicao, distancia, alvo, resultado: resultadoBerserkCritico })
+            }
+          }
+          if (filtros.multiplicadores.includes('Critico')) {
+            const resultadoCritico = calcularDano(posicao, true, false, ehCaC, ehST)
+            array.push({ posicao, distancia, alvo, resultado: resultadoCritico })
+          }
         }
       }
     }

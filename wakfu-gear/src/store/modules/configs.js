@@ -1,5 +1,5 @@
 const defaultState = () => ({
-  darkTheme: false,
+  darkTheme: true,
   tabSelected: 'equips',
   drawerLeft: true,
   drawerRight: false,
@@ -13,7 +13,7 @@ const defaultState = () => ({
     posicoes: ['Frente', 'Costas'],
     alvos: ['ST', 'ZONA'],
     distancias: ['CAC', 'DIST'],
-    multiplicadores: ['Critico', 'Berserk']
+    multiplicadores: ['Critico']
   }
 })
 

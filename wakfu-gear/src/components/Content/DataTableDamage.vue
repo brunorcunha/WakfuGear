@@ -186,9 +186,9 @@ export default {
   methods: {
     organizarIndices () {
       this.indices = []
-      const posicoes = this.showDano.posicoes || ['Frente', 'Costas']
-      const alvos = this.showDano.alvos || ['ST', 'ZONA']
-      const distancias = this.showDano.distancias || ['CAC', 'DIST']
+      const posicoes = this.showDano.posicoes
+      const alvos = this.showDano.alvos
+      const distancias = this.showDano.distancias
       const multiplicadores = ['Normal']
       if (this.showDano.multiplicadores.includes('Critico')) multiplicadores.push('Critico')
       if (this.showDano.multiplicadores.includes('Berserk')) {
@@ -223,7 +223,8 @@ export default {
         danoBase: this.calculoDano.danoBase,
         danoBaseCritico: this.calculoDano.criticoBase,
         resistencia: this.calculoDano.resistencia,
-        danosCausados: 0
+        danosCausados: 0,
+        filtros: this.showDano
       }))
     },
     definirMaiorDano (gears) {
@@ -240,8 +241,10 @@ export default {
     },
     definirClasseDano (indice, index) {
       if (indice.resultado === this.maiorDano[index]) return 'maiordano'
-      if (indice.resultado === this.segundoMaiorDano[index]) return 'segundomaiordano'
       if (indice.resultado === this.menorDano[index]) return 'menordano'
+      if (indice.resultado === this.segundoMaiorDano[index] && this.maiorDano[index] !== this.segundoMaiorDano[index] && this.menorDano[index] !== this.segundoMaiorDano[index]) {
+        return 'segundomaiordano'
+      }
       return ''
     },
     traduzir (array, id) {

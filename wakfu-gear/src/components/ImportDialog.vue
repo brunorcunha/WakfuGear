@@ -45,6 +45,7 @@
           lg9
         >
           <v-text-field
+            ref="campo"
             v-model="linkZenith"
             :disabled="loading"
             label="Zenith Wakfu Builder"
@@ -143,6 +144,7 @@ export default {
       this.linkZenith = ''
       this.codigo = ''
       this.linkMethod = ''
+      this.focarCampo()
     },
     cancelar () {
       this.dialog = false
@@ -180,6 +182,10 @@ export default {
 
       this.loading = false
       this.dialog = false
+    },
+    async focarCampo () {
+      await this.$nextTick()
+      this.$refs.campo.focus()
     }
   }
 }

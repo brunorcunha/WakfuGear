@@ -71,7 +71,7 @@ const actions = {
   setNome ({ commit }, { nome, index }) {
     index = (index != null ? index : state.gearAtual)
     let nomeAjustado = nome.length > 30 ? `${nome.substring(0, 27)}...` : nome
-    nomeAjustado = nome.length < 1 ? 'Gear' : nome
+    nomeAjustado = nomeAjustado.length < 1 ? 'Gear' : nomeAjustado
     commit('setNome', { nome: nomeAjustado, index })
     commit('salvarLS')
   },
