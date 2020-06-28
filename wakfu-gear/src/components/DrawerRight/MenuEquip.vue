@@ -9,8 +9,7 @@
     <template #activator="{ on: menu }">
       <EquipsPopUp
         v-slot="{ hover }"
-        :nome="item.title[$lang]"
-        :lista="item.equipEffects"
+        :item="item"
       >
         <slot
           :on="{ ...menu, ...hover }"
@@ -23,6 +22,8 @@
     >
       <v-subheader class="deep-orange accent-4 white--text">
         {{ item.title[$lang] }}
+        <v-spacer />
+        <span>{{ $t('label.nv') }}{{ item.lvl || '0' }}</span>
       </v-subheader>
       <v-divider />
       <v-list-tile @click="remover(posicao)">

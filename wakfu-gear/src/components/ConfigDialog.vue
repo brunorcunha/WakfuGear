@@ -210,7 +210,6 @@
                   :mask="'####'"
                   :label="$t('label.basecritico')"
                   placeholder="125"
-                  @change="setCalculoDano('criticoBase', $event)"
                 >
                   <template #append>
                     <img src="../../static/atributos/tags_14.png">
@@ -224,12 +223,11 @@
                 <v-text-field
                   v-model="resistencia"
                   :mask="'####'"
-                  :label="$t('label.resistencia')"
+                  :label="`${$t('label.resistencia')} (${resistenciaPorcentagem}%)`"
                   placeholder="0"
-                  @change="setCalculoDano('resistencia', $event)"
                 >
                   <template #append>
-                    <img src="../../static/atributos/mini_29.png">
+                    <img src="../../static/atributos/tags_031.png">
                   </template>
                 </v-text-field>
               </v-flex>
@@ -238,13 +236,13 @@
                 pr-2
               >
                 <v-text-field
-                  disabled
-                  :label="$t('label.resistenciap')"
-                  placeholder="0%"
-                  :value="`${resistenciaPorcentagem}%`"
+                  v-model="danoInfligido"
+                  :mask="'###'"
+                  :label="$t('label.danoinfligido')"
+                  placeholder="0"
                 >
                   <template #append>
-                    <img src="../../static/atributos/tags_031.png">
+                    <img src="../../static/atributos/tags_09.png">
                   </template>
                 </v-text-field>
               </v-flex>
@@ -443,6 +441,7 @@
 import { mapGetters } from 'vuex'
 import LocalStorage from './LocalStorage'
 import MoreInfos from './MoreInfos'
+import { getResistenciaPorcentagem } from '../functions/calcularDano'
 
 export default {
   name: 'ConfigDialog',
@@ -452,6 +451,7 @@ export default {
     danoBase: 0,
     criticoBase: 0,
     resistencia: 0,
+    danoInfligido: 0,
     posicoes: [],
     alvos: [],
     distancias: [],
@@ -460,8 +460,7 @@ export default {
   computed: {
     ...mapGetters('configs', ['darkTheme', 'calculoDano', 'showDano', 'retrair']),
     resistenciaPorcentagem () {
-      if (!this.resistencia || this.resistencia <= 0) return 0
-      return Math.round((1 - Math.pow(0.800000011920929, this.resistencia / 100)) * 100)
+      return getResistenciaPorcentagem(this.resistencia)
     }
   },
   methods: {
@@ -486,6 +485,7 @@ export default {
       this.danoBase = this.calculoDano.danoBase
       this.criticoBase = this.calculoDano.criticoBase
       this.resistencia = this.calculoDano.resistencia
+      this.danoInfligido = this.calculoDano.danoInfligido
 
       this.posicoes = this.showDano.posicoes
       this.alvos = this.showDano.alvos
@@ -497,6 +497,7 @@ export default {
         calculoDano: {
           danoBase: parseInt(this.danoBase),
           criticoBase: parseInt(this.criticoBase),
+          danoInfligido: parseInt(this.danoInfligido),
           resistencia: parseInt(this.resistencia)
         },
         showDanos: {

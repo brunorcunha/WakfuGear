@@ -91,11 +91,8 @@ const actions = {
   async removerGear ({ commit }, { index }) {
     index = (index != null ? index : state.gearAtual)
     commit('removerGear', { index })
-    if (index === state.gearAtual) commit('setAtual', { index: 0 })
-    if (state.gears.length === 0) {
-      commit('addGear', {})
-      commit('setAtual', { index: 0 })
-    }
+    if (state.gears.length === 0) commit('addGear', {})
+    commit('setAtual', { index: 0 })
     commit('salvarLS')
   },
   async editarGear ({ commit }, { gear, index }) {

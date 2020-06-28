@@ -1,10 +1,21 @@
+export const getResistenciaRaw = resistencia => {
+  if (!resistencia || resistencia <= 0) return 0
+
+  const CONSTANTE = 0.800000011920929
+
+  return Math.pow(CONSTANTE, resistencia / 100).toFixed(2)
+}
+
+export const getResistenciaPorcentagem = resistencia => {
+  return Math.round((1 - getResistenciaRaw(resistencia)) * 100)
+}
+
 export default ({ gear, danoBase, danoBaseCritico, resistencia, danosCausados, filtros }) => {
   let Gear, Resistencia, DanoBase, DanoBaseCritico
 
   const valorDanoFrente = 1
   const valorDanoLado = 1.1
   const valorDanoCostas = 1.25
-  const CONSTANTE = 0.800000011920929
 
   const init = () => {
     Gear = {
@@ -36,7 +47,7 @@ export default ({ gear, danoBase, danoBaseCritico, resistencia, danosCausados, f
   }
 
   const valorDanosCausados = () => (Gear.DanosCausados + 100) / 100
-  const valorResistencia = () => (Resistencia <= 0) ? 1 : (Math.pow(CONSTANTE, Resistencia / 100)).toFixed(2)
+  const valorResistencia = () => (Resistencia <= 0) ? 1 : getResistenciaRaw(Resistencia)
 
   const calcularDano = (posicao, ehCritico, ehBerserk, ehCaC, ehST) => {
     const calculoDano = !ehCritico ? DanoBase : DanoBaseCritico

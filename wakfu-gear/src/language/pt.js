@@ -95,7 +95,8 @@ export const pt = {
     frente: 'Frente',
     costas: 'Costas',
     url: 'URL',
-    tabelaretrair: 'Retrair Atributos'
+    tabelaretrair: 'Retrair Atributos',
+    danoinfligido: 'Danos Infligidos'
   },
   msg: {
     adicionarEquip: 'Adicione equipamentos a esse conjunto',

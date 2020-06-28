@@ -16,17 +16,19 @@
         subheader
       >
         <v-subheader class="deep-orange accent-4 white--text">
-          {{ nome }}
+          {{ item.title[$lang] }}
+          <v-spacer />
+          <span>{{ $t('label.nv') }}{{ item.lvl || '0' }}</span>
         </v-subheader>
-        <template v-for="(item, index) in lista">
+        <template v-for="(atributo, index) in item.equipEffects">
           <div :key="`ifx${index}`">
             <v-divider />
-            <v-list-tile :class="`icone i${item.id} menulist paddingleft`">
+            <v-list-tile :class="`icone i${atributo.id} menulist paddingleft`">
               <v-list-tile-content class="fontsmall">
-                <v-list-tile-title>{{ equipEffects.find(e => e.id === item.id)[$lang] }}</v-list-tile-title>
+                <v-list-tile-title>{{ equipEffects.find(e => e.id === atributo.id)[$lang] }}</v-list-tile-title>
               </v-list-tile-content>
               <v-list-tile-avatar class="fontsmall text-xs-right">
-                {{ item.params[0] }}
+                {{ atributo.params[0] }}
               </v-list-tile-avatar>
             </v-list-tile>
           </div>
@@ -42,8 +44,7 @@ import { equipEffects } from '../../model/equipEffects'
 export default {
   name: 'EquipsPopUp',
   props: {
-    nome: { type: String, default: '' },
-    lista: { type: Array, default: () => [] }
+    item: { type: Object, default: () => {} }
   },
   data: () => ({
     equipEffects

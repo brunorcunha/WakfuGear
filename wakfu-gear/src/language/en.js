@@ -95,7 +95,8 @@ export const en = {
     frente: 'Front',
     costas: 'Back',
     url: 'URL',
-    tabelaretrair: 'Retract Attributes'
+    tabelaretrair: 'Retract Attributes',
+    danoinfligido: 'Damage Inflicted'
   },
   msg: {
     adicionarEquip: 'Add equipment to this gear',

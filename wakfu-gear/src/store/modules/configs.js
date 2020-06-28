@@ -8,6 +8,7 @@ const defaultState = () => ({
   calculoDano: {
     danoBase: 100,
     criticoBase: 125,
+    danoInfligido: 0,
     resistencia: 0
   },
   showDano: {

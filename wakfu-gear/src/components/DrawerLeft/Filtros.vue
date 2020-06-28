@@ -283,7 +283,13 @@ export default {
   },
   methods: {
     traduzirFx (val) {
-      return val
+      return val.sort((a, b) => {
+        const at = a[this.$lang]
+        const bt = b[this.$lang]
+        if (at > bt) return 1
+        else if (at < bt) return -1
+        return 0
+      })
     },
     async emitirFiltros () {
       this.progress = true

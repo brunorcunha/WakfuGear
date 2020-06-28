@@ -223,7 +223,7 @@ export default {
         danoBase: this.calculoDano.danoBase,
         danoBaseCritico: this.calculoDano.criticoBase,
         resistencia: this.calculoDano.resistencia,
-        danosCausados: 0,
+        danosCausados: this.calculoDano.danoInfligido,
         filtros: this.showDano
       }))
     },

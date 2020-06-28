@@ -77,7 +77,7 @@
                 :nome="(equipEffects.find(e => e.id === atributo.id2) || {})[$lang]"
               >
                 <v-flex v-on="on">
-                  <div class="icone resist" /> {{ total }}
+                  <div class="icone resist" /> {{ getResistenciaPorcentagem(total) }}% ({{ total }})
                 </v-flex>
               </AtributosPopUp>
             </v-layout>
@@ -172,6 +172,7 @@ import atributos from '../../functions/atributos'
 import { equipEffects } from '../../model/equipEffects'
 import { mapGetters } from 'vuex'
 import AtributosPopUp from './AtributosPopUp'
+import { getResistenciaPorcentagem } from '../../functions/calcularDano'
 
 export default {
   name: 'Atributos',
@@ -312,77 +313,13 @@ export default {
       const resistenciaElementalLista = resistenciaElementalPrimeiroLista + resistenciaElementalSegundoLista + resistenciaElementalTerceiroLista
 
       return resistenciaElementalFixo + resistenciaElementalTotal + resistenciaElementalLista
+    },
+    getResistenciaPorcentagem (resistencia) {
+      return getResistenciaPorcentagem(resistencia)
     }
   }
 }
 </script>
 
 <style scoped>
-  .atr > .flex {
-    padding: 5px 2.5px 0;
-    cursor: move;
-  }
-  .atr > .flex > div {
-    border-radius: 5px;
-    background: white;
-    border: solid 1px darkgrey;
-    text-align: left;
-    padding: 0 3px;
-    padding-right: 8px;
-    height: 23px;
-    box-shadow: 0 0 2px 0 rgba(0,0,0,.16);
-  }
-  .atr.big > .flex > div {
-    padding: 6px 4px 4px;
-    line-height: 27px;
-    height: 35px;
-    text-align: center;
-  }
-  .atr > .flex > .titulo > span {
-    text-shadow: 0 0 1px #000;
-    font-weight: bold;
-    display: block;
-    font-size: 15px;
-    color: #fff;
-    position: relative;
-  }
-  .atr > .flex > .titulo {
-    cursor: default;
-    position: relative;
-    overflow: hidden;
-    height: 30px;
-    padding: 3px 10px;
-    background: #BF361F url(../../../static/h1.png) right center no-repeat !important;
-    border-color: #dd2c00!important;
-  }
-  .atr > .flex > .titulo::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 210px;
-    height: 48px;
-    -webkit-transform: scaleX(-1) scaleY(-1);
-    background: #BF361F url(../../../static/h1.png) left center no-repeat;
-    z-index: 0;
-  }
-  .atr > .flex img {
-    float: left;
-    margin-right: 3px;
-  }
-  .fontsmall {
-    font-size: 12px;
-    line-height: 22px;
-  }
-  .icone {
-    float: left;
-    width: 25px;
-    height: 21px;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-  .big .icone {
-    width: 24px;
-    height: 24px;
-  }
 </style>

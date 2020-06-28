@@ -25,9 +25,11 @@
         <v-text-field
           ref="campo"
           v-model="valor"
+          :disabled="disabled"
           :label="label.campo"
           :placeholder="label.placeholder"
           hide-details
+          @keyup.enter="confirmar"
         />
       </v-card-text>
 
@@ -37,11 +39,13 @@
         <v-spacer />
         <v-btn
           color="error"
+          :disabled="disabled"
           @click="cancelar"
         >
           {{ label.cancelar }}
         </v-btn>
         <v-btn
+          :disabled="disabled"
           color="primary darken-1"
           @click="confirmar"
         >
@@ -64,6 +68,7 @@ export default {
   },
   data: () => ({
     dialog: false,
+    disabled: false,
     resolve: null,
     reject: null,
     titulo: null,
@@ -86,6 +91,7 @@ export default {
   },
   methods: {
     abrir (obj) {
+      this.disabled = false
       this.dialog = true
       this.valor = ''
       this.titulo = obj.titulo
@@ -101,6 +107,7 @@ export default {
       })
     },
     confirmar () {
+      this.disabled = true
       this.resolve(this.valor)
       this.dialog = false
     },

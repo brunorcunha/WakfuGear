@@ -167,10 +167,10 @@ export const equipEffects = [
   {
     id: 150,
     iid: [168],
-    fr: '% Coup Critique',
-    en: '% Critical Hit',
-    es: '% Golpe Crítico',
-    pt: '% Golpe Crítico'
+    fr: 'Coup Critique',
+    en: 'Critical Hit',
+    es: 'Golpe Crítico',
+    pt: 'Golpe Crítico'
   },
   {
     id: 160,
@@ -279,10 +279,10 @@ export const equipEffects = [
   {
     id: 875,
     iid: [876],
-    fr: '% Parade',
-    en: '% Block',
-    es: '% Anticipación',
-    pt: '% Parada'
+    fr: 'Parade',
+    en: 'Block',
+    es: 'Anticipación',
+    pt: 'Parada'
   },
   {
     id: 979,
@@ -359,10 +359,10 @@ export const equipEffects = [
   {
     id: 2001,
     iid: [],
-    fr: '% Quantité Récolte',
-    en: '% Harvesting Quantity',
-    es: '% Cantidad de Recolección',
-    pt: '% Quantidade de Colheita'
+    fr: 'Quantité Récolte',
+    en: 'Harvesting Quantity',
+    es: 'Cantidad de Recolección',
+    pt: 'Quantidade de Colheita'
   },
   {
     id: 910681,
