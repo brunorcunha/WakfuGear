@@ -7,7 +7,7 @@ export const getResistenciaRaw = resistencia => {
 }
 
 export const getResistenciaPorcentagem = resistencia => {
-  return Math.round(getResistenciaRaw(resistencia) * 100)
+  return Math.round((1 - getResistenciaRaw(resistencia)) * 100)
 }
 
 export default ({ gear, danoBase, danoBaseCritico, resistencia, danosCausados, filtros }) => {
