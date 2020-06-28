@@ -4,6 +4,7 @@ const defaultState = () => ({
   drawerLeft: true,
   drawerRight: false,
   tableTransposed: false,
+  retrair: true,
   calculoDano: {
     danoBase: 100,
     criticoBase: 125,
@@ -23,12 +24,14 @@ const state = {
 
 const getters = {
   darkTheme: state => state.configs.darkTheme,
+  retrair: state => state.configs.retrair,
   calculoDano: state => state.configs.calculoDano,
   showDano: state => state.configs.showDano
 }
 
 const mutations = {
   setConfig: (state, config) => { state.configs = config },
+  setRetrair: (state, retrair) => { state.configs.retrair = retrair },
   setDarkTheme: (state, dark) => { state.configs.darkTheme = dark },
   setCalculoDano: (state, obj) => { state.configs.calculoDano = obj },
   setShowDano: (state, obj) => { state.configs.showDano = obj },
@@ -43,6 +46,10 @@ const actions = {
   },
   setDarkTheme ({ commit }, dark) {
     commit('setDarkTheme', dark)
+    commit('salvarLS')
+  },
+  setRetrair ({ commit }, retrair) {
+    commit('setRetrair', retrair)
     commit('salvarLS')
   },
   setDanos ({ commit }, obj) {

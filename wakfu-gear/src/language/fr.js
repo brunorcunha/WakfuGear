@@ -94,14 +94,16 @@ export const fr = {
     zona: 'Zone',
     frente: 'Face',
     costas: 'Arrière',
-    url: 'URL'
+    url: 'URL',
+    tabelaretrair: 'Retract Attributes'
   },
   msg: {
     adicionarEquip: 'Ajouter de l\'équipement à cet Gear',
     atualizaritens: 'Téléchargez la dernière version de l\'équipement.',
     temaescuro: 'Bascule entre le thème blanc et le thème plus sombre.',
     tabelatransposta: 'Basculez entre les vues de table de ligne ou de colonne.',
-    copy: 'Copié dans le presse-papiers!'
+    copy: 'Copié dans le presse-papiers!',
+    tabelaretrair: 'Le défilement de la barre horizontale rétracte les attributs et affiche uniquement les icônes.'
   },
   info: {
     itens: 'Équipement',

@@ -786,6 +786,8 @@ small.link {
 .theme--dark .foot small{ color: rgba(255, 255, 255, .7); }
 .theme--dark .tipclaro { background: #2f3136; border-right: 1px solid #36393f; color: rgba(255, 255, 255, .9); }
 .theme--dark .tipescuro { background: #36393f; border-right: 1px solid #2f3136; color: rgba(255, 255, 255, .9); }
+.theme--dark .ordemSelecionada { background: #202225; }
+.theme--dark .atributoSelecionado { background: #202225; }
 
 
 /** SCROLL LIGHT **/

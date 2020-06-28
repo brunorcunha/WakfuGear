@@ -146,6 +146,7 @@ export default {
     equipType
   }),
   computed: {
+    ...mapGetters('configs', { retrairSetting: 'retrair' }),
     ...mapGetters('items', ['items', 'itemsList']),
     ...mapGetters('filtros', ['filtros'])
   },
@@ -228,8 +229,10 @@ export default {
       this.$refs.atributos.scrollTop = evt.target.scrollTop
       this.$refs.items.scrollLeft = evt.target.scrollLeft
 
-      if (evt.target.scrollLeft < 20 && this.$vuetify.breakpoint.lgAndUp) this.retrair = false
-      else this.retrair = true
+      if (this.retrairSetting) {
+        if (evt.target.scrollLeft < 20 && this.$vuetify.breakpoint.lgAndUp) this.retrair = false
+        else this.retrair = true
+      }
     }
   }
 }

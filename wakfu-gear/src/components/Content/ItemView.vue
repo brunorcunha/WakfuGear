@@ -85,6 +85,12 @@
             {{ item.title[$lang] }}
           </v-subheader>
           <v-divider />
+          <v-list-tile @click="adicionarAoGear">
+            <v-list-tile-content>
+              {{ $t('label.adicionaraogear') }} {{ $t('label.atual') }}
+            </v-list-tile-content>
+          </v-list-tile>
+          <v-divider />
           <v-menu
             open-on-hover
             right
@@ -98,7 +104,7 @@
                 v-on="submenu"
               >
                 <v-list-tile-content>
-                  {{ $t('label.adicionaraogear') }}
+                  {{ $t('label.adicionaraogear') }}...
                 </v-list-tile-content>
                 <v-list-tile-action>
                   <v-icon small>

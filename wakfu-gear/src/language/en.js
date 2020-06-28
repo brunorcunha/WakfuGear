@@ -94,14 +94,16 @@ export const en = {
     zona: 'Zone',
     frente: 'Front',
     costas: 'Back',
-    url: 'URL'
+    url: 'URL',
+    tabelaretrair: 'Retract Attributes'
   },
   msg: {
     adicionarEquip: 'Add equipment to this gear',
     atualizaritens: 'Download the latest version of the equipment.',
     temaescuro: 'Toggles between the white theme and the dark theme.',
     tabelatransposta: 'Switch between row or column table views.',
-    copy: 'Copied to the clipboard!'
+    copy: 'Copied to the clipboard!',
+    tabelaretrair: 'Scrolling the horizontal bar retracts the attributes and displays only the icons.'
   },
   info: {
     itens: 'Items',

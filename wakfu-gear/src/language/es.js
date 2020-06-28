@@ -94,14 +94,16 @@ export const es = {
     zona: 'Zona',
     frente: 'Frente',
     costas: 'Espalda',
-    url: 'URL'
+    url: 'URL',
+    tabelaretrair: 'Retraer Atributos'
   },
   msg: {
     adicionarEquip: 'Agregar equipo a este gear',
     atualizaritens: 'Descargue la última versión del equipo.',
     temaescuro: 'Alterna entre el tema blanco y el tema más oscuro.',
     tabelatransposta: 'Cambiar entre vistas de tabla de fila o columna.',
-    copy: 'Copiado al portapapeles!'
+    copy: 'Copiado al portapapeles!',
+    tabelaretrair: 'El desplazamiento de la barra horizontal retrae los atributos y muestra solo los iconos.'
   },
   info: {
     itens: 'Equipo',

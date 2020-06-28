@@ -25,8 +25,8 @@ const thisFiltros = {
     if (isNaN(levelMin) || isNaN(levelMax)) return items
     if (levelMin > levelMax) levelMax = [levelMin, levelMin = levelMax][0]
 
-    const filtro = nivel => (nivel >= levelMin && nivel <= levelMax) || thisFiltros.isPetFilter(items, filtros)
-    return items.filter(item => filtro(item.lvl))
+    const filtro = nivel => (nivel >= levelMin && nivel <= levelMax)
+    return items.filter(item => filtro(item.lvl) || thisFiltros.isPetOrMount(item))
   },
 
   filtroRaridade: (items, filtros) => {
@@ -35,8 +35,8 @@ const thisFiltros = {
     const raridades = filtros.raridades.map(e => parseInt(e)).filter(e => !isNaN(e))
     if (raridades.length === 0) return items
 
-    const filtro = rarity => raridades.some(raridade => raridade === rarity || thisFiltros.isPetFilter(items, filtros))
-    return items.filter(item => filtro(item.rarity))
+    const filtro = rarity => raridades.some(raridade => raridade === rarity)
+    return items.filter(item => filtro(item.rarity) || thisFiltros.isPetOrMount(item))
   },
 
   filtroTipo: (items, filtros) => {
@@ -72,6 +72,10 @@ const thisFiltros = {
     if (isNaN(limit) || isNaN(offset)) return items.slice(0, 10)
 
     return items.slice(offset, limit)
+  },
+
+  isPetOrMount (item) {
+    return (item.type === 582 || item.type === 420 || item.type === 611)
   },
 
   isPetFilter (items, filtros) {

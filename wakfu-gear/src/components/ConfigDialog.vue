@@ -141,6 +141,38 @@
 
               <v-divider />
 
+              <v-list-tile
+                avatar
+                @click="setRetrair"
+              >
+                <v-list-tile-action>
+                  <v-icon v-if="!retrair">
+                    check_box_outline_blank
+                  </v-icon>
+                  <v-icon
+                    v-else
+                    color="primary"
+                  >
+                    check_box
+                  </v-icon>
+                </v-list-tile-action>
+                <v-list-tile-content>
+                  <v-list-tile-title>
+                    {{ $t('label.tabelaretrair') }}
+                  </v-list-tile-title>
+                  <v-list-tile-sub-title>
+                    {{ $t('msg.tabelaretrair') }}
+                  </v-list-tile-sub-title>
+                </v-list-tile-content>
+                <v-list-tile-action>
+                  <v-icon x-large>
+                    menu_open
+                  </v-icon>
+                </v-list-tile-action>
+              </v-list-tile>
+
+              <v-divider />
+
               <v-subheader>
                 {{ $t('label.calculodano') }}
               </v-subheader>
@@ -426,7 +458,7 @@ export default {
     multiplicadores: []
   }),
   computed: {
-    ...mapGetters('configs', ['darkTheme', 'calculoDano', 'showDano']),
+    ...mapGetters('configs', ['darkTheme', 'calculoDano', 'showDano', 'retrair']),
     resistenciaPorcentagem () {
       if (!this.resistencia || this.resistencia <= 0) return 0
       return Math.round((1 - Math.pow(0.800000011920929, this.resistencia / 100)) * 100)
@@ -446,6 +478,9 @@ export default {
     },
     trocarTema () {
       this.$store.dispatch('configs/setDarkTheme', !this.darkTheme)
+    },
+    setRetrair () {
+      this.$store.dispatch('configs/setRetrair', !this.retrair)
     },
     getValores () {
       this.danoBase = this.calculoDano.danoBase

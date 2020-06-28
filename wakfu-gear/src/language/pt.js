@@ -94,14 +94,16 @@ export const pt = {
     zona: 'Zona',
     frente: 'Frente',
     costas: 'Costas',
-    url: 'URL'
+    url: 'URL',
+    tabelaretrair: 'Retrair Atributos'
   },
   msg: {
     adicionarEquip: 'Adicione equipamentos a esse conjunto',
     atualizaritens: 'Baixa a versão mais recente dos equipamentos.',
     temaescuro: 'Alterna entre o tema branco e o tema mais escuro.',
     tabelatransposta: 'Alterna entre as exibições de tabela em linha ou coluna.',
-    copy: 'Copiado para a área de transferência!'
+    copy: 'Copiado para a área de transferência!',
+    tabelaretrair: 'Ao rolar a barra horizontal retrai os atributos e exibe somente os ícones.'
   },
   info: {
     itens: 'Itens',
