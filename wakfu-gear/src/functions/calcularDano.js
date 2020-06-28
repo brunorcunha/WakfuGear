@@ -7,6 +7,7 @@ export const getResistenciaRaw = resistencia => {
 }
 
 export const getResistenciaPorcentagem = resistencia => {
+  if (!resistencia || resistencia <= 0) return 0
   return Math.round((1 - getResistenciaRaw(resistencia)) * 100)
 }
 
