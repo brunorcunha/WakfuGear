@@ -1,9 +1,12 @@
+const AWS = require('aws-sdk');
 const nodefs = require('fs');
 const path = require('path');
-const mongoose = require('mongoose');
 
 const {
-  MONGO_URL,
+  MY_AWS_ACCESS_KEY_ID,
+  MY_AWS_SECRET_ACCESS_KEY,
+  S3_BUCKET_NAME,
+  MY_AWS_REGION,
   NODE_ENV
 } = process.env;
 
@@ -16,22 +19,22 @@ let fs = {
 }
 
 if(NODE_ENV !== 'development'){
-  mongoose.connect(MONGO_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true
+  const S3_PARAMS = {
+    Bucket: S3_BUCKET_NAME
+  };
+
+  const s3 = new AWS.S3({
+    signatureVersion: 'v4',
+    credentials: new AWS.Credentials(MY_AWS_ACCESS_KEY_ID, MY_AWS_SECRET_ACCESS_KEY),
+    region: MY_AWS_REGION
   });
 
-  const schema = new mongoose.Schema({ name: String, payload: String });
-  const Storage = mongoose.model('Storage', schema);
-
   fs = {
-    access: () => Promise.resolve(),
-    readFile: name => Storage.findOne({ name }),
-    writeFileSync: (name, payload) => {
-      const storage = Storage.findOne({ name });
-      storage.payload = payload;
-      return storage.save();
+    access: Key => s3.headObject({ ...S3_PARAMS, Key }).promise(),
+    readFile: Key => s3.getObject({ ...S3_PARAMS, Key }).promise(),
+    writeFileSync: (Key, payload) => {
+      const bufferObject = new Buffer.from(payload)
+      return s3.putObject({...S3_PARAMS, Key, ContentType: 'application/json', Body: bufferObject }).promise()
     }
   };
 }
