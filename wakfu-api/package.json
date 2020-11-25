@@ -14,6 +14,6 @@
     "request-promise": "^4.2.6"
   },
   "devDependencies": {
-    "netlify-lambda": "^2.0.1"
+    "netlify-lambda": "^1.6.3"
   }
 }
