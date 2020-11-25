@@ -3,18 +3,18 @@ const { fs } = require('./configs/cache')
 const { ALLOWED_ORIGINS } = require('./configs/variables');
 const { WAPI } = require('./configs/wakfu');
 
-const FSreadFile = async (version, tipo) => {
-  return (await fs.readFile(`${version}/${tipo}.json`)).Body.toString()
+const FSreadFile = (version, tipo) => {
+  return fs.readFile(`${version}-${tipo}`)
 }
 
-const FSwriteFile = async (version, tipo, data) => {
-  return await fs.writeFileSync(`${version}/${tipo}.json`, data)
+const FSwriteFile = (version, tipo, data) => {
+  return fs.writeFileSync(`${version}-${tipo}`, data)
 }
 
 const getItemsSaved = async (version, tipo) => {
   let response = ''
   try {
-    await fs.access(`${version}/${tipo}.json`)
+    await fs.access(`${version}-${tipo}`)
     response = await FSreadFile(version, tipo)
   } catch (e) {
     response = await WAPI.items(version, tipo)
