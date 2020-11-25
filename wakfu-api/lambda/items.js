@@ -12,11 +12,8 @@ const FSwriteFile = (version, tipo, data) => {
 }
 
 const getItemsSaved = async (version, tipo) => {
-  let response = ''
-  try {
-    await fs.access(`${version}-${tipo}`)
-    response = await FSreadFile(version, tipo)
-  } catch (e) {
+  let response = await FSreadFile(version, tipo)
+  if (!response) {
     response = await WAPI.items(version, tipo)
     await FSwriteFile(version, tipo, response)
   }
