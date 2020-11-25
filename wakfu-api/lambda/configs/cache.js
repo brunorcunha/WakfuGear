@@ -22,7 +22,7 @@ if(NODE_ENV !== 'development'){
     useCreateIndex: true
   });
 
-  const schema = new Schema({ name: String, payload: String });
+  const schema = new mongoose.Schema({ name: String, payload: String });
   const Storage = mongoose.model('Storage', schema);
 
   fs = {
