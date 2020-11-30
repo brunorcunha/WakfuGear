@@ -101,7 +101,7 @@
                   :value="tipo.id"
                   v-on="on"
                 >
-                  <img :src="`../../../static/${tipo.id}.png`">
+                  <img :src="`../../../static/${tipo.img}`">
                 </v-btn>
               </template>
               <span>{{ tipo[$lang] }}</span>
