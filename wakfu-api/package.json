@@ -9,7 +9,6 @@
     "start": "npm run serve"
   },
   "dependencies": {
-    "mongoose": "^5.10.15",
     "request": "^2.88.2",
     "request-promise": "^4.2.6"
   },
