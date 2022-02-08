@@ -4,6 +4,7 @@ import api from '../../api/items'
 const state = {
   versao: '',
   items: [],
+  maxLvl: 230,
   itemsList: [],
   existItems: false
 }
@@ -12,6 +13,7 @@ const getters = {
   versao: state => state.versao,
   items: state => state.items,
   itemsList: state => state.itemsList,
+  maxLvl: state => state.maxLvl,
   existItems: state => state.existItems
 }
 
@@ -19,6 +21,7 @@ const mutations = {
   setVersao: (state, versao) => { state.versao = versao },
   setItems: (state, items) => { state.items = items },
   setItemsList: (state, itemsList) => { state.itemsList = itemsList },
+  setMaxLvl: (state, maxLvl) => { state.maxLvl = maxLvl },
   setExistItems: (state, existItems) => { state.existItems = !!existItems }
 }
 
@@ -32,6 +35,7 @@ const actions = {
       localStorage.setItem('versao', versao.version)
       localStorage.setItem('itens', JSON.stringify(itens))
       localStorage.setItem('itensList', JSON.stringify(itensList))
+      localStorage.setItem('maxLvl', dados.reduce((ac, item) => Math.max(ac, item.lvl || 0), 200))
     }
 
     if (!localStorage['versao'] || !localStorage['itens']) {
@@ -46,6 +50,7 @@ const actions = {
     commit('setVersao', localStorage.getItem('versao'))
     commit('setItems', JSON.parse(localStorage.getItem('itens')))
     commit('setItemsList', JSON.parse(localStorage.getItem('itensList')))
+    commit('setMaxLvl', localStorage.getItem('maxLvl') || 230)
     commit('setExistItems', true)
   }
 }

@@ -186,7 +186,7 @@
           thumb-label="always"
           color="deep-orange accent-4"
           :step="1"
-          :max="215"
+          :max="maxLvl"
           :min="0"
         />
       </v-flex>
@@ -250,7 +250,7 @@ export default {
     progress: false
   }),
   computed: {
-    ...mapGetters('items', ['itemsList', 'versao']),
+    ...mapGetters('items', ['itemsList', 'versao', 'maxLvl']),
     ...mapGetters('filtros', { filtrosLS: 'filtros' }),
     temAtualizacao () {
       return localStorage['versao'] !== this.versao
