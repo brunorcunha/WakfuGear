@@ -82,6 +82,7 @@
                 flat
                 :input-value="null"
                 v-on="on"
+                style="min-width:40px"
                 @click="toggleTodosTipos"
               >
                 <img src="../../../static/tipo/-1.png">
