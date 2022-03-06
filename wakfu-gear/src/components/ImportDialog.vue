@@ -35,55 +35,6 @@
         indeterminate
       />
       <v-layout
-        row
-        wrap
-        py-3
-        px-4
-      >
-        <v-flex
-          xs12
-          lg9
-        >
-          <v-text-field
-            ref="campo"
-            v-model="linkZenith"
-            :disabled="loading"
-            label="Zenith Wakfu Builder"
-            placeholder="https://zenithwakfu.com/builder/xxxxx"
-            hide-details
-            dense
-          >
-            <template #prepend>
-              <img
-                src="static/zenith.png"
-                height="25"
-              >
-            </template>
-          </v-text-field>
-        </v-flex>
-        <v-flex
-          xs12
-          lg3
-          :pl-4="!$vuetify.breakpoint.smAndDown"
-        >
-          <v-btn
-            block
-            large
-            color="primary"
-            :disabled="loading"
-            @click="importarZenith"
-          >
-            {{ $t('label.importar') }} <v-icon>import_export</v-icon>
-          </v-btn>
-        </v-flex>
-      </v-layout>
-      <v-divider />
-      <div class="ou">
-        <span>
-          {{ $t('label.ou') }}
-        </span>
-      </div>
-      <v-layout
         py-2
         px-4
         wrap

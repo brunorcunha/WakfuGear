@@ -205,6 +205,7 @@ export default {
         items = filtros.filtroRaridade(items, filtro)
         items = filtros.filtroTipo(items, filtro)
         items = filtros.filtroBonus(items, filtro)
+        items = filtros.filtroIgnorarBonus(items, filtro)
       }
 
       return items

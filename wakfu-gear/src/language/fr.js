@@ -8,6 +8,7 @@ export const fr = {
     ou: 'Ou',
     nome: 'Nom',
     bonus: 'Effets',
+    ignorebonus: 'Ignorer Effets',
     nivel: 'Niveau',
     nv: 'Nv.',
     mostrar: 'Afficher',

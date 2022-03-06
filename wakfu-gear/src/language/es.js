@@ -8,6 +8,7 @@ export const es = {
     ou: 'O',
     nome: 'Nombre',
     bonus: 'Efectos',
+    ignorebonus: 'Ignorar Efectos',
     nivel: 'Nivel',
     nv: 'Nv.',
     mostrar: 'Mostrar',

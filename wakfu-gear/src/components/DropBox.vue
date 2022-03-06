@@ -11,7 +11,6 @@
     :item-text="$lang"
     :items="items"
     :label="label"
-    :placeholder="label"
     :disabled="disabled"
     v-on="inputListeners"
   >

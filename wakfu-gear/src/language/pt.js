@@ -8,6 +8,7 @@ export const pt = {
     ou: 'Ou',
     nome: 'Nome',
     bonus: 'Bônus',
+    ignorebonus: 'Ignorar Bônus',
     nivel: 'Nível',
     nv: 'Nv.',
     mostrar: 'Mostrar',

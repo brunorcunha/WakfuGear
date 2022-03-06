@@ -3,12 +3,11 @@ import { equipType } from '../model/equipType'
 
 const thisFiltros = {
   existeFiltro: (filtros, filtro) => {
-    if (!filtros || !filtros.niveis || !Array.isArray(filtros[filtro])) return false
-    return true
+    return !(!filtros || !filtros.niveis || !Array.isArray(filtros[filtro]))
   },
+
   existeFiltroNome: (filtros) => {
-    if (!filtros || !filtros.nome || filtros.nome.length === 0) return false
-    return true
+    return !(!filtros || !filtros.nome || filtros.nome.length === 0)
   },
 
   filtroNome: (items, filtros) => {
@@ -26,7 +25,7 @@ const thisFiltros = {
     if (levelMin > levelMax) levelMax = [levelMin, levelMin = levelMax][0]
 
     const filtro = nivel => (nivel >= levelMin && nivel <= levelMax)
-    return items.filter(item => filtro(item.lvl) || thisFiltros.isPetOrMount(item))
+    return items.filter(item => filtro(item.lvl))
   },
 
   filtroRaridade: (items, filtros) => {
@@ -36,7 +35,7 @@ const thisFiltros = {
     if (raridades.length === 0) return items
 
     const filtro = rarity => raridades.some(raridade => raridade === rarity)
-    return items.filter(item => filtro(item.rarity) || thisFiltros.isPetOrMount(item))
+    return items.filter(item => filtro(item.rarity))
   },
 
   filtroTipo: (items, filtros) => {
@@ -57,12 +56,28 @@ const thisFiltros = {
   filtroBonus: (items, filtros) => {
     if (!thisFiltros.existeFiltro(filtros, 'bonus') || filtros.bonus.length === 0) return items
 
-    let bonus = filtros.bonus.map(e => parseInt(e)).filter(e => !isNaN(e))
+    const bonus = filtros.bonus.map(e => parseInt(e)).filter(e => !isNaN(e))
     if (bonus.length === 0) return items
+
+    const filtro = fx => {
+      return bonus.every((b) => {
+        const allbonus = [b, equipEffects.find(fx => fx.id === b).iid].flat()
+        return allbonus.some(ab => fx.map(e => e.id).includes(ab))
+      })
+    }
+    return items.filter(item => filtro(item.equipEffects))
+  },
+
+  filtroIgnorarBonus: (items, filtros) => {
+    if (!thisFiltros.existeFiltro(filtros, 'ignorebonus') || filtros.ignorebonus.length === 0) return items
+
+    let bonus = filtros.ignorebonus.map(e => parseInt(e)).filter(e => !isNaN(e))
+    if (bonus.length === 0) return items
+
     bonus = bonus.map(b => [b, equipEffects.find(fx => fx.id === b).iid].flat()).flat()
 
-    const filtro = equipEffects => bonus.some(b => equipEffects.map(e => e.id).includes(b))
-    return items.filter(item => filtro(item.equipEffects))
+    const filtro = fx => bonus.some(b => fx.map(e => e.id).includes(b))
+    return items.filter(item => !filtro(item.equipEffects))
   },
 
   filtroLimit: (items, filtros) => {

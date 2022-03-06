@@ -8,6 +8,7 @@ export const en = {
     ou: 'Or',
     nome: 'Name',
     bonus: 'Effects',
+    ignorebonus: 'Ignore Effects',
     nivel: 'Level',
     nv: 'Lv.',
     mostrar: 'Show',

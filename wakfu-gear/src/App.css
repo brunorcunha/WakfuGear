@@ -709,8 +709,6 @@ small.link {
 .lang {
   top: 0;
 }
-.v-slider__thumb-label__container { bottom: -70px; top: auto; }
-.v-slider__thumb-label { border-radius: 0 50% 50% 50%; }
 .v-chip--select-multi { margin: 3px 1px 0 0; }
 .scroll { overflow-y: auto; }
 .foot { border-top: 1px solid #C0C0C0; }

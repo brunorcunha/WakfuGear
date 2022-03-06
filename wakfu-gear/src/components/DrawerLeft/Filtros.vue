@@ -61,7 +61,6 @@
         <v-autocomplete
           v-model="filtros.nome"
           :label="$t('label.nome')"
-          :placeholder="$t('label.nome')"
           :items="itemsList"
           clearable
           dense
@@ -81,8 +80,8 @@
               <v-btn
                 flat
                 :input-value="null"
-                v-on="on"
                 style="min-width:40px"
+                v-on="on"
                 @click="toggleTodosTipos"
               >
                 <img src="../../../static/tipo/-1.png">
@@ -100,8 +99,8 @@
                 <v-btn
                   flat
                   :value="tipo.id"
-                  v-on="on"
                   style="min-width:40px"
+                  v-on="on"
                 >
                   <img :src="`../../../static/${tipo.img}`">
                 </v-btn>
@@ -152,18 +151,9 @@
         </v-btn-toggle>
       </v-flex>
 
-      <v-flex px-3>
-        <drop-box
-          v-model="filtros.bonus"
-          :items="itemsBonus"
-          :label="$t('label.bonus')"
-          :placeholder="$t('label.bonus')"
-        />
-      </v-flex>
-
       <v-flex
         px-2
-        mb-5
+        mb-2
       >
         <v-layout>
           <v-flex px-2>
@@ -183,13 +173,29 @@
         </v-layout>
         <v-range-slider
           v-model="filtros.niveis"
-          ticks
+          thumb-label
+          hide-details
           class="px-3 mt-0"
-          thumb-label="always"
           color="deep-orange accent-4"
           :step="1"
           :max="maxLvl"
-          :min="0"
+          :min="1"
+        />
+      </v-flex>
+
+      <v-flex px-3>
+        <drop-box
+          v-model="filtros.bonus"
+          :items="itemsBonus"
+          :label="$t('label.bonus')"
+        />
+      </v-flex>
+
+      <v-flex px-3>
+        <drop-box
+          v-model="filtros.ignorebonus"
+          :items="itemsBonus"
+          :label="$t('label.ignorebonus')"
         />
       </v-flex>
 
@@ -244,6 +250,7 @@ export default {
       tipos: [],
       raridades: [],
       bonus: [],
+      ignorebonus: [],
       lang: ''
     },
     itemsRaridade: [],

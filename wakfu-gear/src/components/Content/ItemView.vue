@@ -4,14 +4,20 @@
     class="itemHeader"
     @dblclick="adicionarAoGear"
   >
-    <v-img
-      class="img"
-      aspect-ratio="1"
-      lazy-src="/static/erro.png"
-      width="115"
-      height="115"
-      :src="`http://s.ankama.com/www/static.ankama.com/wakfu/portal/game/item/115/${item.iid[0]}.png`"
-    />
+    <EquipsPopUp
+      v-slot="{ hover }"
+      :item="item"
+    >
+      <v-img
+        class="img"
+        aspect-ratio="1"
+        lazy-src="/static/erro.png"
+        width="115"
+        height="115"
+        :src="`http://s.ankama.com/www/static.ankama.com/wakfu/portal/game/item/115/${item.iid[0]}.png`"
+        v-on="hover"
+      />
+    </EquipsPopUp>
 
     <v-tooltip bottom>
       <template #activator="{ on }">
@@ -139,9 +145,10 @@ import { mapGetters } from 'vuex'
 import { equipType } from '../../model/equipType'
 import ListGears from '../DrawerRight/ListGears'
 import EventBus from '../../event-bus'
+import EquipsPopUp from '../DrawerRight/EquipsPopUp'
 
 export default {
-  components: { ListGears },
+  components: { EquipsPopUp, ListGears },
   props: {
     value: { type: Object, default: null }
   },
