@@ -98,7 +98,7 @@ const formatarEquipEffects = equipEffects => {
     125 // Domínio de Ar
   ];
   const somatoriaDominios = equipFx.reduce((ac, item) => listaDominios.includes(item.id) ? ac + item.params[0] : ac, 0);
-  equipFx.push({ id: 0, params: [somatoriaDominios, 0] });
+  equipFx.push({ id: 9999, params: [somatoriaDominios, 0] });
   return equipFx.filter(e => ![1020, 1062, 400].includes(e.id))
 }
 

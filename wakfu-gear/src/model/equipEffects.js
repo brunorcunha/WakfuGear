@@ -21,7 +21,7 @@ export const equipEffects = [
     pt: 'Armadura'
   },
   {
-    id: 0,
+    id: 9999,
     iid: [],
     fr: 'Maîtrise cumulée',
     en: 'Accumulated Mastery',
