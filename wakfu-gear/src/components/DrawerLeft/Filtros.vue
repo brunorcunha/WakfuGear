@@ -100,7 +100,7 @@
                   flat
                   :value="tipo.id"
                   v-on="on"
-                  min-width="40"
+                  style="min-width:40px"
                 >
                   <img :src="`../../../static/${tipo.img}`">
                 </v-btn>
