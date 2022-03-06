@@ -208,7 +208,8 @@ export default {
         { id: 162, icone: 'prosp' },
         { id: 184, icone: 'control' },
         { id: 234, icone: 'kit' },
-        { id: 177, icone: 'will' }
+        { id: 177, icone: 'will' },
+        { id: 0, icone: 'acumulado' }
       ],
       secundario: [
         { id: 149, icone: 'mastcrit' },

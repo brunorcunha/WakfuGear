@@ -30,37 +30,37 @@ const removerItemsAdministrator = items => items.filter(item => ![10].includes(i
 
 const formatarEquipEffects = equipEffects => {
   const IIDtoID = [
-    { iid: 21, id: 20 },
-    { iid: 32, id: 31 },
-    { iid: 56, id: 31 },
-    { iid: 57, id: 41 },
-    { iid: 1063, id: 71 },
-    { iid: 90, id: 80 },
-    { iid: 100, id: 80 },
-    { iid: 93, id: 82 },
-    { iid: 94, id: 83 },
-    { iid: 92, id: 84 },
-    { iid: 130, id: 120 },
-    { iid: 132, id: 122 },
-    { iid: 1056, id: 149 },
-    { iid: 168, id: 150 },
-    { iid: 161, id: 160 },
-    { iid: 167, id: 166 },
-    { iid: 172, id: 171 },
-    { iid: 174, id: 173 },
-    { iid: 176, id: 175 },
-    { iid: 181, id: 180 },
-    { iid: 192, id: 191 },
-    { iid: 194, id: 191 },
-    { iid: 876, id: 875 },
-    { iid: 1060, id: 1053 },
-    { iid: 1061, id: 1055 },
-    { iid: 93, id: 82 },
-    { iid: 97, id: 82 },
-    { iid: 94, id: 83 },
-    { iid: 98, id: 83 },
-    { iid: 92, id: 84 },
-    { iid: 96, id: 84 }
+    { iid: 21, id: 20 }, // PV
+    { iid: 32, id: 31 }, // PA
+    { iid: 56, id: 31 }, // PA
+    { iid: 57, id: 41 }, // PM
+    { iid: 1063, id: 71 }, // Resistência de Costas
+    { iid: 90, id: 80 }, // Resistência Elementar
+    { iid: 100, id: 80 }, // Resistência Elementar
+    { iid: 93, id: 82 }, // Resistência a Fogo
+    { iid: 94, id: 83 }, // Resistência a Água
+    { iid: 92, id: 84 }, // Resistência a Terra
+    { iid: 130, id: 120 }, // Domínio Elementar
+    { iid: 132, id: 122 }, // Domínio de Fogo
+    { iid: 1056, id: 149 }, // Domínio de Crítico
+    { iid: 168, id: 150 }, // Golpe Crítico
+    { iid: 161, id: 160 }, // Alcance
+    { iid: 167, id: 166 }, // Sabedoria
+    { iid: 172, id: 171 }, // Iniciativa
+    { iid: 174, id: 173 }, // Bloqueio
+    { iid: 176, id: 175 }, // Esquiva
+    { iid: 181, id: 180 }, // Domínio de Costas
+    { iid: 192, id: 191 }, // PW
+    { iid: 194, id: 191 }, // PW
+    { iid: 876, id: 875 }, // Parada
+    { iid: 1060, id: 1053 }, // Domínio de Distância
+    { iid: 1061, id: 1055 }, // Domínio de Berserk
+    { iid: 93, id: 82 }, // Resistência a Fogo
+    { iid: 97, id: 82 }, // Resistência a Fogo
+    { iid: 94, id: 83 }, // Resistência a Água
+    { iid: 98, id: 83 }, // Resistência a Água
+    { iid: 92, id: 84 }, // Resistência a Terra
+    { iid: 96, id: 84 } // Resistência a Terra
   ]
   const ArrayIID = IIDtoID.map(e => e.iid)
 
@@ -80,6 +80,25 @@ const formatarEquipEffects = equipEffects => {
 
     return { id, params }
   })
+  const listaDominios = [
+    120, // Domínio Elementar
+    149, // Domínio de Crítico
+    180, // Domínio de Costas
+    1050, // Domínio de Zona
+    1051, // Domínio de Alvo Único
+    1052, // Domínio de Corpo a Corpo
+    1053, // Domínio de Distância
+    1055, // Domínio de Berserk
+    910681, // Domínio sobre 1 elemento
+    910682, // Domínio sobre 2 elemento
+    910683, // Domínio sobre 3 elementos
+    122, // Domínio de Fogo
+    123, // Domínio de Terra
+    124, // Domínio de Água
+    125 // Domínio de Ar
+  ];
+  const somatoriaDominios = equipFx.reduce((ac, item) => listaDominios.includes(item.id) ? ac + item.params[0] : ac, 0);
+  equipFx.push({ id: 0, params: [somatoriaDominios, 0] });
   return equipFx.filter(e => ![1020, 1062, 400].includes(e.id))
 }
 
@@ -97,9 +116,9 @@ const formatarItem = item => {
   const gfx = item.definition.item.graphicParameters.femaleGfxId
   const type = item.definition.item.baseParameters.itemTypeId
   const rarity = item.definition.item.baseParameters.rarity
-  const minShard = item.definition.item.baseParameters.minimumShardSlotNumber
-  const maxShard = item.definition.item.baseParameters.maximumShardSlotNumber
-  const shard = [minShard, maxShard]
+  // const minShard = item.definition.item.baseParameters.minimumShardSlotNumber
+  // const maxShard = item.definition.item.baseParameters.maximumShardSlotNumber
+  // const shard = [minShard, maxShard]
   let lvl = item.definition.item.level
   let iid = [ item.definition.item.graphicParameters.gfxId ]
   if (iid[0] !== gfx) iid.push(gfx)
@@ -122,7 +141,6 @@ const formatarItem = item => {
     type,
     set,
     rarity,
-    shard,
     equipEffects
   }
 }

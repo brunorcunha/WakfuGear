@@ -408,7 +408,7 @@ small.link {
 .icone.fire { background-image: url(../static/atributos/mini_11.png); }
 .icone.water { background-image: url(../static/atributos/mini_03.png); }
 .icone.air { background-image: url(../static/atributos/mini_05.png); }
-.icone.damage { background-image: url(../static/atributos/tags_09.png); }
+.icone.damage, .icone.acumulado { background-image: url(../static/atributos/tags_09.png); }
 .icone.i20, .icone.hp { background-image: url(../static/atributos/tags_34.png); }
 .icone.i41, .icone.mp { background-image: url(../static/atributos/tags_02.png); }
 .icone.i191, .icone.wp { background-image: url(../static/atributos/tags_28.png); }
