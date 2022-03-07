@@ -22,15 +22,15 @@
               <v-spacer />
               <span>{{ $t('label.nv') }}{{ item.lvl || '0' }}</span>
             </v-subheader>
-            <template v-for="(atributo, index) in item.equipEffects">
+            <template v-for="(atributo, index) in equipEffectsList">
               <div :key="`ifx${index}`">
                 <v-divider />
-                <v-list-tile :class="`icone i${atributo.id} menulist paddingleft`">
+                <v-list-tile :class="`icone i${atributo} menulist paddingleft`">
                   <v-list-tile-content class="fontsmall">
-                    <v-list-tile-title>{{ equipEffects.find(e => e.id === atributo.id)[$lang] }}</v-list-tile-title>
+                    <v-list-tile-title>{{ equipEffects.find(e => e.id === atributo)[$lang] }}</v-list-tile-title>
                   </v-list-tile-content>
                   <v-list-tile-avatar class="fontsmall text-xs-right">
-                    {{ atributo.params[0] }}
+                    {{ (item.equipEffects[index] || {params: ['']}).params[0] }}
                   </v-list-tile-avatar>
                 </v-list-tile>
               </div>
@@ -55,7 +55,7 @@
                   alt=""
                 >
               </v-subheader>
-              <template v-for="(atributo, index) in item.equipEffects">
+              <template v-for="(atributo, index) in equipEffectsList">
                 <div :key="`ifx${index}`">
                   <v-divider />
                   <v-list-tile class="menulist">
@@ -91,7 +91,7 @@
                           {{ fxItems[indexItemCompare][index].value }}
                         </span>
                         <span v-else>
-                          {{ atributo.params[0] }}
+                          {{ (item.equipEffects[index] || {params: ['']}).params[0] }}
                         </span>
                       </v-list-tile-title>
                     </v-list-tile-content>
@@ -131,11 +131,19 @@ export default {
     isCompare () {
       return !!(!this.vazio && this.itemsCompare.length)
     },
+    equipEffectsList () {
+      const fxOriginal = this.item.equipEffects.map((e) => e.id)
+      const fxItems = this.itemsCompare.flatMap((e) => e.equipEffects.map((f) => f.id))
+      return [...new Set([
+        ...fxOriginal,
+        ...fxItems
+      ])]
+    },
     fxItems () {
       return this.itemsCompare.map((e) => {
-        return this.item.equipEffects.map(fx => {
-          const original = fx.params[0] || 0
-          const valor = e.equipEffects.find((f) => f.id === fx.id)?.params[0] || 0
+        return this.equipEffectsList.map((fx, i) => {
+          const original = this.item.equipEffects[i]?.params[0] || 0
+          const valor = e.equipEffects.find((f) => f.id === fx)?.params[0] || 0
           const value = original - valor
           const typeEQ = value < 0 ? 'sub' : 'eq'
           const type = value > 0 ? 'add' : typeEQ
